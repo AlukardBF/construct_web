@@ -1,6 +1,6 @@
 <?php
 
-namespace construct\konlabu\models;
+
 
 class File extends \Phalcon\Mvc\Model
 {

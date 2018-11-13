@@ -1,7 +1,72 @@
-<div class="page-header">
-    <h1>Congratulations!</h1>
+<div class="modal fade" id="signIn">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h4 class="modal-title">Вход</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<form class="form-horizontal" method="post" action="/construct_web/session/">
+			<div class="form-group">
+			<label for="exampleInputEmail1">Почта</label>
+			<input type="email" name="email" class="form-control" id="exampleInputEmail1">
+			</div>
+			<div class="form-group">
+			<label for="exampleInputPassword1">Пароль</label>
+			<input type="password" name="password" class="form-control" id="exampleInputPassword1">
+			</div>
+			<div class="form-group">
+			<div class="main-checkbox">
+			<input value="None" id="checkbox1" name="check"А type="checkbox">
+			<label for="checkbox1">Keep me Signed in</label>
+			</div>
+			</div>
+			<div class="form-group">
+			<button type="submit" style="width:100%" class="btn btn-outline-primary">Войти</button>
+			</div>
+		</form>
+      </div>
+    </div><!-- /.модальное окно-Содержание -->  
+  </div><!-- /.модальное окно-диалог -->  
 </div>
+<!-- /.модальное окно -->  
 
-<p>You're now flying with Phalcon. Great things are about to happen!</p>
-
-<p>This page is located at <code>views/index/index.phtml</code></p>
+  
+  <nav class="navbar navbar-expand-md bg-primary navbar-dark bg-gradient">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="fa d-inline fa-lg fa-cloud"></i>
+        <b> ВПИ ВИТ</b>
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <a class="btn navbar-btn ml-2 text-white btn-dark" data-toggle="modal" data-target="#signIn">
+          <i class="fas fa-user"></i> Войти</a>
+      </div>
+    </div>
+  </nav>
+  <div class="py-5 text-center h-100" style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/cover_event.jpg&quot;);">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="display-3 mb-4 text-primary">Курсовые работы ВИТ</h1>
+          <p class="lead mb-5">Система для управления курсовыми работами студентов. Система создана для студентов, научных руководителей и научных консултантов. Разработана студентами группы ВИП-408.<br/>
+          Пароль: pass<br/> Hash: <? echo $pass; ?>
+          <br/><? 
+          if($auth!==null){
+            echo $auth->email; 
+            echo $auth->role; 
+          }
+          echo "<br/>";
+          if($error!==null){
+            echo $error; 
+          }?> </p>
+          
+        </div>
+      </div>
+    </div>
+  </div>

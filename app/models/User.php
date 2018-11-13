@@ -1,6 +1,6 @@
 <?php
 
-namespace construct\konlabu\models;
+
 
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\Email as EmailValidator;

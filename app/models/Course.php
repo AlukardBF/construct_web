@@ -1,6 +1,6 @@
 <?php
 
-namespace construct\konlabu\models;
+
 
 class Course extends \Phalcon\Mvc\Model
 {

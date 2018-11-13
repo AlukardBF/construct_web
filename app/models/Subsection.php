@@ -1,6 +1,6 @@
 <?php
 
-namespace construct\konlabu\models;
+
 
 class Subsection extends \Phalcon\Mvc\Model
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace construct\konlabu\models;
+
 
 class Comment extends \Phalcon\Mvc\Model
 {
