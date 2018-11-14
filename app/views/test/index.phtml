@@ -1,1 +1,11 @@
 <h1>Добро пожаловать!!!!</h1>
+<br/>
+<?
+echo Phalcon\Tag::linkTo(
+    [
+        "/session/logout",
+        "logout",
+        "class" => "btn-primary",
+    ]
+);
+?>

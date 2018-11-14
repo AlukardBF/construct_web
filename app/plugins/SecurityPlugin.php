@@ -80,10 +80,15 @@ class SecurityPlugin extends Plugin
 		// Private area resources (backend)
 		$adminResources = [
 		    'test'    => ['index'],
+		    'session'    => ['logout'],
 		];
 		$teachResources = [
+			'test'    => ['index'],
+		    'session'    => ['logout'],
 		];
 		$studentResources = [
+			'test'    => ['index'],
+		    'session'    => ['logout'],
 		];
 
 		foreach ($adminResources as $resourceName => $actions) {

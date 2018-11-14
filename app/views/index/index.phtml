@@ -27,6 +27,14 @@
 			<button type="submit" style="width:100%" class="btn btn-outline-primary">Войти</button>
 			</div>
 		</form>
+        <?
+          echo CustomTags::card(
+              [
+                  'class' => 'bg-danger',
+                  'body'   => $error,
+              ]
+          );
+        ?>
       </div>
     </div><!-- /.модальное окно-Содержание -->  
   </div><!-- /.модальное окно-диалог -->  
@@ -57,11 +65,6 @@
           <p class="lead mb-5">Система для управления курсовыми работами студентов. Система создана для студентов, научных руководителей и научных консултантов. Разработана студентами группы ВИП-408.<br/>
           Пароль: pass<br/> Hash: <? echo $pass; ?>
           <br/><? 
-          if($auth!==null){
-            echo $auth->email; 
-            echo $auth->role; 
-          }
-          echo "<br/>";
           if($error!==null){
             echo $error; 
           }?> </p>
@@ -70,3 +73,11 @@
       </div>
     </div>
   </div>
+
+<? if($error!==null){ ?>
+  <script>
+    $(document).ready(function () {
+      $('#signIn').modal('show');
+    });
+  </script>
+<? } ?>

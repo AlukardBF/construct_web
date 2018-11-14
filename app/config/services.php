@@ -152,3 +152,11 @@ $di->set(
         return $dispatcher;
     }
 );
+
+    // Assign our new tag a definition so we can call it
+    $di->set(
+        'CustomTags',
+        function () {
+            return new CustomTags();
+        }
+    );
