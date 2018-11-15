@@ -24,7 +24,6 @@ class SecurityPlugin extends Plugin
             $role = self::GUEST;
         } else {
         	//ENUM('admin', 'teach', 'student')
-        	var_dump($auth);
             $role = $auth['role'];
         }
 
@@ -81,6 +80,7 @@ class SecurityPlugin extends Plugin
 		$adminResources = [
 		    'test'    => ['index'],
 		    'session'    => ['logout'],
+		    'user'    => ['index','edit','create','search','new','save','delete'],
 		];
 		$teachResources = [
 			'test'    => ['index'],

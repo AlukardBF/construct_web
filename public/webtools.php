@@ -30,6 +30,8 @@ $bootstrap = new Bootstrap([
     'base_path'   => BASE_PATH,
 ]);
 
+    echo BASE_PATH;
+
 if (APPLICATION_ENV === ENV_TESTING) {
     return $bootstrap->run();
 } else {

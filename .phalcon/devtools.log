@@ -1,0 +1,1 @@
+Wed 14 14:52:40 DESKTOP-86C0JPQ php: [ERROR] Uncaught exception: Call to a member function path() on null in D:\devtools\scripts\Phalcon\Builder\Scaffold.php on line 91
