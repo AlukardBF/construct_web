@@ -85,6 +85,7 @@ class SecurityPlugin extends Plugin
 		$teachResources = [
 			'test'    => ['index'],
 		    'session'    => ['logout'],
+		    'course'  => ['index'],
 		];
 		$studentResources = [
 			'test'    => ['index'],
