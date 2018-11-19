@@ -1,6 +1,6 @@
 <?php
-use Phalcon\Mvc\Controller;
-class CourseController extends Controller 
+
+class CourseController extends ControllerBase 
 { 
 	public function indexAction()
     {

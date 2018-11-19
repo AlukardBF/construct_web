@@ -11,6 +11,8 @@ echo Phalcon\Tag::linkTo(
 ?>
 <br/>
 <?
+echo 'Роль: '.$this->session->get('auth')['role'].'<br/>';
+echo 'email: '.$this->session->get('auth')['email'].'<br/>';
 echo PHP_EOL;
 echo PHP_EOL;
 echo $this->tag->linkTo( 

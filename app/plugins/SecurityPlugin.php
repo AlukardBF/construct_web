@@ -75,8 +75,13 @@ class SecurityPlugin extends Plugin
 		foreach ($roles as $role) {
 		    $acl->addRole($role);
 		}
-
 		// Private area resources (backend)
+		$allPrivateResources = [
+		    'test'    => ['index'],
+		    'session'    => ['logout'],
+		    'user'    => ['index','edit','create','search','new','save','delete'],
+		    'course'  => ['index'],
+		];
 		$adminResources = [
 		    'test'    => ['index'],
 		    'session'    => ['logout'],
@@ -92,19 +97,7 @@ class SecurityPlugin extends Plugin
 		    'session'    => ['logout'],
 		];
 
-		foreach ($adminResources as $resourceName => $actions) {
-		    $acl->addResource(
-		        new Resource($resourceName),
-		        $actions
-		    );
-		}
-		foreach ($teachResources as $resourceName => $actions) {
-		    $acl->addResource(
-		        new Resource($resourceName),
-		        $actions
-		    );
-		}
-		foreach ($studentResources as $resourceName => $actions) {
+		foreach ($allPrivateResources as $resourceName => $actions) {
 		    $acl->addResource(
 		        new Resource($resourceName),
 		        $actions
@@ -127,11 +120,13 @@ class SecurityPlugin extends Plugin
 		// Grant access to public areas to both users and guests
 		foreach ($roles as $role) {
 		    foreach ($publicResources as $resource => $actions) {
-		        $acl->allow(
-		            $role->getName(),
-		            $resource,
-		            '*'
-		        );
+		    	foreach ($actions as $action) {
+			        $acl->allow(
+			            $role->getName(),
+			            $resource,
+			            $action
+			        );
+			    }
 		    }
 		}
 
@@ -145,7 +140,7 @@ class SecurityPlugin extends Plugin
 		        );
 		    }
 		}
-		foreach ($adminResources as $resource => $actions) {
+		foreach ($teachResources as $resource => $actions) {
 		    foreach ($actions as $action) {
 		        $acl->allow(
 		            self::TEACH,
@@ -154,7 +149,7 @@ class SecurityPlugin extends Plugin
 		        );
 		    }
 		}
-		foreach ($adminResources as $resource => $actions) {
+		foreach ($studentResources as $resource => $actions) {
 		    foreach ($actions as $action) {
 		        $acl->allow(
 		            self::STUDENT,
