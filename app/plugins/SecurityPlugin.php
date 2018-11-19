@@ -80,7 +80,8 @@ class SecurityPlugin extends Plugin
 		    'test'    => ['index'],
 		    'session'    => ['logout'],
 		    'user'    => ['index','edit','create','search','new','save','delete'],
-		    'course'  => ['index'],
+		    'course'  => ['index', 'register'],
+		    'subsection' => ['index'],
 		];
 		$adminResources = [
 		    'test'    => ['index'],
@@ -90,11 +91,13 @@ class SecurityPlugin extends Plugin
 		$teachResources = [
 			'test'    => ['index'],
 		    'session'    => ['logout'],
-		    'course'  => ['index'],
+		    'course'  => ['index', 'register'],
+		    'subsection' => ['index'],
 		];
 		$studentResources = [
 			'test'    => ['index'],
 		    'session'    => ['logout'],
+		    'subsection' => ['index'],
 		];
 
 		foreach ($allPrivateResources as $resourceName => $actions) {

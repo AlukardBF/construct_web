@@ -21,7 +21,12 @@ class CourseController extends ControllerBase
 		);
 		if ($success) 
 			{ 
-				echo "Спасибо за регистрацию!"; 
+				$this->dispatcher->forward(
+            [
+                'controller' => 'subsection',
+                'action'     => 'index',
+            ]
+        	); 
 			} else 
 			{ 
 				echo "К сожалению, возникли следующие проблемы: ";
@@ -31,6 +36,6 @@ class CourseController extends ControllerBase
 					echo $message->getMessage(), "<br/>"; 
 				}
 			}
-		$this->view->disable();
+		//$this->view->disable();
 	}
 }
