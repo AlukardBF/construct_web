@@ -10,10 +10,10 @@ use Phalcon\Acl\Resource;
 
 class SecurityPlugin extends Plugin
 {
-	const ADMIN = 'admin';
-	const TEACH = 'teach';
-	const STUDENT = 'student';
-	const GUEST = 'guest';
+	public const ADMIN = 'admin';
+	public const TEACH = 'teach';
+	public const STUDENT = 'student';
+	public const GUEST = 'guest';
 
     public function beforeExecuteRoute(Event $event, Dispatcher $dispatcher)
     {

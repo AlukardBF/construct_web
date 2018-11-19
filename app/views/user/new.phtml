@@ -30,12 +30,6 @@
     );
 ?>
 
-<div class="form-group">
-    <label for="fieldUserId" class="col-sm-2 control-label">User</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["user_id", "type" => "number", "class" => "form-control", "id" => "fieldUserId"]) ?>
-    </div>
-</div>
 
 <div class="form-group">
     <label for="fieldEmail" class="col-sm-2 control-label">Email</label>
@@ -45,49 +39,49 @@
 </div>
 
 <div class="form-group">
-    <label for="fieldPass" class="col-sm-2 control-label">Pass</label>
+    <label for="fieldPass" class="col-sm-2 control-label">Пароль</label>
     <div class="col-sm-10">
         <?php echo $this->tag->textField(["pass", "size" => 30, "class" => "form-control", "id" => "fieldPass"]) ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="fieldType" class="col-sm-2 control-label">Type</label>
+    <label for="fieldType" class="col-sm-2 control-label">Тип пользователя</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->selectStatic(["type", [], "class" => "form-control", "id" => "fieldType"]) ?>
+        <?php echo $this->tag->selectStatic(["type",  ['admin'=>'admin','teach'=>'teach','student'=>'student'], "class" => "form-control", "id" => "fieldType"]) ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="fieldName" class="col-sm-2 control-label">Name</label>
+    <label for="fieldName" class="col-sm-2 control-label">Имя</label>
     <div class="col-sm-10">
         <?php echo $this->tag->textField(["name", "size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="fieldSecondName" class="col-sm-2 control-label">Second Of Name</label>
+    <label for="fieldSecondName" class="col-sm-2 control-label">Фамилия</label>
     <div class="col-sm-10">
         <?php echo $this->tag->textField(["second_name", "size" => 30, "class" => "form-control", "id" => "fieldSecondName"]) ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="fieldFatherName" class="col-sm-2 control-label">Father Of Name</label>
+    <label for="fieldFatherName" class="col-sm-2 control-label">Отчество</label>
     <div class="col-sm-10">
         <?php echo $this->tag->textField(["father_name", "size" => 30, "class" => "form-control", "id" => "fieldFatherName"]) ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="fieldGroupGroupId" class="col-sm-2 control-label">Group Of Group</label>
+    <label for="fieldGroupGroupId" class="col-sm-2 control-label">Граппа(для студентов)</label>
     <div class="col-sm-10">
         <?php echo $this->tag->textField(["group_group_id", "type" => "number", "class" => "form-control", "id" => "fieldGroupGroupId"]) ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="fieldTitle" class="col-sm-2 control-label">Title</label>
+    <label for="fieldTitle" class="col-sm-2 control-label">Звание (для преподователей)</label>
     <div class="col-sm-10">
         <?php echo $this->tag->textField(["title", "size" => 30, "class" => "form-control", "id" => "fieldTitle"]) ?>
     </div>

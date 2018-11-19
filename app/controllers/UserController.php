@@ -115,7 +115,8 @@ class UserController extends ControllerBase
         $user = new User();
         $user->userId = $this->request->getPost("user_id");
         $user->email = $this->request->getPost("email", "email");
-        $user->pass = $this->request->getPost("pass");
+        $pass = $this->request->getPost("pass");
+        $user->pass = $this->security->hash($pass);
         $user->type = $this->request->getPost("type");
         $user->name = $this->request->getPost("name");
         $user->secondName = $this->request->getPost("second_name");
@@ -177,7 +178,8 @@ class UserController extends ControllerBase
 
         $user->userId = $this->request->getPost("user_id");
         $user->email = $this->request->getPost("email", "email");
-        $user->pass = $this->request->getPost("pass");
+        $pass = $this->request->getPost("pass");
+        $user->pass = $this->security->hash($pass);
         $user->type = $this->request->getPost("type");
         $user->name = $this->request->getPost("name");
         $user->secondName = $this->request->getPost("second_name");
