@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-		<form class="form-horizontal" method="post" action="/construct_web/session/">
+		<form class="form-horizontal" method="post" action="session">
 			<div class="form-group">
 			<label for="exampleInputEmail1">Почта</label>
 			<input type="email" name="email" class="form-control" id="exampleInputEmail1">
@@ -40,8 +40,8 @@
   </div><!-- /.модальное окно-диалог -->  
 </div>
 <!-- /.модальное окно -->  
-
-  
+  <!--выводим навбар, только для гостей.-->
+  <?php if($this->session->auth['role']=='guest' || $this->session->auth['role']==null){ ?>
   <nav class="navbar navbar-expand-md bg-primary navbar-dark bg-gradient">
     <div class="container">
       <a class="navbar-brand" href="#">
@@ -57,12 +57,13 @@
       </div>
     </div>
   </nav>
-  <div class="py-5 text-center h-100" style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/cover_event.jpg&quot;);">
+  <? }?>
+  <div class="py-5 text-center h-100">
     <div class="container py-5">
       <div class="row">
         <div class="col-md-12">
           <h1 class="display-3 mb-4 text-primary">Курсовые работы ВИТ</h1>
-          <p class="lead mb-5">Система для управления курсовыми работами студентов. Система создана для студентов, научных руководителей и научных консултантов. Разработана студентами группы ВИП-408.<br/>
+          <p class="lead mb-5">Система для управления курсовыми работами студентов. Система создана для студентов, научных руководителей и научных консультантов. Разработана студентами группы ВИП-408.<br/>
           Пароль: pass<br/> Hash: <? echo $pass; ?>
           <br/><? 
           if($error!==null){
