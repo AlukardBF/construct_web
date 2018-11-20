@@ -1,2 +1,8 @@
+#Phalcon ignore
 /cache/
 /config/development/
+#VSCode ignore
+.vscode/
+#Vagrant ignore
+Vagrantfile
+.vagrant/
