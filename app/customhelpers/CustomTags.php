@@ -50,4 +50,58 @@ class CustomTags extends Tag
 
         return $code;
     }
+
+    public static function comment($parameters) {
+        $class = null;
+        $username = null;
+        $time = null;
+        $usertype = null;
+        $commenttext = null;
+
+        // Converting parameters to array if it is not
+        if (!is_array($parameters)) {
+            $parameters = [$parameters];
+        }
+
+        if (isset($parameters['class'])) {
+            $class = $parameters['class'];
+            unset($parameters['class']);
+        }
+        if (isset($parameters['username'])) {
+            $username = $parameters['username'];
+            unset($parameters['username']);
+        }
+        if (isset($parameters['time'])) {
+            $time = $parameters['time'];
+            unset($parameters['time']);
+        }
+        if (isset($parameters['usertype'])) {
+            $usertype = $parameters['usertype'];
+            unset($parameters['usertype']);
+        }
+        if (isset($parameters['commenttext'])) {
+            $commenttext = $parameters['commenttext'];
+            unset($parameters['commenttext']);
+        }
+
+        // Generate the tag code
+        $code = '<div class = "card '. $class.'"';
+        $code .= '><div class="card-body"><h5 class="card-title">';
+        if ($username != null) {
+            $code .= $username;
+        }
+        if ($time != null) {
+            $code .= ', <span class="small text-mute">' . $time . '</span>';
+        }
+        if ($usertype != null) {
+            $code .= ' <span class="small text-secondary">' . $usertype . '</span>';
+        }
+        $code .= '</h5>';
+        if ($commenttext != null) {
+            $code .= '<p class="card-text">' . $commenttext . '</p>';
+        }
+        $code .= '</div></div>';
+
+        return $code;
+    }
 }

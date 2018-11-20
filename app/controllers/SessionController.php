@@ -43,7 +43,7 @@ class SessionController extends \Phalcon\Mvc\Controller
         if ($user !== false && $this->security->checkHash($password, $user->pass)) {
           	/*если пользователь найден и
           	пароли совпадают
-          	авторизируем и переходим на след страницу*/
+          	авторизуем и переходим на след страницу*/
           	$this->_registerSession($user);
       	    return $this->dispatcher->forward(
                 [
@@ -65,12 +65,7 @@ class SessionController extends \Phalcon\Mvc\Controller
      public function logoutAction()
     {
         $this->session->destroy();
-        return $this->dispatcher->forward(
-            [
-                'controller' => 'index',
-                'action'     => 'index',
-            ]
-        );
+        return $this->response->redirect();
     }
 
 }
