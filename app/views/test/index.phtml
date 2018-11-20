@@ -34,7 +34,7 @@ echo $this->tag->linkTo(
       <div class="row">
         <div class="col-md-12">
           <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+           <!-- <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
               <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">Курс 1</h5>
                 <small>3 days ago</small>
@@ -53,7 +53,23 @@ echo $this->tag->linkTo(
                 <p class="mb-1">Описание курса</p>
                 <small>Оценка</small>
               </div>
-            </a>
+            </a>-->
+            <table>
+              <tr>
+                <th>Имя</th>
+                <th>Описание</th>
+              </tr>
+              <?php
+              foreach ($page->items as $item) 
+                { 
+              ?>
+              <tr>
+                <td><?php echo $item->name; ?></td>
+                <td><?php echo $item->description; ?></td>
+              </tr>
+              <?php } ?>
+            </table>
+
           </div>
         </div>
       </div>

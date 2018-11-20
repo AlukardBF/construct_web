@@ -25,7 +25,7 @@ class Course extends \Phalcon\Mvc\Model
     /**
      * Initialize method for model.
      */
-   /* public function initialize()
+    public function initialize()
     {
         $this->setSchema("konlabu");
         $this->setSource("course");
@@ -38,7 +38,7 @@ class Course extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-   /* public function getSource()
+    public function getSource()
     {
         return 'course';
     }
@@ -49,7 +49,7 @@ class Course extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Course[]|Course|\Phalcon\Mvc\Model\ResultSetInterface
      */
-   /* public static function find($parameters = null)
+    public static function find($parameters = null)
     {
         return parent::find($parameters);
     }
@@ -60,9 +60,9 @@ class Course extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Course|\Phalcon\Mvc\Model\ResultInterface
      */
-   /* public static function findFirst($parameters = null)
+    public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
-    }*/
+    }
 
 }
