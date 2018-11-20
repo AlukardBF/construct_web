@@ -9,9 +9,9 @@ class IndexController extends ControllerBase
     	$this->view->pass = $this->security->hash("pass");
     	$this->view->auth = $this->session->auth;
     	$this->view->error = $error;
-    	if($error == null){
-    		$this->view->error = "error is null";
-    	}
+    	// if($error == null){
+    	// 	$this->view->error = "error is null";
+    	// }
     }
 }
 

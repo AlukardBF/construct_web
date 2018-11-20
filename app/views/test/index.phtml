@@ -1,18 +1,18 @@
 <h1>Добро пожаловать!!!!</h1>
 <br/>
-<?
-echo Phalcon\Tag::linkTo(
-    [
-        "/session/logout",
-        "logout",
-        "class" => "btn-primary",
-    ]
-);
-?>
+<!-- <?
+// echo Phalcon\Tag::linkTo(
+//     [
+//         "/session/logout",
+//         "logout",
+//         "class" => "btn-primary",
+//     ]
+// );
+?> -->
 <br/>
 <?
 echo 'Роль: '.$this->session->get('auth')['role'].'<br/>';
-echo 'email: '.$this->session->get('auth')['email'].'<br/>';
+echo 'Почта: '.$this->session->get('auth')['email'].'<br/>';
 echo PHP_EOL;
 echo PHP_EOL;
 echo $this->tag->linkTo( 

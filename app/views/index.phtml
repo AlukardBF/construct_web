@@ -26,9 +26,16 @@
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-                    <span class="navbar-text text-light">Login</span>
-                    <a class="btn navbar-btn ml-2 text-white btn-dark">
-                      <i class="fas fa-user"></i> Sign Out</a>
+                    <span class="navbar-text text-light"><? echo $this->session->get('auth')['email'] ?></span>
+                      <?
+                        echo Phalcon\Tag::linkTo(
+                            [
+                                "/session/logout",
+                                "Sign Out",
+                                "class" => "btn navbar-btn ml-2 text-white btn-dark",
+                            ]
+                        );
+                      ?>
                   </div>
                 </div>
               </nav>

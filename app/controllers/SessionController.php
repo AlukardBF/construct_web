@@ -65,7 +65,7 @@ class SessionController extends \Phalcon\Mvc\Controller
      public function logoutAction()
     {
         $this->session->destroy();
-                return $this->dispatcher->forward(
+        return $this->dispatcher->forward(
             [
                 'controller' => 'index',
                 'action'     => 'index',

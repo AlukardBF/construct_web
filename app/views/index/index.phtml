@@ -20,7 +20,7 @@
 			<div class="form-group">
 			<div class="main-checkbox">
 			<input value="None" id="checkbox1" name="check"А type="checkbox">
-			<label for="checkbox1">Keep me Signed in</label>
+			<label for="checkbox1">Запомнить меня</label>
 			</div>
 			</div>
 			<div class="form-group">
@@ -28,12 +28,14 @@
 			</div>
 		</form>
         <?
-          echo CustomTags::card(
-              [
-                  'class' => 'bg-danger',
-                  'body'   => $error,
-              ]
-          );
+          if($error != null) {
+            echo CustomTags::card(
+                [
+                    'class' => 'bg-danger',
+                    'body'   => $error,
+                ]
+            );
+          }
         ?>
       </div>
     </div><!-- /.модальное окно-Содержание -->  
