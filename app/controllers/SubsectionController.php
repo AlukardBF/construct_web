@@ -3,7 +3,7 @@
 class SubsectionController extends ControllerBase
 {
 
-    public function indexAction()
+    public function indexAction($courseId=NULL)
     {
     	
     }
