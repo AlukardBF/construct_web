@@ -59,6 +59,7 @@ class UserController extends ControllerBase
      */
     public function newAction()
     {
+        $this->view->groups = Group::find();
 
     }
 
@@ -83,6 +84,9 @@ class UserController extends ControllerBase
                 return;
             }
 
+            $this->view->groups = Group::find();
+            $this->view->groupId = $user->group_group_id;
+
             $this->view->user_id = $user->user_id;
 
             $this->tag->setDefault("user_id", $user->user_id);
@@ -94,6 +98,7 @@ class UserController extends ControllerBase
             $this->tag->setDefault("father_name", $user->father_name);
             $this->tag->setDefault("group_group_id", $user->group_group_id);
             $this->tag->setDefault("title", $user->title);
+            $this->tag->setDefault("group_name", $user->group->name);
             
         }
     }
@@ -113,15 +118,14 @@ class UserController extends ControllerBase
         }
 
         $user = new User();
-        $user->userId = $this->request->getPost("user_id");
         $user->email = $this->request->getPost("email", "email");
         $pass = $this->request->getPost("pass");
         $user->pass = $this->security->hash($pass);
         $user->type = $this->request->getPost("type");
         $user->name = $this->request->getPost("name");
-        $user->secondName = $this->request->getPost("second_name");
-        $user->fatherName = $this->request->getPost("father_name");
-        $user->groupGroupId = $this->request->getPost("group_group_id");
+        $user->second_name = $this->request->getPost("second_name");
+        $user->father_name = $this->request->getPost("father_name");
+        $user->group_group_id = $this->request->getPost("group_group_id");
         $user->title = $this->request->getPost("title");
         
 
@@ -182,9 +186,9 @@ class UserController extends ControllerBase
         $user->pass = $this->security->hash($pass);
         $user->type = $this->request->getPost("type");
         $user->name = $this->request->getPost("name");
-        $user->secondName = $this->request->getPost("second_name");
-        $user->fatherName = $this->request->getPost("father_name");
-        $user->groupGroupId = $this->request->getPost("group_group_id");
+        $user->second_name = $this->request->getPost("second_name");
+        $user->father_name = $this->request->getPost("father_name");
+        $user->group_group_id = $this->request->getPost("group_group_id");
         $user->title = $this->request->getPost("title");
         
 

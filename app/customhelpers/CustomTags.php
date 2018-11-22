@@ -104,4 +104,81 @@ class CustomTags extends Tag
 
         return $code;
     }
+    //пагинация, паря
+    public static function pagination($parameters){
+        $next = null;
+        $before = null;
+        $current = null;
+        $count = null;
+        //ссылка, для перехода, пишется обычная ссылка, и на месте, где ложен быть номер страницы, ставится %d
+        //например "/sdkfsdf/%d"
+        $link = null;
+        // Converting parameters to array if it is not
+        if (!is_array($parameters)) {
+            $parameters = [$parameters];
+        }
+        if (isset($parameters['count'])) {
+            $count = $parameters['count'];
+            unset($parameters['count']);
+        }
+        if($count<2){
+            return '';
+        }
+
+        if (isset($parameters['next'])) {
+            $next = $parameters['next'];
+            unset($parameters['next']);
+        }
+
+        if (isset($parameters['before'])) {
+            $before = $parameters['before'];
+            unset($parameters['before']);
+        }
+
+        if (isset($parameters['current'])) {
+            $current = $parameters['current'];
+            unset($parameters['current']);
+        } 
+
+        if (isset($parameters['link'])) {
+            $link = $parameters['link'];
+            unset($parameters['link']);
+        }
+
+        // Generate the tag code
+        $code = '<nav aria-label="Page navigation example"><ul class="pagination">';
+        $linkRes = sprintf($link,$before);
+        $code.='<li class="page-item">'.
+                Phalcon\Tag::linkTo(
+                    [
+                        $linkRes,
+                        '<',
+                        "class" => "page-link",
+                    ]).'</li>';
+
+        for ( $i=1; $i<=$count; $i++) {
+                $linkRes = sprintf($link,$i);
+                if($i!=$current)
+                    $code.='<li class="page-item">'.
+                    Phalcon\Tag::linkTo(
+                        [
+                            $linkRes,
+                            $i,
+                            "class" => "page-link",
+                        ]).'</li>';
+                else
+                    $code.='<li class="page-item active"> <a class="page-link text-light">'.$i.'</a></li>';
+        }       
+        $linkRes = sprintf($link,$next);
+        $code.='<li class="page-item">'.
+                Phalcon\Tag::linkTo(
+                    [
+                        $linkRes,
+                        '>',
+                        "class" => "page-link",
+                    ]).'</li>';
+
+        $code.=  '</ul></nav>';
+        return $code;
+    }
 }
