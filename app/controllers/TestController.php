@@ -7,7 +7,7 @@ class TestController extends \Phalcon\Mvc\Controller
 
     public function indexAction()
     {
-    	$currentPage = 1;
+    	$currentPage = (int) $_GET["page"];
 		// Набор данных для разбивки на страницы
 		$course = Course::find();
 		// Создаём пагинатор, отображаются 4 элемента на странице, начиная с текущей - $currentPage

@@ -38,54 +38,42 @@ echo $this->tag->linkTo(
               <?
               foreach ($page->items as $item) 
                 { 
+                  ?>
+                  <a>
+              <?
               
            echo $this->tag->linkTo( 
-              "subsection/index/".$item->couse_id,
-              "Зарегистрировать курс!"
-            );
-?>
-           <a href="" class="list-group-item list-group-item-action flex-column align-items-start btn-outline-primary">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1"><? echo $item->name; ?></h5>
+              [
+                "subsection/index/".$item->course_id,
+                " <div class='d-flex w-100 justify-content-between'>
+                <h5 class='mb-1'>".$item->name."</h5>
                 <small>3 days ago</small>
               </div>
-              <div class="d-flex w-100 justify-content-between">
-                <p class="mb-1"><? echo $item->description; ?></p>
+              <div class='d-flex w-100 justify-content-between'>
+                <p class='mb-1'>".$item->description."</p>
                 <small>Оценка</small>
-              </div>
+              </div>",
+              "class" => "list-group-item list-group-item-action flex-column align-items-start btn-outline-primary",
+
+            ]
+            );
+?>
+           
+             
             </a>
             <? } ?>
-            <a href="/robots/search">Первая</a> <a href="/robots/search?page=<?= $page->before; ?>">Предыдущая</a> <a href="/robots/search?page=<?= $page->next; ?>">Следующая</a> <a href="/robots/search?page=<?= $page->last; ?>">Последняя</a>
-            <?php echo "Вы на странице ", $page->current, " из ", $page->total_pages; ?>
-            <!-- 
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Курс 2</h5>
-                <small class="text-muted">3 days ago</small>
-              </div>
-              <div class="d-flex w-100 justify-content-between">
-                <p class="mb-1">Описание курса</p>
-                <small>Оценка</small>
-              </div>
-            </a>
-            <table border="1">
-              <tr>
-                <th>Имя</th>
-                <th>Описание</th>
-              </tr>
-              <?
-             // foreach ($page->items as $item) 
-              //  { 
-              ?>
-              <tr>
-                <td><? //echo $item->name; ?></td>
-                <td><?// echo $item->description; ?></td>
-              </tr>
-              <?// } ?>
-            </table>-->
+            
 
           </div>
         </div>
       </div>
+      <div style="text-align: center;">
+      <a href="/robots/search">Первая</a>
+      <a href="/robots/search?page=<?= $page->before; ?>" class="m-2"><b>Предыдущая</b></a>
+      <a href="/robots/search?page=<?= $page->next; ?>" class="m-2"><b>Следующая</b></a>
+      <a href="/robots/search?page=<?= $page->last; ?>" class="m-2"><b>Последняя</b></a>
+      <br>
+      <?php echo "Вы на странице ", $page->current, " из ", $page->total_pages; ?>
+    </div>
     </div>
   </div>
