@@ -1,0 +1,65 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="page-header">
+    <h1>
+        Search group
+    </h1>
+
+</div>
+<div class="col-sm-10">
+    <p>
+        <?php echo $this->tag->linkTo(["group/new", '<i class="far fa-plus-square"></i> СОЗДАТЬ ГРУППУ']) ?>
+    </p>
+</div>
+<?php echo $this->getContent() ?>
+
+<?php
+    echo $this->tag->form(
+        [
+            "group/search",
+            "autocomplete" => "off",
+            "class" => "form-horizontal w-100"
+        ]
+    );
+?>
+
+<div class="form-group">
+    <label for="fieldGroupId" class="col-sm-3 control-label">Идентификатор группы</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["group_id", "type" => "number", "class" => "form-control", "id" => "fieldGroupId"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldName" class="col-sm-2 control-label">Название группы</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["name", "size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldYear" class="col-sm-2 control-label">Год создания группы</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["year", "size" => 30, "class" => "form-control", "id" => "fieldYear"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldType" class="col-sm-2 control-label">Форма обучения</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->selectStatic(["type", [''=>'все','очная'=>'очная','заочная'=>'заочная','вечерняя'=>'вечерняя'], "class" => "form-control", "id" => "fieldType"]) ?>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <?php echo $this->tag->submitButton(["Search", "class" => "btn btn-default"]) ?>
+    </div>
+</div>
+
+<?php echo $this->tag->endForm(); ?>

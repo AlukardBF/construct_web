@@ -10,6 +10,12 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('#groups').DataTable();
+    $('#erase_group').click(function(){
+        $('#fieldGroupGroupId').val('');
+        $('#fieldGroupName').val('');
+        $('#groups tr').removeClass("bg-secondary");
+    });
+    
     $('#groups tbody tr').click(function(){
         var group_id = $(this).find(".group_id").text();
         var name = $(this).find(".group_name").text();
@@ -17,11 +23,11 @@ $(document).ready(function() {
         $(this).addClass("bg-secondary");
         $('#fieldGroupGroupId').val(group_id);
         $('#fieldGroupName').val(name);
-
+        $('#set_group').modal('toggle');
     });
 } );
 </script>
-
+    
 <style>
     tbody tr{
         cursor: pointer;
@@ -78,7 +84,7 @@ $(document).ready(function() {
 </nav>
 <div class="page-header">
     <h1>
-        Edit user
+        Редактировать пользователя
     </h1>
 </div>
 
@@ -151,6 +157,9 @@ $(document).ready(function() {
         <div class="input-group-append">
             <button class="btn-secondary" type="button" data-toggle="modal" data-target="#set_group">
                 <i class="fas fa-search "></i>
+            </button>
+            <button class="btn-danger" type="button" id="erase_group">
+                <i class="fas fa-times"></i>
             </button>
         </div>
     </div>

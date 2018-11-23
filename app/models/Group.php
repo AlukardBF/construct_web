@@ -1,21 +1,37 @@
 <?php
 
-
-
 class Group extends \Phalcon\Mvc\Model
 {
 
     /**
      *
      * @var integer
+     * @Primary
+     * @Identity
+     * @Column(column="group_id", type="integer", length=11, nullable=false)
      */
     public $group_id;
 
     /**
      *
      * @var string
+     * @Column(column="name", type="string", length=45, nullable=true)
      */
     public $name;
+
+    /**
+     *
+     * @var string
+     * @Column(column="year", type="string", length=4, nullable=false)
+     */
+    public $year;
+
+    /**
+     *
+     * @var string
+     * @Column(column="type", type="string", nullable=false)
+     */
+    public $type;
 
     /**
      * Initialize method for model.
@@ -24,17 +40,7 @@ class Group extends \Phalcon\Mvc\Model
     {
         $this->setSchema("konlabu");
         $this->setSource("group");
-        $this->hasMany('group_id', 'construct\konlabu\models\User', 'group_group_id', ['alias' => 'User']);
-    }
-
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'group';
+        $this->hasMany('group_id', 'User', 'group_group_id', ['alias' => 'User']);
     }
 
     /**
@@ -57,6 +63,16 @@ class Group extends \Phalcon\Mvc\Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    /**
+     * Returns table name mapped in the model.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return 'group';
     }
 
 }

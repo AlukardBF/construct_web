@@ -82,11 +82,13 @@ class SecurityPlugin extends Plugin
 		    'user'    => ['index','edit','create','search','new','save','delete'],
 		    'course'  => ['index', 'register'],
 		    'subsection' => ['index'],
+		    'group'    => ['index','edit','create','search','new','save','delete'],
 		];
 		$adminResources = [
 		    'test'    => ['index'],
 		    'session'    => ['logout'],
 		    'user'    => ['index','edit','create','search','new','save','delete'],
+		    'group'    => ['index','edit','create','search','new','save','delete'],
 		];
 		$teachResources = [
 			'test'    => ['index'],

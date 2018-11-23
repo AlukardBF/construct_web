@@ -98,7 +98,8 @@ class UserController extends ControllerBase
             $this->tag->setDefault("father_name", $user->father_name);
             $this->tag->setDefault("group_group_id", $user->group_group_id);
             $this->tag->setDefault("title", $user->title);
-            $this->tag->setDefault("group_name", $user->group->name);
+            if($user->group_group_id!=null)
+                $this->tag->setDefault("group_name", $user->group->name);
             
         }
     }
