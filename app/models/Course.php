@@ -29,8 +29,8 @@ class Course extends \Phalcon\Mvc\Model
     {
         $this->setSchema("konlabu");
         $this->setSource("course");
-        $this->hasMany('course_id', 'construct\konlabu\models\Subsection', 'course_course_id', ['alias' => 'Subsection']);
-        $this->hasMany('course_id', 'construct\konlabu\models\UserHasCourse', 'course_course_id', ['alias' => 'UserHasCourse']);
+        $this->hasMany('course_id', 'Subsection', 'course_course_id', ['alias' => 'Subsection']);
+        $this->hasMany('course_id', 'UserHasCourse', 'course_course_id', ['alias' => 'UserHasCourse']);
     }
 
     /**

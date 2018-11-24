@@ -2,14 +2,32 @@
 
 class CourseController extends ControllerBase
 {
-    public function indexAction()
+    public function editAction($course_id = null)
+    {
+               // Получаем запрошенный курс
+        $course = Course::findFirst("course_id = ".intval($course_id)); 
+        if($course!=null){
+            $this->view->chapters = $course->getSubsection( [
+                "section = 'главы'",
+            ]);
+            $this->view->applications =$course->getSubsection( [
+                "section = 'приложения'",
+            ]);
+            $this->view->charts = $course->getSubsection( [
+                "section = 'графические материалы'",
+            ]);
+        }
+        $this->view->course = $course; 
+    }
+
+    public function newAction()
     {
 
     }
     /**
      * Creates a new course
      */
-    public function registerAction()
+    public function createAction()
     {
         $course = new Course();
         // Сохраняем и проверяем на наличие ошибок
@@ -23,8 +41,9 @@ class CourseController extends ControllerBase
         if ($success) {
             $this->dispatcher->forward(
                 [
-                    'controller' => 'subsection',
-                    'action' => 'index',
+                    'controller' => 'course',
+                    'action' => 'edit',
+                    'params' => ['course_id'=>$course->course_id],
                 ]
             );
         } else {
@@ -36,4 +55,5 @@ class CourseController extends ControllerBase
         }
         //$this->view->disable();
     }
+
 }

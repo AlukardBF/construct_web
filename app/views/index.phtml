@@ -20,7 +20,7 @@
                 <div class="container">
                   <a class="navbar-brand" href="#">
                     <i class="fa d-inline fa-lg fa-cloud"></i>
-                    <b> Brand</b>
+                    <b> ВПИ/ВИТ</b>
                   </a>
                   <?php 
                   $role=$this->session->auth['role'];
@@ -33,7 +33,7 @@
                           <?
                             echo Phalcon\Tag::linkTo(
                                 [
-                                    "course/",
+                                    "course/create",
                                     '<i class="fas fa-brain"></i> Курсы',
                                     "class" => "btn navbar-btn ml-2 text-light",
                                 ]

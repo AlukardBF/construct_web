@@ -1,0 +1,132 @@
+<div class="py-1">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class=""><?echo $course->name; ?></h1>
+				<h3><?echo $course->description; ?></h3>
+			</div>
+		</div>
+	</div>
+</div>
+<?php echo $this->getContent(); ?>
+<div class="container">
+	<div class="row pb-4">
+		<div class="col-md-12">
+			<h2 class="">Главы</h2>
+			<?php echo $this->tag->form(["subsection/create","method" => 'POST']); ?>
+			<p>
+			<label for="theme"> Название главы </label><br/>
+			<?php echo $this->tag->textField("theme"); ?> </p>
+			<p>
+			<label for="description">Описание</label><br/>
+			<?php echo $this->tag->textArea("discription"); ?> </p>
+
+			<?php echo $this->tag->hiddenField(['section',"value" => 'главы']); ?>
+			<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
+
+			<?php echo $this->tag->submitButton(['добавить раздел', "class" => "btn btn-secondary"]); ?> </p>
+			</form>
+			<div class="list-group">
+					
+<?
+	if($chapters!=null){
+		foreach ($chapters as $number => $subsection) {
+			?>
+			<div class="list-group-item">
+				<?php echo $this->tag->form(["subsection/save","method" => 'POST']); ?>
+				<div class=" w-100">
+					<label for="theme"> Название главы </label><br/>
+					<?php echo $this->tag->textField(["theme", 'value'=>$subsection->theme,]); ?>
+
+				</div>
+				<div class=" w-100">
+					<label for="description">Описание</label><br/>
+					<?php echo $this->tag->textArea(["discription", 'value'=>$subsection->discription, 'class'=>'w-100']); ?> 
+				</div><br>
+				<?php echo $this->tag->submitButton(['Сохранить изменения', "class" => "btn btn-secondary"]); ?>
+				</form>
+			</div>
+			<?
+		}
+	}?>
+	</div>
+	<h2 class="">Приложения</h2>
+			<?php echo $this->tag->form(["subsection/create","method" => 'POST']); ?>
+			<p>
+			<label for="theme"> Название приложения </label><br/>
+			<?php echo $this->tag->textField("theme"); ?> </p>
+			<p>
+			<label for="description">Описание</label><br/>
+			<?php echo $this->tag->textArea("discription"); ?> </p>
+
+			<?php echo $this->tag->hiddenField(['section',"value" => 'приложения']); ?>
+			<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
+
+			<?php echo $this->tag->submitButton(['добавить раздел', "class" => "btn btn-secondary"]); ?> </p>
+			</form>
+			<div class="list-group">
+					
+<?
+	if($applications!=null){
+		foreach ($applications as $number => $subsection) {
+			?>
+			<div class="list-group-item">
+				<?php echo $this->tag->form(["subsection/save","method" => 'POST']); ?>
+				<div class=" w-100">
+					<label for="theme"> Название главы </label><br/>
+					<?php echo $this->tag->textField(["theme", 'value'=>$subsection->theme,]); ?>
+
+				</div>
+				<div class=" w-100">
+					<label for="description">Описание</label><br/>
+					<?php echo $this->tag->textArea(["discription", 'value'=>$subsection->discription, 'class'=>'w-100']); ?> 
+				</div><br>
+				<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
+				<?php echo $this->tag->submitButton(['Сохранить изменения', "class" => "btn btn-secondary"]); ?>
+				</form>
+			</div>
+			<?
+		}
+	}?>
+	</div>
+	<h2 class="">Графические материалы</h2>
+			<?php echo $this->tag->form(["subsection/create","method" => 'POST']); ?>
+			<p>
+			<label for="theme"> Название графических материалов </label><br/>
+			<?php echo $this->tag->textField("theme"); ?> </p>
+			<p>
+			<label for="description">Описание</label><br/>
+			<?php echo $this->tag->textArea("discription"); ?> </p>
+
+			<?php echo $this->tag->hiddenField(['section',"value" => 'графические материалы']); ?>
+			<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
+
+			<?php echo $this->tag->submitButton(['добавить раздел', "class" => "btn btn-secondary"]); ?> </p>
+			</form>
+			<div class="list-group">
+					
+<?
+	if($charts!=null){
+		foreach ($charts as $number => $subsection) {
+			?>
+			<div class="list-group-item">
+				<?php echo $this->tag->form(["subsection/save","method" => 'POST']); ?>
+				<div class=" w-100">
+					<label for="theme"> Название главы </label><br/>
+					<?php echo $this->tag->textField(["theme", 'value'=>$subsection->theme,]); ?>
+
+				</div>
+				<div class=" w-100">
+					<label for="description">Описание</label><br/>
+					<?php echo $this->tag->textArea(["discription", 'value'=>$subsection->discription, 'class'=>'w-100']); ?> 
+				</div><br>
+				<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
+				<?php echo $this->tag->submitButton(['Сохранить изменения', "class" => "btn btn-secondary"]); ?>
+				</form>
+			</div>
+			<?
+		}
+	}?>		</div>
+		</div>
+	</div>
+</div>

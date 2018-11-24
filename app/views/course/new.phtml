@@ -1,0 +1,11 @@
+<h2> Зарегистрируйте курс, используя эту форму </h2>
+<?php echo $this->tag->form("course/create"); ?>
+<p>
+<label for="name"> Имя </label>
+<?php echo $this->tag->textField("name"); ?> </p>
+<p>
+<label for="description"> Описание </label>
+<?php echo $this->tag->textField("description"); ?> </p>
+<p>
+<?php echo $this->tag->submitButton("Регистрация"); ?> </p>
+</form>

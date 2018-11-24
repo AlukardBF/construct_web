@@ -24,8 +24,8 @@ class UserHasCourse extends \Phalcon\Mvc\Model
     {
         $this->setSchema("konlabu");
         $this->setSource("user_has_course");
-        $this->belongsTo('course_course_id', 'construct\konlabu\models\Course', 'course_id', ['alias' => 'Course']);
-        $this->belongsTo('user_user_id', 'construct\konlabu\models\User', 'user_id', ['alias' => 'User']);
+        $this->belongsTo('course_course_id', 'Course', 'course_id', ['alias' => 'Course']);
+        $this->belongsTo('user_user_id', 'User', 'user_id', ['alias' => 'User']);
     }
 
     /**

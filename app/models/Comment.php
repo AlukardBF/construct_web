@@ -42,8 +42,8 @@ class Comment extends \Phalcon\Mvc\Model
     {
         $this->setSchema("konlabu");
         $this->setSource("comment");
-        $this->belongsTo('subsection_subsection_id', 'construct\konlabu\models\Subsection', 'subsection_id', ['alias' => 'Subsection']);
-        $this->belongsTo('user_user_id', 'construct\konlabu\models\User', 'user_id', ['alias' => 'User']);
+        $this->belongsTo('subsection_subsection_id', 'Subsection', 'subsection_id', ['alias' => 'Subsection']);
+        $this->belongsTo('user_user_id', 'User', 'user_id', ['alias' => 'User']);
     }
 
     /**

@@ -48,9 +48,9 @@ class Subsection extends \Phalcon\Mvc\Model
     {
         $this->setSchema("konlabu");
         $this->setSource("subsection");
-        $this->hasMany('subsection_id', 'construct\konlabu\models\Comment', 'subsection_subsection_id', ['alias' => 'Comment']);
-        $this->hasMany('subsection_id', 'construct\konlabu\models\File', 'subsection_subsection_id', ['alias' => 'File']);
-        $this->belongsTo('course_course_id', 'construct\konlabu\models\Course', 'course_id', ['alias' => 'Course']);
+        $this->hasMany('subsection_id', 'Comment', 'subsection_subsection_id', ['alias' => 'Comment']);
+        $this->hasMany('subsection_id', 'File', 'subsection_subsection_id', ['alias' => 'File']);
+        $this->belongsTo('course_course_id', 'Course', 'course_id', ['alias' => 'Course']);
     }
 
     /**
