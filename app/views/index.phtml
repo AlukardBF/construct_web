@@ -15,73 +15,74 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <!--выводим навбар, только для залогиненных.-->
 
-        <?php 
-        $role=$this->session->auth['role'];
-        if($role != 'guest' && $role != null){
-         ?>
+        
             <nav class="navbar navbar-expand-md bg-primary navbar-dark bg-gradient">
                 <div class="container">
                   <a class="navbar-brand" href="#">
                     <i class="fa d-inline fa-lg fa-cloud"></i>
                     <b> Brand</b>
                   </a>
-                  <? if($role!='admin') {?>
-                    <!--для всех, кроме админа-->
-                    <ul class="navbar-nav">
-                      <li class="nav-item active">
-                        <?
-                          echo Phalcon\Tag::linkTo(
-                              [
-                                  "course/",
-                                  '<i class="fas fa-brain"></i> Курсы',
-                                  "class" => "btn navbar-btn ml-2 text-light",
-                              ]
-                          );
-                        ?>
-                      </li>
-                    </ul>
-                    <ul class="navbar-nav">
-                      <li class="nav-item active">
-                        <?
-                          echo Phalcon\Tag::linkTo(
-                              [
-                                  "user/edit",
-                                  '<i class="fas fa-cog"></i> Настройки',
-                                  "class" => "btn navbar-btn ml-2 text-light",
-                              ]
-                          );
-                        ?>
-                      </li>
-                    </ul>
-                  <? }?>
+                  <?php 
+                  $role=$this->session->auth['role'];
+                  if($role != 'guest' && $role != null){
+                   ?>
+                    <? if($role!='admin') {?>
+                      <!--для всех, кроме админа-->
+                      <ul class="navbar-nav">
+                        <li class="nav-item active">
+                          <?
+                            echo Phalcon\Tag::linkTo(
+                                [
+                                    "course/",
+                                    '<i class="fas fa-brain"></i> Курсы',
+                                    "class" => "btn navbar-btn ml-2 text-light",
+                                ]
+                            );
+                          ?>
+                        </li>
+                      </ul>
+                      <ul class="navbar-nav">
+                        <li class="nav-item active">
+                          <?
+                            echo Phalcon\Tag::linkTo(
+                                [
+                                    "user/edit",
+                                    '<i class="fas fa-cog"></i> Настройки',
+                                    "class" => "btn navbar-btn ml-2 text-light",
+                                ]
+                            );
+                          ?>
+                        </li>
+                      </ul>
+                    <? }?>
 
-                  <? if($role=='admin') {?>
-                    <!--только для админестратора-->
-                    <ul class="navbar-nav">
-                      <li class="nav-item active">
-                        <?
-                          echo Phalcon\Tag::linkTo(
-                              [
-                                  "/user/",
-                                  '<i class="fas fa-user"></i> Пользователи',
-                                  "class" => "btn navbar-btn ml-2 text-light",
-                              ]
-                          );
-                        ?>
-                      </li>
-                      <li class="nav-item active">
-                        <?
-                          echo Phalcon\Tag::linkTo(
-                              [
-                                  "/group/",
-                                  '<i class="fas fa-users"></i> Группы',
-                                  "class" => "btn navbar-btn ml-2 text-light",
-                              ]
-                          );
-                        ?>
-                      </li>
-                    </ul>
-                  <? }?>
+                    <? if($role=='admin') {?>
+                      <!--только для админестратора-->
+                      <ul class="navbar-nav">
+                        <li class="nav-item active">
+                          <?
+                            echo Phalcon\Tag::linkTo(
+                                [
+                                    "/user/",
+                                    '<i class="fas fa-user"></i> Пользователи',
+                                    "class" => "btn navbar-btn ml-2 text-light",
+                                ]
+                            );
+                          ?>
+                        </li>
+                        <li class="nav-item active">
+                          <?
+                            echo Phalcon\Tag::linkTo(
+                                [
+                                    "/group/",
+                                    '<i class="fas fa-users"></i> Группы',
+                                    "class" => "btn navbar-btn ml-2 text-light",
+                                ]
+                            );
+                          ?>
+                        </li>
+                      </ul>
+                    <? }?>
 
                   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent">
                     <span class="navbar-toggler-icon"></span>
@@ -92,15 +93,24 @@
                         echo Phalcon\Tag::linkTo(
                             [
                                 "/session/logout",
-                                "Sign Out",
+                                "Выйти",
                                 "class" => "btn navbar-btn ml-2 text-white btn-dark",
                             ]
                         );
                       ?>
                   </div>
+                  <?php }else{?>
+                        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+                          <a class="btn navbar-btn ml-2 text-white btn-dark" data-toggle="modal" data-target="#signIn">
+                            <i class="fas fa-user"></i> Войти</a>
+                        </div>
+                    <?php } ?>
                 </div>
               </nav>
-        <?php } ?>
+        
     </head>
     <body>
         <div class="container">

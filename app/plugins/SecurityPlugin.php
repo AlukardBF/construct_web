@@ -39,16 +39,41 @@ class SecurityPlugin extends Plugin
 
         if (!$allowed) {
             // If he doesn't have access forward him to the index controller
-            $this->flash->error(
-                "You don't have access to this module"
-            );
+            // $this->flash->error(
+            //     "You don't have access to this module"
+            // );
+            switch ($role) {
+            	case self::GUEST:
+        			$dispatcher->forward(
+		                [
+		                    'controller' => 'index',
+		                    'action'     => 'index',
+		                ]
+		            );
+            		break;
+            	case self::ADMIN:
+        			$dispatcher->forward(
+		                [
+		                    'controller' => 'user',
+		                    'action'     => 'index',
+		                ]
+		            );
+            		break;
+            	case self::STUDENT:		
+            	case self::TEACH:
+        			$dispatcher->forward(
+		                [
+		                    'controller' => 'test',
+		                    'action'     => 'index',
+		                ]
+		            );
+            		break;
+            	
+            	default:
+            		# code...
+            		break;
+            }
 
-            $dispatcher->forward(
-                [
-                    'controller' => 'index',
-                    'action'     => 'index',
-                ]
-            );
 
             // Returning 'false' we tell to the dispatcher to stop the current operation
             return false;
@@ -78,11 +103,12 @@ class SecurityPlugin extends Plugin
 		// Private area resources (backend)
 		$allPrivateResources = [
 		    'test'    => ['index'],
-		    'session'    => ['logout'],
+		    'session'    => ['index', 'logout'],
 		    'user'    => ['index','edit','create','search','new','save','delete'],
 		    'course'  => ['index', 'register'],
 		    'subsection' => ['index'],
 		    'group'    => ['index','edit','create','search','new','save','delete'],
+		    'index'    => ['index'],
 		];
 		$adminResources = [
 		    'test'		=> ['index'],
@@ -104,6 +130,10 @@ class SecurityPlugin extends Plugin
 		    'subsection' 	=> ['index'],
 
 		];
+		$guestResources = [
+		    'index'    => ['index'],
+		    'session'    => ['index'],
+		];
 
 		foreach ($allPrivateResources as $resourceName => $actions) {
 		    $acl->addResource(
@@ -114,8 +144,6 @@ class SecurityPlugin extends Plugin
 
 		// Public area resources (frontend)
 		$publicResources = [
-		    'index'    => ['index'],
-		    'session'    => ['index'],
 		    'errors'   => ['show404', 'show500'],
 		];
 
@@ -161,6 +189,15 @@ class SecurityPlugin extends Plugin
 		    foreach ($actions as $action) {
 		        $acl->allow(
 		            self::STUDENT,
+		            $resource,
+		            $action
+		        );
+		    }
+		}
+		foreach ($guestResources as $resource => $actions) {
+		    foreach ($actions as $action) {
+		        $acl->allow(
+		            self::GUEST,
 		            $resource,
 		            $action
 		        );
