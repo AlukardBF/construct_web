@@ -32,8 +32,21 @@
                         <?
                           echo Phalcon\Tag::linkTo(
                               [
-                                  "/user/",
-                                  "Курсы",
+                                  "course/",
+                                  '<i class="fas fa-brain"></i> Курсы',
+                                  "class" => "btn navbar-btn ml-2 text-light",
+                              ]
+                          );
+                        ?>
+                      </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                      <li class="nav-item active">
+                        <?
+                          echo Phalcon\Tag::linkTo(
+                              [
+                                  "user/edit",
+                                  '<i class="fas fa-cog"></i> Настройки',
                                   "class" => "btn navbar-btn ml-2 text-light",
                               ]
                           );
@@ -50,7 +63,7 @@
                           echo Phalcon\Tag::linkTo(
                               [
                                   "/user/",
-                                  "Пользователи",
+                                  '<i class="fas fa-user"></i> Пользователи',
                                   "class" => "btn navbar-btn ml-2 text-light",
                               ]
                           );
@@ -61,7 +74,7 @@
                           echo Phalcon\Tag::linkTo(
                               [
                                   "/group/",
-                                  "Группы",
+                                  '<i class="fas fa-users"></i> Группы',
                                   "class" => "btn navbar-btn ml-2 text-light",
                               ]
                           );

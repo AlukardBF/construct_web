@@ -6,90 +6,138 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<? $role=$this->session->auth['role']; ?>
+<? if($role=='admin'){ /*начало условия*/?>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#groups').DataTable();
+        $('#erase_group').click(function(){
+            $('#fieldGroupGroupId').val('');
+            $('#fieldGroupName').val('');
+            $('#groups tr').removeClass("bg-secondary");
+        });
+        
+        $('#groups tbody tr').click(function(){
+            var group_id = $(this).find(".group_id").text();
+            var name = $(this).find(".group_name").text();
+            $('#groups tr').removeClass("bg-secondary");
+            $(this).addClass("bg-secondary");
+            $('#fieldGroupGroupId').val(group_id);
+            $('#fieldGroupName').val(name);
+            $('#set_group').modal('toggle');
+        });
+        $('#random_pass').click(function(){
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$_";
+            var passLen = Math.floor(Math.random()* 5+8);
+            for (var i = 0; i < passLen; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+            $('#fieldPass').val(text);
+        });
+    } );
+    </script>
+        
+    <style>
+        tbody tr{
+            cursor: pointer;
+        }
+    </style>
 
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#groups').DataTable();
-    $('#erase_group').click(function(){
-        $('#fieldGroupGroupId').val('');
-        $('#fieldGroupName').val('');
-        $('#groups tr').removeClass("bg-secondary");
-    });
-    
-    $('#groups tbody tr').click(function(){
-        var group_id = $(this).find(".group_id").text();
-        var name = $(this).find(".group_name").text();
-        $('#groups tr').removeClass("bg-secondary");
-        $(this).addClass("bg-secondary");
-        $('#fieldGroupGroupId').val(group_id);
-        $('#fieldGroupName').val(name);
-        $('#set_group').modal('toggle');
-    });
-} );
-</script>
-    
-<style>
-    tbody tr{
-        cursor: pointer;
-    }
-</style>
-
-<div class="modal"  id="set_group">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Выбрать группу</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <table id="groups" class="table table-bordered table-hover" >
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?
-                        foreach ($groups as $key => $group) {
-                            if($groupId ==$group->group_id )
-                                echo 
-                                '<tr class="bg-secondary">'.
-                                    '<td class="group_id">'.$group->group_id.'</td>'.
-                                    '<td class="group_name">'.$group->name.'</td>'.
-                                '</tr>';
-                            else
-                                echo 
-                                '<tr>'.
-                                    '<td class="group_id">'.$group->group_id.'</td>'.
-                                    '<td class="group_name">'.$group->name.'</td>'.
-                                '</tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
+    <div class="modal"  id="set_group">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Выбрать группу</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table id="groups" class="table table-bordered table-hover" >
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?
+                            foreach ($groups as $key => $group) {
+                                if($groupId ==$group->group_id )
+                                    echo 
+                                    '<tr class="bg-secondary">'.
+                                        '<td class="group_id">'.$group->group_id.'</td>'.
+                                        '<td class="group_name">'.$group->name.'</td>'.
+                                    '</tr>';
+                                else
+                                    echo 
+                                    '<tr>'.
+                                        '<td class="group_id">'.$group->group_id.'</td>'.
+                                        '<td class="group_name">'.$group->name.'</td>'.
+                                    '</tr>';
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<nav aria-label="breadcrumb" class='pt-3'>
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["user/index", "Пользователи"]); ?></li>
-    <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["user/search", "Результаты поиска"]); ?></li>
-    <li class="breadcrumb-item active">Редактировать пользователя</li>
-  </ol>
-</nav>
+    <nav aria-label="breadcrumb" class='pt-3'>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["user/index", "Пользователи"]); ?></li>
+        <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["user/search", "Результаты поиска"]); ?></li>
+        <li class="breadcrumb-item active">Редактировать пользователя</li>
+      </ol>
+    </nav>
+<?}  /*конец условия*/?>
 <div class="page-header">
     <h1>
         Редактировать пользователя
     </h1>
 </div>
 
+<!--//форма изменения пароля-->
 <?php echo $this->getContent(); ?>
+<?php
+    echo $this->tag->form(
+        [
+            "user/save",
+            "autocomplete" => "off",
+            "class" => "form-horizontal"
+        ]
+    );
+?>
+<? if($role!='admin'){?>
+    <div class="form-group">
+        <label for="fieldPass" class="col-sm-2 control-label">Старый пароль</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->passwordField(["old_pass", "size" => 30, "class" => "form-control", "id" => "fieldPass"]) ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fieldPass" class="col-sm-2 control-label">Новый пароль</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->passwordField(["pass",  "size" => 30, "class" => "form-control", "id" => "fieldPass"]) ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fieldPass" class="col-sm-2 control-label">Повторите пароль</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->passwordField(["re_pass",  "size" => 30, "class" => "form-control", "id" => "fieldPass"]) ?>
+        </div>
+    </div>
 
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <?php echo $this->tag->submitButton(["Изменить пароль", "class" => "btn btn-default"]) ?>
+        </div>
+    </div>
+    <?php echo $this->tag->endForm(); ?>
+<?}?>
+
+<!--//форма изменения личных данных-->
 <?php
     echo $this->tag->form(
         [
@@ -100,33 +148,25 @@ $(document).ready(function() {
     );
 ?>
 
-<div class="form-group">
-    <label for="fieldUserId" class="col-sm-2 control-label">User</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["user_id", "type" => "number", "class" => "form-control", "id" => "fieldUserId"]) ?>
-    </div>
-</div>
-
+<? if($role=='admin'){?>
 <div class="form-group">
     <label for="fieldEmail" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-10">
         <?php echo $this->tag->textField(["email", "size" => 30, "class" => "form-control", "id" => "fieldEmail"]) ?>
     </div>
 </div>
-
 <div class="form-group">
     <label for="fieldPass" class="col-sm-2 control-label">Пароль</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["pass", "size" => 30, "class" => "form-control", "id" => "fieldPass"]) ?>
+    <div class="col-sm-10 input-group">
+        <?php echo $this->tag->passwordField(["pass",  "size" => 30, "class" => "form-control", "id" => "fieldPass"]) ?>
+        <div class="input-group-append">
+            <button class="btn-secondary" type="button" id="random_pass">
+                <i class="fas fa-dice-six"></i> Случайный
+            </button>
+        </div>
     </div>
 </div>
-
-<div class="form-group">
-    <label for="fieldType" class="col-sm-2 control-label">Тип пользователя</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->selectStatic(["type",  ['admin'=>'admin','teach'=>'teach','student'=>'student'], "class" => "form-control", "id" => "fieldType"]) ?>
-    </div>
-</div>
+<?}?>
 
 <div class="form-group">
     <label for="fieldName" class="col-sm-2 control-label">Имя</label>
@@ -149,6 +189,15 @@ $(document).ready(function() {
     </div>
 </div>
 
+<? if($role=='admin'){?>
+<div class="form-group">
+    <label for="fieldType" class="col-sm-2 control-label">Тип пользователя</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->selectStatic(["type",  ['admin'=>'admin','teach'=>'teach','student'=>'student'], "class" => "form-control", "id" => "fieldType"]) ?>
+    </div>
+</div>
+
+
 <div class="form-group">
     <label for="fieldGroupGroupId" class="col-sm-2 control-label">Группа (для студентов)</label>
     <div class="col-sm-10 input-group">
@@ -164,20 +213,21 @@ $(document).ready(function() {
         </div>
     </div>
 </div>
-
+<?}?>
+<? if($role=='admin'||$role=='teach'){?>
 <div class="form-group">
     <label for="fieldTitle" class="col-sm-2 control-label">Звание (для преподователей)</label>
     <div class="col-sm-10">
         <?php echo $this->tag->textField(["title", "size" => 30, "class" => "form-control", "id" => "fieldTitle"]) ?>
     </div>
 </div>
+<?}?>
 
-
-<?php echo $this->tag->hiddenField("id") ?>
+<?php echo $this->tag->hiddenField("user_id") ?>
 
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-        <?php echo $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+        <?php echo $this->tag->submitButton(["Сохранить личные данные", "class" => "btn btn-default"]) ?>
     </div>
 </div>
 

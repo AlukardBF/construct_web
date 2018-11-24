@@ -68,11 +68,15 @@ class UserController extends ControllerBase
      *
      * @param string $user_id
      */
-    public function editAction($user_id)
+    public function editAction($user_id=0)
     {
         if (!$this->request->isPost()) {
-
-            $user = User::findFirstByuser_id($user_id);
+            $auth = $this->session->auth;
+            if($auth['role']=='admin'){
+                $user = User::findFirstByuser_id($user_id);
+            }else{
+                $user = User::findFirstByuser_id($auth['id']);
+            }
             if (!$user) {
                 $this->flash->error("user was not found");
 
@@ -88,18 +92,16 @@ class UserController extends ControllerBase
             $this->view->groupId = $user->group_group_id;
 
             $this->view->user_id = $user->user_id;
-
             $this->tag->setDefault("user_id", $user->user_id);
-            $this->tag->setDefault("email", $user->email);
-            $this->tag->setDefault("pass", $user->pass);
             $this->tag->setDefault("type", $user->type);
+            $this->tag->setDefault("group_group_id", $user->group_group_id);
+            $this->tag->setDefault("title", $user->title);
+            $this->tag->setDefault("email", $user->email);
+            if($user->group_group_id!=null)
+                $this->tag->setDefault("group_name", $user->group->name);
             $this->tag->setDefault("name", $user->name);
             $this->tag->setDefault("second_name", $user->second_name);
             $this->tag->setDefault("father_name", $user->father_name);
-            $this->tag->setDefault("group_group_id", $user->group_group_id);
-            $this->tag->setDefault("title", $user->title);
-            if($user->group_group_id!=null)
-                $this->tag->setDefault("group_name", $user->group->name);
             
         }
     }
@@ -168,7 +170,12 @@ class UserController extends ControllerBase
         }
 
         $user_id = $this->request->getPost("user_id");
-        $user = User::findFirstByuser_id($user_id);
+        $auth = $this->session->auth;
+        if($auth['role']=='admin'){
+            $user = User::findFirstByuser_id($user_id);
+        }else{
+            $user = User::findFirstByuser_id($auth['id']);
+        }
 
         if (!$user) {
             $this->flash->error("user does not exist " . $user_id);
@@ -180,18 +187,64 @@ class UserController extends ControllerBase
 
             return;
         }
-
-        $user->userId = $this->request->getPost("user_id");
-        $user->email = $this->request->getPost("email", "email");
+        if($auth['role']=='admin'){           
+            $user->type = $this->request->getPost("type"); 
+            $user->email = $this->request->getPost("email", "email");
+            if($this->request->getPost("group_group_id")!=null){
+                $user->group_group_id = $this->request->getPost("group_group_id");
+            }else{
+                 $user->group_group_id = null;
+            }
+        }
+        //сохранение пароля, для обычного пользователя
         $pass = $this->request->getPost("pass");
-        $user->pass = $this->security->hash($pass);
-        $user->type = $this->request->getPost("type");
-        $user->name = $this->request->getPost("name");
-        $user->second_name = $this->request->getPost("second_name");
-        $user->father_name = $this->request->getPost("father_name");
-        $user->group_group_id = $this->request->getPost("group_group_id");
-        $user->title = $this->request->getPost("title");
-        
+        if($pass!=null){
+            if($auth['role']!='admin'){
+                $old_pass = $this->request->getPost("old_pass");
+                $re_pass = $this->request->getPost("re_pass");
+                if($re_pass==$pass){
+                    if($this->security->checkHash($old_pass,$user->pass)){
+                        $user->pass = $this->security->hash($pass);
+                    }else{
+                        $this->flash->error("Неверный старый пароль!!!");
+                        return $this->dispatcher->forward([
+                            'controller' => "user",
+                            'action' => 'edit'
+                        ]);  
+                    }
+                    
+                }else{
+                    $this->flash->error("Новый пароль и повторный пароль не совпадают!!!");
+                    return $this->dispatcher->forward([
+                            'controller' => "user",
+                            'action' => 'edit'
+                        ]);  
+                }
+            }else{//сохранение пароля для админестратора
+                $user->pass = $this->security->hash($pass);
+            }
+        }
+        $second_name = $this->request->getPost("second_name");
+        if($second_name!=null){
+            $user->second_name =$second_name; 
+        }
+
+        $father_name = $this->request->getPost("father_name");
+        if($father_name!=null){
+            $user->father_name =$father_name; 
+        }
+
+        $name = $this->request->getPost("name");
+        if($name!=null){
+            $user->name =$name; 
+        }
+
+        //здесь не эквивалентность, по тому что, это поле может быть пустым
+        //потому должна быть возможность присвоить пустую строку
+        $title = $this->request->getPost("title");
+        if($title!==null){ 
+            $user->title =$title; 
+        }
 
         if (!$user->save()) {
 

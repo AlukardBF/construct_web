@@ -11,6 +11,7 @@
 ?> -->
 <br/>
 <?
+echo 'id: '.$this->session->get('auth')['id'].'<br/>';
 echo 'Роль: '.$this->session->get('auth')['role'].'<br/>';
 echo 'Почта: '.$this->session->get('auth')['email'].'<br/>';
 echo PHP_EOL;

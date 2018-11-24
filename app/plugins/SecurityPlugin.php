@@ -85,21 +85,24 @@ class SecurityPlugin extends Plugin
 		    'group'    => ['index','edit','create','search','new','save','delete'],
 		];
 		$adminResources = [
-		    'test'    => ['index'],
-		    'session'    => ['logout'],
-		    'user'    => ['index','edit','create','search','new','save','delete'],
-		    'group'    => ['index','edit','create','search','new','save','delete'],
+		    'test'		=> ['index'],
+		    'session'	=> ['logout'],
+		    'user'		=> ['index','edit','create','search','new','save','delete'],
+		    'group'		=> ['index','edit','create','search','new','save','delete'],
 		];
 		$teachResources = [
-			'test'    => ['index'],
-		    'session'    => ['logout'],
-		    'course'  => ['index', 'register'],
-		    'subsection' => ['index'],
+			'test'    		=> ['index'],
+		    'session'    	=> ['logout'],
+		    'course'  		=> ['index', 'register'],
+		    'user'    		=> ['edit','save'],
+		    'subsection' 	=> ['index'],
 		];
 		$studentResources = [
-			'test'    => ['index'],
-		    'session'    => ['logout'],
-		    'subsection' => ['index'],
+			'test'    		=> ['index'],
+		    'session'    	=> ['logout'],
+		    'user'    		=> ['edit','save'],
+		    'subsection' 	=> ['index'],
+
 		];
 
 		foreach ($allPrivateResources as $resourceName => $actions) {
