@@ -48,9 +48,9 @@
 								</li>
 								<ul>
 						</div>
-						<a class="btn btn-danger" href="#comment" style="width: 100%" data-toggle="collapse" role="button" aria-expanded="false"
+						<a class="btn btn-danger" href="#<? echo $subsection->subsection_id ?>" style="width: 100%" data-toggle="collapse" role="button" aria-expanded="false"
 						 aria-controls="comment">Комментарии</a>
-						<div class="collapse multi-collapse" id="comment">
+						<div class="collapse multi-collapse" id="<? echo $subsection->subsection_id ?>" >
 							<!-- <div class="card card-body">
 								<h5>Комментатор, <span class="small text-mute">00:00</span> <span class="small text-secondary">студент</span></h5>
 								<p>Комментарий</p>
@@ -123,7 +123,7 @@
 								</li>
 								<ul>
 						</div>
-						<a class="btn btn-danger" href="#comment" style="width: 100%">Комментарии</a>
+						<a class="btn btn-danger" href="#<? echo $subsection->subsection_id ?>" style="width: 100%">Комментарии</a>
 					</div>
 				<?}?>
 				</div>
@@ -168,7 +168,7 @@
 								</li>
 								<ul>
 						</div>
-						<a class="btn btn-danger" href="#comment" style="width: 100%">Комментарии</a>
+						<a class="btn btn-danger" href="#<? echo $subsection->subsection_id ?>" style="width: 100%">Комментарии</a>
 					</div>
 					<?}?>
 				</div>
