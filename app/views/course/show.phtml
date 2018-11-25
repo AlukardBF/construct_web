@@ -30,9 +30,10 @@
 					 		if($role != 'guest' && $role != null){
 					            if($role=='student') {
 					        ?>
-					        <form enctype="multipart/form-data" method="post">
-							<p><input type="file" name="f">
-							<input type="submit" value="Отправить"></p>
+					        <input type="hidden" name="MAX_FILE_SIZE" value="30000">
+					        <form action="/construct/construct_web/file/upload" enctype="multipart/form-data" method="post">
+								<input type="file" name="filename" class="btn btn-outline-primary"><br>
+        						<input type="submit" value="Загрузить" class="btn btn-outline-primary"><br>
 							</form>
 							<?}}?>
 
