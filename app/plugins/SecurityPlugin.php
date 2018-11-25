@@ -109,6 +109,7 @@ class SecurityPlugin extends Plugin
 		    'subsection' => ['index','create','save','delete'],
 		    'group'    => ['index','edit','create','search','new','save','delete'],
 		    'index'    => ['index'],
+		    'file'    => ['upload'],
 		];
 		$adminResources = [
 		    'test'		=> ['index'],
@@ -129,6 +130,7 @@ class SecurityPlugin extends Plugin
 		    'user'    		=> ['edit','save'],
 		    'course'  		=> ['list','show'],
 		    'subsection' 	=> ['index'],
+		    'file'    => ['upload'],
 
 		];
 		$guestResources = [
