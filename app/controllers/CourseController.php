@@ -61,6 +61,11 @@ class CourseController extends ControllerBase
         }
 
     }
+    
+    public function newAction()
+    {
+
+    }
 
     public function deleteAction($course_id = null)
     {
