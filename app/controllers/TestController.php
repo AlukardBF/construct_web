@@ -9,17 +9,8 @@ class TestController extends \Phalcon\Mvc\Controller
     {
     	$currentPage = (int) $_GET["page"];
 		// Набор данных для разбивки на страницы
-		$course = Course::find();
-		// Создаём пагинатор, отображаются 4 элемента на странице, начиная с текущей - $currentPage
-		$paginator = new PaginatorModel(
-			[ 
-				"data" => $course,
-				"limit" => 4,
-				"page" => $currentPage,
-			]
-		);
-		// Получение результатов работы ппагинатора 
-		$this->view->page = $paginator->getPaginate();
+		
+
 
     }
 

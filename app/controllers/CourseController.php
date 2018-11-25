@@ -1,4 +1,5 @@
 <?php
+use Phalcon\Paginator\Adapter\Model as PaginatorModel;
 
 class CourseController extends ControllerBase
 {
@@ -18,6 +19,22 @@ class CourseController extends ControllerBase
             ]);
         }
         $this->view->course = $course; 
+    }
+
+    public function listAction(){
+        $numberPage = $this->request->getQuery("page", "int");
+        //список курсов
+        $course = Course::find();
+        // Создаём пагинатор, отображаются 4 элемента на странице, начиная с текущей - $currentPage
+        $paginator = new PaginatorModel(
+            [ 
+                "data" => $course,
+                "limit" => 3,
+                "page" => $numberPage,
+            ]
+        );
+        // Получение результатов работы ппагинатора 
+        $this->view->page = $paginator->getPaginate();
     }
 
     public function newAction()
