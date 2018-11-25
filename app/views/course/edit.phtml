@@ -9,11 +9,12 @@
 				<?php echo $this->tag->textField([ "name", 'value' => $course->name ]); ?> </p>
 				<p>
 				<label for="description">Описание</label><br/>
-				<?php echo $this->tag->textArea([ "description", 'value' => $course->description ]); ?> </p>
-				<?php echo $this->tag->hiddenField(['course_id',"value" => $course->course_id]); ?>
-				<?php echo $this->tag->submitButton(['Сохранить', "class" => "btn btn-secondary"]); ?> </p>
+				<?php echo $this->tag->textArea([ "description", 'value' => $course->description ]); ?>
+				<?php echo $this->tag->hiddenField(['course_id',"value" => $course->course_id]); ?> </p>
+				<p>
+				<?php echo $this->tag->submitButton(['Сохранить', "class" => "btn btn-secondary"]); ?>
+				<?php echo $this->tag->linkTo(['course/delete/'.$course->course_id, 'Удалить курс', 'class' => 'btn btn-danger']) ?> </p>
 				</form>
-				
 			</div>
 		</div>
 	</div>
