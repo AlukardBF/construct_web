@@ -61,11 +61,49 @@ class CourseController extends ControllerBase
         }
 
     }
-
+    
     public function newAction()
     {
 
     }
+
+    public function deleteAction($course_id = null)
+    {
+        $course = Course::findFirstBycourse_id($course_id);
+        if (!$course) {
+            $this->flash->error("Course was not found");
+
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'list'
+            ]);
+
+            return;
+        }
+
+        if (!$course->delete()) {
+
+            foreach ($course->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'edit',
+                'params' => ['course_id'=>$course_id]
+            ]);
+
+            return;
+        }
+
+        $this->flash->success("Course was deleted successfully");
+
+        $this->dispatcher->forward([
+            'controller' => "course",
+            'action' => "list"
+        ]);
+    }
+
     /**
      * Creates a new course
      */
@@ -116,7 +154,17 @@ class CourseController extends ControllerBase
     // Получаем запрошенный курс
     $course = Course::findFirst("course_id = ".intval($course_id)); 
     $user = User::findFirst("user_id = ".intval($user_id)); 
-    
+    if($course!=null){
+            $this->view->chapters = $course->getSubsection( [
+                "section = 'главы'",
+            ]);
+            $this->view->applications =$course->getSubsection( [
+                "section = 'приложения'",
+            ]);
+            $this->view->charts = $course->getSubsection( [
+                "section = 'графические материалы'",
+            ]);
+        }
     
     $this->view->course = $course;
     $this->view->user = $user;
