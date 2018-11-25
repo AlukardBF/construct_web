@@ -53,7 +53,8 @@ class UserController extends ControllerBase
 
         $this->view->page = $paginator->getPaginate();
     }
-
+    
+    
     /**
      * Displays the creation form
      */

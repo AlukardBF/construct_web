@@ -1,0 +1,77 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<?php use Phalcon\Tag; ?>
+
+
+
+<!-- <nav aria-label="breadcrumb " class='pt-3'>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["user/index", "Пользователи"]); ?></li>
+    <li class="breadcrumb-item active">Результаты поиска</li>
+  </ol>
+</nav> -->
+
+<div class="page-header">
+    <h1>Результаты поиска</h1>
+</div>
+
+<?php echo $this->getContent(); ?>
+
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>User</th>
+            <th>Email</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Отчество</th>
+            <th>Группа</th>
+            <th>Форма обучения</th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($page->items as $user): ?>
+            <? $group = $user->group; ?>
+            <tr>
+                <td><?php echo $user->user_id ?></td>
+            <td><?php echo $user->email ?></td>
+            <td><?php echo $user->name ?></td>
+            <td><?php echo $user->second_name ?></td>
+            <td><?php echo $user->father_name ?></td>
+            <td><?php
+                if($group!=null){
+                    echo $group->name." ".$group->year;
+                }
+              ?></td>
+            <td><?php 
+                if($group!=null){
+                    echo $group->type;
+                }
+             ?></td>
+
+                <td><?php echo $this->tag->linkTo(["student/subscribe/".$course_id."/" . $user->user_id, "Подписать"]); ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-flex justify-content-center">
+    <?
+        echo CustomTags::pagination([
+                        'link' => 'student/search/'.$course_id.'?page=%d',
+                        'current' => $page->current,
+                        'next' => $page->next,
+                        'before' => $page->before,
+                        'count'   => $page->total_pages,
+                    ]);
+
+    ?>
+</div>
