@@ -6,3 +6,5 @@
 #Vagrant ignore
 Vagrantfile
 .vagrant/
+#Uploaded files
+public/uploads
