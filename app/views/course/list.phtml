@@ -1,3 +1,37 @@
+<div class="modal fade" id="createCourse">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Создать курс</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <?echo Phalcon\Tag::form(
+            [
+                "course/create",
+                "method" => "post",
+                "class"=>"form-horizontal",
+            ]
+        );?>
+        <div class="form-group">
+          <label for="nameInput">Наименование</label>
+          <input type="text" name="name" class="form-control" id="nameInput">
+        </div>
+        <div class="form-group">
+          <label for="descriptionInput">Описание</label>
+          <textarea type="text" name="description" class="form-control" id="descriptionInput"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" style="width:100%" class="btn btn-outline-secondary">Создать курс</button>
+        </div>
+        </form>
+      </div>
+    </div><!-- /.модальное окно-Содержание -->
+  </div><!-- /.модальное окно-диалог -->
+</div>
+<!-- /.модальное окно -->
  <div class="py-2">
     <div class="container">
       <div class="row">
@@ -11,14 +45,20 @@
 
           <?  
           $role=$this->session->auth['role'];
- if($role != 'guest' && $role != null){
-                if($role=='teach') {
-          echo $this->tag->linkTo( 
-              [
-                "course/new/",
-                "|+| добавить курс",
-              ]
-            ); }}?>
+          if($role != 'guest' && $role != null) {
+            if($role=='teach') {
+              echo $this->tag->linkTo( 
+                [
+                  "",
+                  "Добавить курс",
+                  'class' => 'btn btn-secondary',
+                  'data-toggle' => 'modal',
+                  'data-target' => '#createCourse'
+                ]
+              );
+            }
+          }
+          ?>
 
   <div class="py-5">
     <div class="container">
