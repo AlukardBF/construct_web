@@ -111,4 +111,58 @@ class CourseController extends ControllerBase
         }
     }
 
+    public function saveAction()
+    {
+
+        if (!$this->request->isPost()) {
+            $this->flash->error("Редактируйте через форму");
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'list'
+            ]);
+
+            return;
+        }
+
+        $course_id = $this->request->getPost("course_id");
+        $course = Course::findFirst($course_id);
+
+        if (!$course) {
+            $this->flash->error("Подраздел не существует " . $course_id);
+
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'list'
+            ]);
+
+            return;
+        }
+
+        $course->name = $this->request->getPost("name");
+        $course->description = $this->request->getPost("description");
+        
+
+        if (!$course->save()) {
+            $this->flash->error('Произошла ошибка: ');
+            foreach ($group->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'edit',
+                'params' => ['course_id'=>$course_id]
+            ]);
+
+            return;
+        }
+
+        $this->flash->success("Курс успешно обновлен.");
+
+        $this->dispatcher->forward([
+            'controller' => "course",
+            'action' => 'edit',
+            'params' => ['course_id'=>$course_id]
+        ]);
+    }
 }

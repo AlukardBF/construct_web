@@ -1,9 +1,19 @@
 <div class="py-1">
 	<div class="container">
-		<div class="row">
+		<div class="row pb-4">
 			<div class="col-md-12">
-				<h1 class=""><?echo $course->name; ?></h1>
-				<h3><?echo $course->description; ?></h3>
+				<h1 class="">Редактирование курса</h1>
+				<?php echo $this->tag->form(["course/save","method" => 'POST']); ?>
+				<p>
+				<label for="name">Название курса</label><br/>
+				<?php echo $this->tag->textField([ "name", 'value' => $course->name ]); ?> </p>
+				<p>
+				<label for="description">Описание</label><br/>
+				<?php echo $this->tag->textArea([ "description", 'value' => $course->description ]); ?> </p>
+				<?php echo $this->tag->hiddenField(['course_id',"value" => $course->course_id]); ?>
+				<?php echo $this->tag->submitButton(['Сохранить', "class" => "btn btn-secondary"]); ?> </p>
+				</form>
+				
 			</div>
 		</div>
 	</div>
@@ -24,7 +34,7 @@
 			<?php echo $this->tag->hiddenField(['section',"value" => 'главы']); ?>
 			<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
 
-			<?php echo $this->tag->submitButton(['добавить раздел', "class" => "btn btn-secondary"]); ?> </p>
+			<?php echo $this->tag->submitButton(['Добавить раздел', "class" => "btn btn-secondary"]); ?> </p>
 			</form>
 			<div class="list-group">
 					
@@ -42,11 +52,11 @@
 				<div class=" w-100">
 					<label for="description">Описание</label><br/>
 					<?php echo $this->tag->textArea(["discription", 'value'=>$subsection->discription, 'class'=>'w-100']); ?> 
-					<?php echo $this->tag->hiddenField(['course_id',"value" => $course->course_id]); ?> 
-					<?php echo $this->tag->hiddenField(['subsection_id',"value" => $subsection->subsection_id]); ?> 
+					<?php echo $this->tag->hiddenField(['course_id',"value" => $course->course_id]); ?>
+					<?php echo $this->tag->hiddenField(['subsection_id',"value" => $subsection->subsection_id]); ?>
 				</div><br>
 				<?php echo $this->tag->submitButton(['Сохранить изменения', "class" => "btn btn-secondary"]); ?>
-				<?php echo $this->tag->linkTo(['subsection/delete/'.$subsection->subsection_id, 'Удалить подсекцию', 'class' => 'btn btn-danger']) ?>
+				<?php echo $this->tag->linkTo(['subsection/delete/'.$subsection->subsection_id, 'Удалить раздел', 'class' => 'btn btn-danger']) ?>
 				</form>				
 			</div>
 			<?
@@ -65,7 +75,7 @@
 			<?php echo $this->tag->hiddenField(['section',"value" => 'приложения']); ?>
 			<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
 
-			<?php echo $this->tag->submitButton(['добавить раздел', "class" => "btn btn-secondary"]); ?> </p>
+			<?php echo $this->tag->submitButton(['Добавить раздел', "class" => "btn btn-secondary"]); ?> </p>
 			</form>
 			<div class="list-group">
 					
@@ -87,7 +97,7 @@
 				<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
 				<?php echo $this->tag->hiddenField(['subsection_id',"value" => $course->course_id]); ?> 
 				<?php echo $this->tag->submitButton(['Сохранить изменения', "class" => "btn btn-secondary"]); ?>
-				<?php echo $this->tag->linkTo(['subsection/delete/'.$subsection->subsection_id, 'Удалить подсекцию', 'class' => 'btn btn-danger']) ?>
+				<?php echo $this->tag->linkTo(['subsection/delete/'.$subsection->subsection_id, 'Удалить раздел', 'class' => 'btn btn-danger']) ?>
 				</form>				
 			</div>
 			<?
@@ -106,7 +116,7 @@
 			<?php echo $this->tag->hiddenField(['section',"value" => 'графические материалы']); ?>
 			<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
 
-			<?php echo $this->tag->submitButton(['добавить раздел', "class" => "btn btn-secondary"]); ?> </p>
+			<?php echo $this->tag->submitButton(['Добавить раздел', "class" => "btn btn-secondary"]); ?> </p>
 			</form>
 			<div class="list-group">
 					
@@ -127,7 +137,7 @@
 				</div><br>
 				<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
 				<?php echo $this->tag->submitButton(['Сохранить изменения', "class" => "btn btn-secondary"]); ?>
-				<?php echo $this->tag->linkTo(['subsection/delete/'.$subsection->subsection_id, 'Удалить подсекцию', 'class' => 'btn btn-danger']) ?>
+				<?php echo $this->tag->linkTo(['subsection/delete/'.$subsection->subsection_id, 'Удалить раздел', 'class' => 'btn btn-danger']) ?>
 				</form>				
 			</div>
 			<?
