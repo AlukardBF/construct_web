@@ -105,7 +105,7 @@ class SecurityPlugin extends Plugin
 		    'test'    => ['index'],
 		    'session'    => ['index', 'logout'],
 		    'user'    => ['index','edit','create','search','new','save','delete'],
-		    'course'  => ['edit','new', 'create','list'],
+		    'course'  => ['index','edit','new', 'create','list'],
 		    'subsection' => ['index','create','save','delete'],
 		    'group'    => ['index','edit','create','search','new','save','delete'],
 		    'index'    => ['index'],

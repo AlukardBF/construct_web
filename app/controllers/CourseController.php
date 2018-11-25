@@ -32,7 +32,7 @@ class CourseController extends ControllerBase
     public function listAction(){
         $numberPage = $this->request->getQuery("page", "int");
         //список курсов
-        $user = User::findFirst($this->session->auth[id]);
+        $user = User::findFirst($this->session->auth['id']);
         if($user!=null){
             $course = $user->getCourse();
             $paginator = new PaginatorModel(
