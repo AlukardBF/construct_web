@@ -111,4 +111,15 @@ class CourseController extends ControllerBase
         }
     }
 
+    public function showAction($course_id = null, $user_id = null) 
+    {  
+    // Получаем запрошенный курс
+    $course = Course::findFirst("course_id = ".intval($course_id)); 
+    $user = User::findFirst("user_id = ".intval($user_id)); 
+    
+    
+    $this->view->course = $course;
+    $this->view->user = $user;
+
+    }
 }
