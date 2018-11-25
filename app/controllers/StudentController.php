@@ -33,12 +33,13 @@ class StudentController extends ControllerBase
            $subIds[] = $user->user_id;
         }
         $this->view->course_id = $course_id;
+        $parameters[] = 'type = "student"';
         if(count($subIds)>0){
             $parameters[]='user_id NOT IN ({ids:array})';
             $parameters["bind"]=["ids"=>$subIds];
         }
         
-        $parameters["type"] = "student";
+        
         
         //$parameters["order"] = "user_id";
         $user = User::find($parameters);
