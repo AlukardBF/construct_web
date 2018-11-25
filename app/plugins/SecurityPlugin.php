@@ -111,7 +111,7 @@ class SecurityPlugin extends Plugin
 			'group'			=> ['index','edit','create','search','new','save','delete'],
 			'comment' 		=> ['index','create'],
 			'index'			=> ['index'],
-			'file'    		=> ['upload'],
+			'file'    		=> ['upload','download'],
 		];
 		$adminResources = [
 		    'test'		=> ['index'],
@@ -127,6 +127,7 @@ class SecurityPlugin extends Plugin
 		    'student' 		=> ['index','search','subscribe'],
 			'subsection' 	=> ['index','create','save','delete'],
 			'comment' 		=> ['index','create'],
+			'file'    		=> ['download'],
 		];
 		$studentResources = [
 			'test'    		=> ['index'],
@@ -135,7 +136,7 @@ class SecurityPlugin extends Plugin
 			'course'  		=> ['list','show'],
 			'comment' 		=> ['index','create'],
 		    'subsection' 	=> ['index'],
-		    'file'    => ['upload'],
+		    'file'    		=> ['upload','download'],
 
 		];
 		$guestResources = [

@@ -37,6 +37,7 @@ class File extends \Phalcon\Mvc\Model
         $this->setSchema("konlabu");
         $this->setSource("file");
         $this->belongsTo('subsection_subsection_id', 'Subsection', 'subsection_id', ['alias' => 'Subsection']);
+        $this->belongsTo('user_user_id', 'User', 'user_id', ['alias' => 'User']);
     }
 
     /**

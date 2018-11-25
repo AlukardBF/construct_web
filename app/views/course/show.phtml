@@ -2,12 +2,17 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1 class=""><?echo $course->name; ?></h1>
-				<h3><?echo $course->description; ?></h3>
+				<h1 class="">
+					<?echo $course->name; ?>
+				</h1>
+				<h3>
+					<?echo $course->description; ?>
+				</h3>
 			</div>
 		</div>
 	</div>
 </div>
+<?php echo $this->getContent(); ?>
 <div class="py-2">
 	<div class="container">
 		<div class="row pb-4">
@@ -17,11 +22,27 @@
 					<?foreach ($chapters as $number => $subsection) {?>
 					<div class="list-group-item">
 						<div class="d-flex w-100 justify-content-between">
-							<h4 class="mb-1"><b><? echo $subsection->theme ?></b></h4>
-							<small>3 days ago</small>
+							<h4 class="mb-1"><b>
+									<? echo $subsection->theme ?></b></h4>
+							<small>
+								<? if (count($subsection->getFile()) != 0) {
+									$date = time(); 
+									foreach ($subsection->getFile() as $file) { 
+										if ($date > strtotime($file->datetime)) {
+											$date = strtotime($file->datetime);
+										}
+									}
+									echo date('d/m/Y, H:i', $date);
+								} else {
+									echo "Изменения отсутствуют";
+								}
+								?>
+							</small>
 						</div>
 						<div class="d-flex w-100 justify-content-between">
-							<h6 class="mb-1" contenteditable="true"><? echo $subsection->discription ?></h6>
+							<h5 class="mb-1" contenteditable="true">
+								<? echo $subsection->discription ?>
+							</h5>
 							<small>Оценка</small>
 						</div>
 						<div>
@@ -30,28 +51,35 @@
 					 		if($role != 'guest' && $role != null){
 					            if($role=='student') {
 					        ?>
-					        <input type="hidden" name="MAX_FILE_SIZE" value="30000">
-					        <form action="file/upload" enctype="multipart/form-data" method="post">
-								<input type="file" name="filename" class="btn btn-outline-primary"><br>
-        						<input type="submit" value="Загрузить" class="btn btn-outline-primary"><br>
+							<?php echo $this->tag->form(["file/upload","method" => 'POST',"class" => 'form-inline py-2',"enctype"=>"multipart/form-data"]); ?>
+							<div class="input-group">
+								<input type="file" name="upFile" class="btn btn-outline-primary">
+								<?php echo $this->tag->hiddenField(['subsection_id', "value" => $subsection->subsection_id]); ?>
+								<div class="input-group-append">
+									<?php echo $this->tag->submitButton(['Загрузить', "class" => "btn btn-outline-primary", "name" => "upload"]); ?>
+								</div>
+							</div>
 							</form>
 							<?}}?>
 
-							<ul>
-								<li>
-									<a href="#" class="text-secondary">Файл 1</a>, 00:00, 00.00.00
-								</li>
-								<li>
-									<a href="#" class="text-secondary">Файл 2</a>, 00:00, 00.00.00
-								</li>
-								<li>
-									<a href="#" class="text-secondary">Файл 3</a>, 00:00, 00.00.00
-								</li>
-								<ul>
+							<div class="list-group">
+								<? foreach ($subsection->getFile() as $file) { ?>
+								<a href="<? echo '/file/download/'.$file->getUser()->user_id.'/'.$course->course_id.'/'.$subsection->subsection_id.'/'.$file->file_id ?>"
+								 class="my-2 list-group-item list-group-item-action flex-column align-items-start">
+									<div class="d-flex w-100 justify-content-between">
+										<h6 class="mb-1">
+											<? echo $file->filename ?>
+										</h6>
+										<small>
+											<? echo date('d/m/Y, H:i', strtotime($file->datetime)) ?></small>
+									</div>
+								</a>
+								<?}?>
+							</div>
 						</div>
-						
-						<a class="btn btn-danger" href="#<? echo $subsection->subsection_id ?>" style="width: 100%" data-toggle="collapse" role="button" aria-expanded="false"
-						 aria-controls="comment">Комментарии</a>
+
+						<a class="btn btn-danger" href="#<? echo $subsection->subsection_id ?>" style="width: 100%" data-toggle="collapse"
+						 role="button" aria-expanded="false" aria-controls="comment">Комментарии</a>
 						<div class="collapse multi-collapse" id="<? echo $subsection->subsection_id ?>" style="max-height: 50vh; overflow: scroll;">
 							<? foreach ($subsection->getComment() as $comment) {
 								$user = $comment->getUser();
@@ -70,10 +98,10 @@
 							} ?>
 							<div class="card card-footer">
 								<?php echo $this->tag->form(["comment/create","method" => 'POST',"class" => 'form-inline']); ?>
-									<?php echo $this->tag->textArea(["text","class" => 'w-100',"rows" => '3']); ?>
-									<?php echo $this->tag->hiddenField(['subsection_id', "value" => $subsection->subsection_id]); ?>
-									<?php echo $this->tag->submitButton(['Отправить', "class" => "btn btn-outline-primary w-100"]); ?>
-								</form>								
+								<?php echo $this->tag->textArea(["text","class" => 'w-100',"rows" => '3']); ?>
+								<?php echo $this->tag->hiddenField(['subsection_id', "value" => $subsection->subsection_id]); ?>
+								<?php echo $this->tag->submitButton(['Отправить', "class" => "btn btn-outline-primary w-100"]); ?>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -88,13 +116,28 @@
 				<div class="list-group">
 					<?foreach ($applications as $number => $subsection) {?>
 					<div class="list-group-item">
-
 						<div class="d-flex w-100 justify-content-between">
-							<h4 class="mb-1"><b><? echo $subsection->theme ?></b></h4>
-							<small>3 days ago</small>
+							<h4 class="mb-1"><b>
+									<? echo $subsection->theme ?></b></h4>
+							<small>
+								<? if (count($subsection->getFile()) != 0) {
+									$date = time(); 
+									foreach ($subsection->getFile() as $file) { 
+										if ($date > strtotime($file->datetime)) {
+											$date = strtotime($file->datetime);
+										}
+									}
+									echo date('d/m/Y, H:i', $date);
+								} else {
+									echo "Изменения отсутствуют";
+								}
+								?>
+							</small>
 						</div>
 						<div class="d-flex w-100 justify-content-between">
-							<h6 class="mb-1"><? echo $subsection->discription ?></h6>
+							<h5 class="mb-1" contenteditable="true">
+								<? echo $subsection->discription ?>
+							</h5>
 							<small>Оценка</small>
 						</div>
 						<div>
@@ -103,25 +146,35 @@
 					 		if($role != 'guest' && $role != null){
 					            if($role=='student') {
 					        ?>
-					        <form enctype="multipart/form-data" method="post">
-							<p><input type="file" name="f">
-							<input type="submit" value="Отправить"></p>
+							<?php echo $this->tag->form(["file/upload","method" => 'POST',"class" => 'form-inline py-2',"enctype"=>"multipart/form-data"]); ?>
+							<div class="input-group">
+								<input type="file" name="upFile" class="btn btn-outline-primary">
+								<?php echo $this->tag->hiddenField(['subsection_id', "value" => $subsection->subsection_id]); ?>
+								<div class="input-group-append">
+									<?php echo $this->tag->submitButton(['Загрузить', "class" => "btn btn-outline-primary", "name" => "upload"]); ?>
+								</div>
+							</div>
 							</form>
 							<?}}?>
-							<ul>
-								<li>
-									<a href="#" class="text-secondary">Файл 1</a>, 00:00, 00.00.00
-								</li>
-								<li>
-									<a href="#" class="text-secondary">Файл 2</a>, 00:00, 00.00.00
-								</li>
-								<li>
-									<a href="#" class="text-secondary">Файл 3</a>, 00:00, 00.00.00
-								</li>
-								<ul>
+
+							<div class="list-group">
+								<?	foreach ($subsection->getFile() as $file) { ?>
+								<a href="<? echo '/file/download/'.$file->getUser()->user_id.'/'.$course->course_id.'/'.$subsection->subsection_id.'/'.$file->file_id ?>"
+								 class="my-2 list-group-item list-group-item-action flex-column align-items-start">
+									<div class="d-flex w-100 justify-content-between">
+										<h6 class="mb-1">
+											<? echo $file->filename ?>
+										</h6>
+										<small>
+											<? echo date('d/m/Y, H:i', strtotime($file->datetime)) ?></small>
+									</div>
+								</a>
+								<?}?>
+							</div>
 						</div>
-						<a class="btn btn-danger" href="#<? echo $subsection->subsection_id ?>" style="width: 100%" data-toggle="collapse" role="button" aria-expanded="false"
-						 aria-controls="comment">Комментарии</a>
+
+						<a class="btn btn-danger" href="#<? echo $subsection->subsection_id ?>" style="width: 100%" data-toggle="collapse"
+						 role="button" aria-expanded="false" aria-controls="comment">Комментарии</a>
 						<div class="collapse multi-collapse" id="<? echo $subsection->subsection_id ?>" style="max-height: 50vh; overflow: scroll;">
 							<? foreach ($subsection->getComment() as $comment) {
 								$user = $comment->getUser();
@@ -140,14 +193,14 @@
 							} ?>
 							<div class="card card-footer">
 								<?php echo $this->tag->form(["comment/create","method" => 'POST',"class" => 'form-inline']); ?>
-									<?php echo $this->tag->textArea(["text","class" => 'w-100',"rows" => '3']); ?>
-									<?php echo $this->tag->hiddenField(['subsection_id', "value" => $subsection->subsection_id]); ?>
-									<?php echo $this->tag->submitButton(['Отправить', "class" => "btn btn-outline-primary w-100"]); ?>
-								</form>								
+								<?php echo $this->tag->textArea(["text","class" => 'w-100',"rows" => '3']); ?>
+								<?php echo $this->tag->hiddenField(['subsection_id', "value" => $subsection->subsection_id]); ?>
+								<?php echo $this->tag->submitButton(['Отправить', "class" => "btn btn-outline-primary w-100"]); ?>
+								</form>
 							</div>
 						</div>
 					</div>
-				<?}?>
+					<?}?>
 				</div>
 			</div>
 		</div>
@@ -156,15 +209,30 @@
 			<div class="col-md-12">
 				<h2 class="">Графические материалы</h2>
 				<div class="list-group">
-				<? foreach ($charts as $number => $subsection) {?>
+					<?foreach ($charts as $number => $subsection) {?>
 					<div class="list-group-item">
-
 						<div class="d-flex w-100 justify-content-between">
-							<h4 class="mb-1"><b><? echo $subsection->theme ?></b></h4>
-							<small>3 days ago</small>
+							<h4 class="mb-1"><b>
+									<? echo $subsection->theme ?></b></h4>
+							<small>
+								<? if (count($subsection->getFile()) != 0) {
+									$date = time(); 
+									foreach ($subsection->getFile() as $file) { 
+										if ($date > strtotime($file->datetime)) {
+											$date = strtotime($file->datetime);
+										}
+									}
+									echo date('d/m/Y, H:i', $date);
+								} else {
+									echo "Изменения отсутствуют";
+								}
+								?>
+							</small>
 						</div>
 						<div class="d-flex w-100 justify-content-between">
-							<h6 class="mb-1" contenteditable="true"><? echo $subsection->discription ?></h6>
+							<h5 class="mb-1" contenteditable="true">
+								<? echo $subsection->discription ?>
+							</h5>
 							<small>Оценка</small>
 						</div>
 						<div>
@@ -173,25 +241,35 @@
 					 		if($role != 'guest' && $role != null){
 					            if($role=='student') {
 					        ?>
-					        <form enctype="multipart/form-data" method="post">
-							<p><input type="file" name="f">
-							<input type="submit" value="Отправить"></p>
+							<?php echo $this->tag->form(["file/upload","method" => 'POST',"class" => 'form-inline py-2',"enctype"=>"multipart/form-data"]); ?>
+							<div class="input-group">
+								<input type="file" name="upFile" class="btn btn-outline-primary">
+								<?php echo $this->tag->hiddenField(['subsection_id', "value" => $subsection->subsection_id]); ?>
+								<div class="input-group-append">
+									<?php echo $this->tag->submitButton(['Загрузить', "class" => "btn btn-outline-primary", "name" => "upload"]); ?>
+								</div>
+							</div>
 							</form>
 							<?}}?>
-							<ul>
-								<li>
-									<a href="#" class="text-secondary">Файл 1</a>, 00:00, 00.00.00
-								</li>
-								<li>
-									<a href="#" class="text-secondary">Файл 2</a>, 00:00, 00.00.00
-								</li>
-								<li>
-									<a href="#" class="text-secondary">Файл 3</a>, 00:00, 00.00.00
-								</li>
-								<ul>
+
+							<div class="list-group">
+								<?	foreach ($subsection->getFile() as $file) { ?>
+								<a href="<? echo '/file/download/'.$file->getUser()->user_id.'/'.$course->course_id.'/'.$subsection->subsection_id.'/'.$file->file_id ?>"
+								 class="my-2 list-group-item list-group-item-action flex-column align-items-start">
+									<div class="d-flex w-100 justify-content-between">
+										<h6 class="mb-1">
+											<? echo $file->filename ?>
+										</h6>
+										<small>
+											<? echo date('d/m/Y, H:i', strtotime($file->datetime)) ?></small>
+									</div>
+								</a>
+								<?}?>
+							</div>
 						</div>
-						<a class="btn btn-danger" href="#<? echo $subsection->subsection_id ?>" style="width: 100%" data-toggle="collapse" role="button" aria-expanded="false"
-						 aria-controls="comment">Комментарии</a>
+
+						<a class="btn btn-danger" href="#<? echo $subsection->subsection_id ?>" style="width: 100%" data-toggle="collapse"
+						 role="button" aria-expanded="false" aria-controls="comment">Комментарии</a>
 						<div class="collapse multi-collapse" id="<? echo $subsection->subsection_id ?>" style="max-height: 50vh; overflow: scroll;">
 							<? foreach ($subsection->getComment() as $comment) {
 								$user = $comment->getUser();
@@ -210,10 +288,10 @@
 							} ?>
 							<div class="card card-footer">
 								<?php echo $this->tag->form(["comment/create","method" => 'POST',"class" => 'form-inline']); ?>
-									<?php echo $this->tag->textArea(["text","class" => 'w-100',"rows" => '3']); ?>
-									<?php echo $this->tag->hiddenField(['subsection_id', "value" => $subsection->subsection_id]); ?>
-									<?php echo $this->tag->submitButton(['Отправить', "class" => "btn btn-outline-primary w-100"]); ?>
-								</form>								
+								<?php echo $this->tag->textArea(["text","class" => 'w-100',"rows" => '3']); ?>
+								<?php echo $this->tag->hiddenField(['subsection_id', "value" => $subsection->subsection_id]); ?>
+								<?php echo $this->tag->submitButton(['Отправить', "class" => "btn btn-outline-primary w-100"]); ?>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -225,7 +303,7 @@
 </div>
 
 <script>
-$(document).ready(function() {
-    $("textarea").val("")
-});
+	$(document).ready(function () {
+		$("textarea").val("")
+	});
 </script>
