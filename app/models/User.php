@@ -99,6 +99,13 @@ class User extends \Phalcon\Mvc\Model
     {
         $this->setSchema("konlabu");
         $this->setSource("user");
+        $this->hasManyToMany(
+            'user_id',
+            'UserHasCourse',
+            'user_user_id', 'course_course_id',
+            'Course',
+            'course_id'
+        );
         $this->hasMany('user_id', 'Comment', 'user_user_id', ['alias' => 'Comment']);
         $this->hasMany('user_id', 'UserHasCourse', 'user_user_id', ['alias' => 'UserHasCourse']);
         $this->belongsTo('group_group_id', 'Group', 'group_id', ['alias' => 'Group']);

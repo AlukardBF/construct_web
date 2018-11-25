@@ -24,9 +24,10 @@ class CourseController extends ControllerBase
     public function listAction(){
         $numberPage = $this->request->getQuery("page", "int");
         //список курсов
-        $course = Course::find();
-        // Создаём пагинатор, отображаются 4 элемента на странице, начиная с текущей - $currentPage
-        $paginator = new PaginatorModel(
+        $user = User::findFirst($this->session->auth[id]);
+        if($user!=null){
+            $course = $user->getCourse();
+            $paginator = new PaginatorModel(
             [ 
                 "data" => $course,
                 "limit" => 3,
@@ -35,6 +36,8 @@ class CourseController extends ControllerBase
         );
         // Получение результатов работы ппагинатора 
         $this->view->page = $paginator->getPaginate();
+        }
+
     }
 
     public function newAction()
@@ -47,6 +50,8 @@ class CourseController extends ControllerBase
     public function createAction()
     {
         $course = new Course();
+        $user_id = $this->session->auth['id'];
+        $user = User::findFirst($user_id);
         // Сохраняем и проверяем на наличие ошибок
         $success = $course->save(
             $this->request->getPost(),
@@ -56,13 +61,25 @@ class CourseController extends ControllerBase
             ]
         );
         if ($success) {
-            $this->dispatcher->forward(
-                [
-                    'controller' => 'course',
-                    'action' => 'edit',
-                    'params' => ['course_id'=>$course->course_id],
-                ]
-            );
+            $userHasCourse = new UserHasCourse();
+            $userHasCourse->user = $user;
+            $userHasCourse->course = $course;
+            $success = $userHasCourse->save();
+            if($success){
+                $this->dispatcher->forward(
+                    [
+                        'controller' => 'course',
+                        'action' => 'edit',
+                        'params' => ['course_id'=>$course->course_id],
+                    ]
+                );
+            }else{
+                echo "К сожалению, возникли следующие проблемы: ";
+                $messages = $course->getMessages();
+                foreach ($messages as $message) {
+                    echo $message->getMessage(), "<br/>";
+                }
+            }
         } else {
             echo "К сожалению, возникли следующие проблемы: ";
             $messages = $course->getMessages();
@@ -70,7 +87,6 @@ class CourseController extends ControllerBase
                 echo $message->getMessage(), "<br/>";
             }
         }
-        //$this->view->disable();
     }
 
 }
