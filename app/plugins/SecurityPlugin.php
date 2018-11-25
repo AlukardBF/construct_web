@@ -107,7 +107,7 @@ class SecurityPlugin extends Plugin
 		    'user'			=> ['index','edit','create','search','new','save','delete'],
 		    'course'		=> ['index','edit','new', 'create','list','save','show','delete'],
 		    'student'		=> ['index','search','subscribe'],
-		    'subsection'	=> ['index','create','save','delete'],
+		    'subsection'	=> ['index','create','save','delete','grade'],
 			'group'			=> ['index','edit','create','search','new','save','delete'],
 			'comment' 		=> ['index','create'],
 			'index'			=> ['index'],
@@ -125,7 +125,7 @@ class SecurityPlugin extends Plugin
 		    'course'  		=> ['index','edit','new', 'create','list','save','show','delete'],
 		    'user'    		=> ['edit','save'],
 		    'student' 		=> ['index','search','subscribe'],
-			'subsection' 	=> ['index','create','save','delete'],
+			'subsection' 	=> ['index','create','save','delete','grade'],
 			'comment' 		=> ['index','create'],
 			'file'    		=> ['download'],
 		];
