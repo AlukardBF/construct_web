@@ -62,10 +62,43 @@ class CourseController extends ControllerBase
 
     }
 
-    public function newAction()
+    public function deleteAction($course_id = null)
     {
+        $course = Course::findFirstBycourse_id($course_id);
+        if (!$course) {
+            $this->flash->error("Course was not found");
 
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'list'
+            ]);
+
+            return;
+        }
+
+        if (!$course->delete()) {
+
+            foreach ($course->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'edit',
+                'params' => ['course_id'=>$course_id]
+            ]);
+
+            return;
+        }
+
+        $this->flash->success("Course was deleted successfully");
+
+        $this->dispatcher->forward([
+            'controller' => "course",
+            'action' => "list"
+        ]);
     }
+
     /**
      * Creates a new course
      */
