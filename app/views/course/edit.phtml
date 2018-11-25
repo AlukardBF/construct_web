@@ -44,7 +44,8 @@
 					<?php echo $this->tag->textArea(["discription", 'value'=>$subsection->discription, 'class'=>'w-100']); ?> 
 				</div><br>
 				<?php echo $this->tag->submitButton(['Сохранить изменения', "class" => "btn btn-secondary"]); ?>
-				</form>
+				<?php echo $this->tag->linkTo(['subsection/delete/'.$subsection->subsection_id, 'Удалить подсекцию', 'class' => 'btn btn-danger']) ?>
+				</form>				
 			</div>
 			<?
 		}
@@ -83,7 +84,8 @@
 				</div><br>
 				<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
 				<?php echo $this->tag->submitButton(['Сохранить изменения', "class" => "btn btn-secondary"]); ?>
-				</form>
+				<?php echo $this->tag->linkTo(['subsection/delete/'.$subsection->subsection_id, 'Удалить подсекцию', 'class' => 'btn btn-danger']) ?>
+				</form>				
 			</div>
 			<?
 		}
@@ -122,7 +124,8 @@
 				</div><br>
 				<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
 				<?php echo $this->tag->submitButton(['Сохранить изменения', "class" => "btn btn-secondary"]); ?>
-				</form>
+				<?php echo $this->tag->linkTo(['subsection/delete/'.$subsection->subsection_id, 'Удалить подсекцию', 'class' => 'btn btn-danger']) ?>
+				</form>				
 			</div>
 			<?
 		}
