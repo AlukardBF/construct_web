@@ -154,7 +154,17 @@ class CourseController extends ControllerBase
     // Получаем запрошенный курс
     $course = Course::findFirst("course_id = ".intval($course_id)); 
     $user = User::findFirst("user_id = ".intval($user_id)); 
-    
+    if($course!=null){
+            $this->view->chapters = $course->getSubsection( [
+                "section = 'главы'",
+            ]);
+            $this->view->applications =$course->getSubsection( [
+                "section = 'приложения'",
+            ]);
+            $this->view->charts = $course->getSubsection( [
+                "section = 'графические материалы'",
+            ]);
+        }
     
     $this->view->course = $course;
     $this->view->user = $user;
