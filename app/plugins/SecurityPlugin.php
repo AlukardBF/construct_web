@@ -105,7 +105,7 @@ class SecurityPlugin extends Plugin
 		    'test'    => ['index'],
 		    'session'    => ['index', 'logout'],
 		    'user'    => ['index','edit','create','search','new','save','delete'],
-		    'course'  => ['index','edit','new', 'create','list','show'],
+		    'course'  => ['index','edit','new', 'create','list','save'],
 		    'subsection' => ['index','create','save','delete'],
 		    'group'    => ['index','edit','create','search','new','save','delete'],
 		    'index'    => ['index'],
@@ -119,7 +119,7 @@ class SecurityPlugin extends Plugin
 		$teachResources = [
 			'test'    		=> ['index'],
 		    'session'    	=> ['logout'],
-		    'course'  		=> ['index','edit','new', 'create','list','show'],
+		    'course'  		=> ['index','edit','new', 'create','list','save'],
 		    'user'    		=> ['edit','save'],
 		    'subsection' 	=> ['index','create','save','delete'],
 		];
