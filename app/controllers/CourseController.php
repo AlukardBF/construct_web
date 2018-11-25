@@ -6,7 +6,7 @@ class CourseController extends ControllerBase
     public function editAction($course_id = null)
     {
                // Получаем запрошенный курс
-        $course = Course::findFirst("course_id = ".intval($course_id)); 
+        $course = Course::findFirst($course_id); 
         if($course!=null){
             $this->view->chapters = $course->getSubsection( [
                 "section = 'главы'",

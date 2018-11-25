@@ -43,4 +43,59 @@ class SubsectionController extends ControllerBase
             'params' => ['course_id'=>$course_id]
         ]);
     } 
+
+    public function saveAction()
+    {
+
+        if (!$this->request->isPost()) {
+            $this->flash->error("Редактируйте через форму");
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'list'
+            ]);
+
+            return;
+        }
+
+        $subsection_id = $this->request->getPost("subsection_id");
+        $subsection = Subsection::findFirst($subsection_id);
+
+        if (!$subsection) {
+            $this->flash->error("Подраздел не существует " . $group_id);
+
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'list'
+            ]);
+
+            return;
+        }
+        $course_id = $this->request->getPost("course_id");
+        $subsection->theme = $this->request->getPost("theme");
+        $subsection->discription = $this->request->getPost("discription");
+        
+
+        if (!$subsection->save()) {
+            $this->flash->error('Произошла ошибка');
+            foreach ($group->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'edit',
+                'params' => ['course_id'=>$course_id]
+            ]);
+
+            return;
+        }
+
+        $this->flash->success("group was updated successfully");
+
+        $this->dispatcher->forward([
+            'controller' => "course",
+            'action' => 'edit',
+            'params' => ['course_id'=>$course_id]
+        ]);
+    }
 }
