@@ -27,7 +27,7 @@ class Subsection extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $discription;
+    public $description;
 
     /**
      *

@@ -16,7 +16,7 @@ class SubsectionController extends ControllerBase
 
         $subsection = new subsection();
         $subsection->theme = $this->request->getPost("theme");
-        $subsection->discription = $this->request->getPost("discription");
+        $subsection->description = $this->request->getPost("description");
         $subsection->section = $this->request->getPost("section");
         $course_id = $this->request->getPost("course_course_id");
         $subsection->course_course_id = $course_id;
@@ -112,7 +112,7 @@ class SubsectionController extends ControllerBase
         }
         $course_id = $this->request->getPost("course_id");
         $subsection->theme = $this->request->getPost("theme");
-        $subsection->discription = $this->request->getPost("discription");
+        $subsection->description = $this->request->getPost("description");
         
 
         if (!$subsection->save()) {
