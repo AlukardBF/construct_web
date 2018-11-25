@@ -3,65 +3,64 @@ use Phalcon\Paginator\Adapter\Model as PaginatorModel;
 
 class CourseController extends ControllerBase
 {
-    public function indexAction($course_id = null) 
-    {  
-    // Получаем запрошенный курс
-    $course = Course::findFirst("course_id = ".intval($course_id)); 
-    //$students = UserHasCourse::find("course_course_id = ".intval($course_id));  
-    $this->view->course = $course;
-   // $this->view->students = $students;
-    $numberPage = $this->request->getQuery("page", "int");
+    public function indexAction($course_id = null)
+    {
+        // Получаем запрошенный курс
+        $course = Course::findFirst($course_id);
+        $this->view->course = $course;
+        $numberPage = $this->request->getQuery("page", "int");
         //список курсов
-            $students = $course->getUser('type!="teach"');
+        $students = $course->getUser('type!="teach"');
 
-            $paginator = new PaginatorModel(
-            [ 
+        $paginator = new PaginatorModel(
+            [
                 "data" => $students,
                 "limit" => 3,
                 "page" => $numberPage,
             ]
         );
-        // Получение результатов работы ппагинатора 
+        // Получение результатов работы пагинатора
         $this->view->page = $paginator->getPaginate();
-        
-    } 
+
+    }
     public function editAction($course_id = null)
     {
-               // Получаем запрошенный курс
-        $course = Course::findFirst($course_id); 
-        if($course!=null){
-            $this->view->chapters = $course->getSubsection( [
+        // Получаем запрошенный курс
+        $course = Course::findFirst($course_id);
+        if ($course != null) {
+            $this->view->chapters = $course->getSubsection([
                 "section = 'главы'",
             ]);
-            $this->view->applications =$course->getSubsection( [
+            $this->view->applications = $course->getSubsection([
                 "section = 'приложения'",
             ]);
-            $this->view->charts = $course->getSubsection( [
+            $this->view->charts = $course->getSubsection([
                 "section = 'графические материалы'",
             ]);
         }
-        $this->view->course = $course; 
+        $this->view->course = $course;
     }
 
-    public function listAction(){
+    public function listAction()
+    {
         $numberPage = $this->request->getQuery("page", "int");
         //список курсов
         $user = User::findFirst($this->session->auth['id']);
-        if($user!=null){
+        if ($user != null) {
             $course = $user->getCourse();
             $paginator = new PaginatorModel(
-            [ 
-                "data" => $course,
-                "limit" => 3,
-                "page" => $numberPage,
-            ]
-        );
-        // Получение результатов работы ппагинатора 
-        $this->view->page = $paginator->getPaginate();
+                [
+                    "data" => $course,
+                    "limit" => 3,
+                    "page" => $numberPage,
+                ]
+            );
+            // Получение результатов работы пагинатора
+            $this->view->page = $paginator->getPaginate();
         }
 
     }
-    
+
     public function newAction()
     {
 
@@ -69,13 +68,13 @@ class CourseController extends ControllerBase
 
     public function deleteAction($course_id = null)
     {
-        $course = Course::findFirstBycourse_id($course_id);
+        $course = Course::findFirst($course_id);
         if (!$course) {
             $this->flash->error("Course was not found");
 
             $this->dispatcher->forward([
                 'controller' => "course",
-                'action' => 'list'
+                'action' => 'list',
             ]);
 
             return;
@@ -90,7 +89,7 @@ class CourseController extends ControllerBase
             $this->dispatcher->forward([
                 'controller' => "course",
                 'action' => 'edit',
-                'params' => ['course_id'=>$course_id]
+                'params' => ['course_id' => $course_id],
             ]);
 
             return;
@@ -100,7 +99,7 @@ class CourseController extends ControllerBase
 
         $this->dispatcher->forward([
             'controller' => "course",
-            'action' => "list"
+            'action' => "list",
         ]);
     }
 
@@ -122,18 +121,18 @@ class CourseController extends ControllerBase
         );
         if ($success) {
             $userHasCourse = new UserHasCourse();
-            $userHasCourse->user = $user;
-            $userHasCourse->course = $course;
+            $userHasCourse->User = $user;
+            $userHasCourse->Course = $course;
             $success = $userHasCourse->save();
-            if($success){
+            if ($success) {
                 $this->dispatcher->forward(
                     [
                         'controller' => 'course',
                         'action' => 'edit',
-                        'params' => ['course_id'=>$course->course_id],
+                        'params' => ['course_id' => $course->course_id],
                     ]
                 );
-            }else{
+            } else {
                 echo "К сожалению, возникли следующие проблемы: ";
                 $messages = $course->getMessages();
                 foreach ($messages as $message) {
@@ -149,27 +148,27 @@ class CourseController extends ControllerBase
         }
     }
 
-    public function showAction($course_id = null, $user_id = null) 
-    {  
-    // Получаем запрошенный курс
-    $course = Course::findFirst("course_id = ".intval($course_id)); 
-    $user = User::findFirst("user_id = ".intval($user_id)); 
-    if($course!=null){
-            $this->view->chapters = $course->getSubsection( [
+    public function showAction($course_id = null, $user_id = null)
+    {
+        // Получаем запрошенный курс
+        $course = Course::findFirst($course_id);
+        $user = User::findFirst($user_id);
+        if ($course != null) {
+            $this->view->chapters = $course->getSubsection([
                 "section = 'главы'",
             ]);
-            $this->view->applications =$course->getSubsection( [
+            $this->view->applications = $course->getSubsection([
                 "section = 'приложения'",
             ]);
-            $this->view->charts = $course->getSubsection( [
+            $this->view->charts = $course->getSubsection([
                 "section = 'графические материалы'",
             ]);
         }
-    
-    $this->view->course = $course;
-    $this->view->user = $user;
 
+        $this->view->course = $course;
+        $this->view->user = $user;
     }
+
     public function saveAction()
     {
 
@@ -177,7 +176,7 @@ class CourseController extends ControllerBase
             $this->flash->error("Редактируйте через форму");
             $this->dispatcher->forward([
                 'controller' => "course",
-                'action' => 'list'
+                'action' => 'list',
             ]);
 
             return;
@@ -191,7 +190,7 @@ class CourseController extends ControllerBase
 
             $this->dispatcher->forward([
                 'controller' => "course",
-                'action' => 'list'
+                'action' => 'list',
             ]);
 
             return;
@@ -199,7 +198,6 @@ class CourseController extends ControllerBase
 
         $course->name = $this->request->getPost("name");
         $course->description = $this->request->getPost("description");
-        
 
         if (!$course->save()) {
             $this->flash->error('Произошла ошибка: ');
@@ -210,7 +208,7 @@ class CourseController extends ControllerBase
             $this->dispatcher->forward([
                 'controller' => "course",
                 'action' => 'edit',
-                'params' => ['course_id'=>$course_id]
+                'params' => ['course_id' => $course_id],
             ]);
 
             return;
@@ -221,7 +219,7 @@ class CourseController extends ControllerBase
         $this->dispatcher->forward([
             'controller' => "course",
             'action' => 'edit',
-            'params' => ['course_id'=>$course_id]
+            'params' => ['course_id' => $course_id],
         ]);
     }
 }

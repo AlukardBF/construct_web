@@ -36,6 +36,10 @@
 				 <?
               foreach ($page->items as $item) 
                 { 
+									$fullname = $item->name.' '.$item->second_name;
+									if ($item->father_name != null) {
+										$fullname .= ' '.$item->father_name;
+									}
                   ?>
                   <a>
               <?
@@ -43,7 +47,7 @@
 		              [
 		                "course/show/".$course->course_id."/".$item->user_id,
 		                " <div class='d-flex w-100 justify-content-between'>
-		                <h5 class='mb-1'>".$item->name."</h5>
+		                <h5 class='mb-1'>".$fullname."</h5>
 		              </div>",
 		              "class" => "list-group-item list-group-item-action flex-column align-items-start btn-outline-primary",
 

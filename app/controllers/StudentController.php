@@ -73,8 +73,8 @@ class StudentController extends ControllerBase
             ]);
         }
         $userHasCourse = new UserHasCourse();
-        $userHasCourse->user = $user;
-        $userHasCourse->course = $course;
+        $userHasCourse->User = $user;
+        $userHasCourse->Course = $course;
         $success = $userHasCourse->create();
         if($success){
             echo $this->flash->success("Успех!!!");
