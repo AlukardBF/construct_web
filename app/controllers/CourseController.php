@@ -10,6 +10,20 @@ class CourseController extends ControllerBase
     //$students = UserHasCourse::find("course_course_id = ".intval($course_id));  
     $this->view->course = $course;
    // $this->view->students = $students;
+    $numberPage = $this->request->getQuery("page", "int");
+        //список курсов
+            $students = $course->getUser('type!="teach"');
+
+            $paginator = new PaginatorModel(
+            [ 
+                "data" => $students,
+                "limit" => 3,
+                "page" => $numberPage,
+            ]
+        );
+        // Получение результатов работы ппагинатора 
+        $this->view->page = $paginator->getPaginate();
+        
     } 
     public function editAction($course_id = null)
     {

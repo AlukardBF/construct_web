@@ -26,17 +26,17 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h1 class="">Список студентов</h1>
-				<?
-              foreach ($students->items as $item) 
+				 <?
+              foreach ($page->items as $item) 
                 { 
                   ?>
                   <a>
               <?
 		           echo $this->tag->linkTo( 
 		              [
-		                "course/index/".$item->course_course_id."/".$item->user_user_id,
+		                "course/index/".$item->course_id."/".$item->user_id,
 		                " <div class='d-flex w-100 justify-content-between'>
-		                <h5 class='mb-1'>".$item->user_user_id."</h5>
+		                <h5 class='mb-1'>".$item->name."</h5>
 		              </div>",
 		              "class" => "list-group-item list-group-item-action flex-column align-items-start btn-outline-primary",
 
