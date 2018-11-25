@@ -88,10 +88,10 @@ class CustomTags extends Tag
         $code = '<div class = "card '. $class.'"';
         $code .= '><div class="card-body"><h5 class="card-title">';
         if ($username != null) {
-            $code .= $username;
+            $code .= '<span class="font-weight-bold">' . $username . '</span>';
         }
         if ($time != null) {
-            $code .= ', <span class="small text-mute">' . $time . '</span>';
+            $code .= ' <span class="small text-mute">' . $time . '</span>';
         }
         if ($usertype != null) {
             $code .= ' <span class="small text-secondary">' . $usertype . '</span>';

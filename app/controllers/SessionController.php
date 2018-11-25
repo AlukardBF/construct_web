@@ -44,13 +44,24 @@ class SessionController extends \Phalcon\Mvc\Controller
           	/*если пользователь найден и
           	пароли совпадают
           	авторизуем и переходим на след страницу*/
-          	$this->_registerSession($user);
-      	    return $this->dispatcher->forward(
-                [
-                    'controller' => 'test',
-                    'action'     => 'index',
-                ]
-            );
+            $this->_registerSession($user);
+            
+            if ($user->type == 'admin') {
+                return $this->dispatcher->forward(
+                    [
+                        'controller' => 'user',
+                        'action'     => 'index',
+                    ]
+                );
+            } else {
+                return $this->dispatcher->forward(
+                    [
+                        'controller' => 'course',
+                        'action'     => 'list',
+                    ]
+                );
+            }
+      	    
         }
 
         return $this->dispatcher->forward(

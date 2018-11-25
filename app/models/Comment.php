@@ -15,7 +15,7 @@ class Comment extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $datatime;
+    public $datetime;
 
     /**
      *

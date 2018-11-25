@@ -102,14 +102,15 @@ class SecurityPlugin extends Plugin
 		}
 		// Private area resources (backend)
 		$allPrivateResources = [
-		    'test'    => ['index'],
-		    'session'    => ['index', 'logout'],
-		    'user'    => ['index','edit','create','search','new','save','delete'],
-		    'course'  => ['index','edit','new', 'create','list','save','show','delete'],
-		    'student' =>['index','search','subscribe'],
-		    'subsection' => ['index','create','save','delete'],
-		    'group'    => ['index','edit','create','search','new','save','delete'],
-		    'index'    => ['index'],
+		    'test'			=> ['index'],
+		    'session'		=> ['index', 'logout'],
+		    'user'			=> ['index','edit','create','search','new','save','delete'],
+		    'course'		=> ['index','edit','new', 'create','list','save','show','delete'],
+		    'student'		=> ['index','search','subscribe'],
+		    'subsection'	=> ['index','create','save','delete'],
+			'group'			=> ['index','edit','create','search','new','save','delete'],
+			'comment' 		=> ['index','create'],
+		    'index'			=> ['index'],
 		];
 		$adminResources = [
 		    'test'		=> ['index'],
@@ -122,20 +123,22 @@ class SecurityPlugin extends Plugin
 		    'session'    	=> ['logout'],
 		    'course'  		=> ['index','edit','new', 'create','list','save','show','delete'],
 		    'user'    		=> ['edit','save'],
-		    'student' =>['index','search','subscribe'],
-		    'subsection' 	=> ['index','create','save','delete'],
+		    'student' 		=> ['index','search','subscribe'],
+			'subsection' 	=> ['index','create','save','delete'],
+			'comment' 		=> ['index','create'],
 		];
 		$studentResources = [
 			'test'    		=> ['index'],
 		    'session'    	=> ['logout'],
 		    'user'    		=> ['edit','save'],
-		    'course'  		=> ['list','show'],
+			'course'  		=> ['list','show'],
+			'comment' 		=> ['index','create'],
 		    'subsection' 	=> ['index'],
 
 		];
 		$guestResources = [
-		    'index'    => ['index'],
-		    'session'    => ['index'],
+		    'index'		=> ['index'],
+		    'session'	=> ['index'],
 		];
 
 		foreach ($allPrivateResources as $resourceName => $actions) {
