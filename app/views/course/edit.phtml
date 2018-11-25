@@ -46,7 +46,8 @@
 					<?php echo $this->tag->hiddenField(['subsection_id',"value" => $subsection->subsection_id]); ?> 
 				</div><br>
 				<?php echo $this->tag->submitButton(['Сохранить изменения', "class" => "btn btn-secondary"]); ?>
-				</form>
+				<?php echo $this->tag->linkTo(['subsection/delete/'.$subsection->subsection_id, 'Удалить подсекцию', 'class' => 'btn btn-danger']) ?>
+				</form>				
 			</div>
 			<?
 		}
@@ -86,7 +87,8 @@
 				<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
 				<?php echo $this->tag->hiddenField(['subsection_id',"value" => $course->course_id]); ?> 
 				<?php echo $this->tag->submitButton(['Сохранить изменения', "class" => "btn btn-secondary"]); ?>
-				</form>
+				<?php echo $this->tag->linkTo(['subsection/delete/'.$subsection->subsection_id, 'Удалить подсекцию', 'class' => 'btn btn-danger']) ?>
+				</form>				
 			</div>
 			<?
 		}
@@ -125,7 +127,8 @@
 				</div><br>
 				<?php echo $this->tag->hiddenField(['course_course_id',"value" => $course->course_id]); ?> 
 				<?php echo $this->tag->submitButton(['Сохранить изменения', "class" => "btn btn-secondary"]); ?>
-				</form>
+				<?php echo $this->tag->linkTo(['subsection/delete/'.$subsection->subsection_id, 'Удалить подсекцию', 'class' => 'btn btn-danger']) ?>
+				</form>				
 			</div>
 			<?
 		}

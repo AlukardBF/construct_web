@@ -3,6 +3,14 @@ use Phalcon\Paginator\Adapter\Model as PaginatorModel;
 
 class CourseController extends ControllerBase
 {
+    public function indexAction($course_id = null) 
+    {  
+    // Получаем запрошенный курс
+    $course = Course::findFirst("course_id = ".intval($course_id)); 
+    //$students = UserHasCourse::find("course_course_id = ".intval($course_id));  
+    $this->view->course = $course;
+   // $this->view->students = $students;
+    } 
     public function editAction($course_id = null)
     {
                // Получаем запрошенный курс

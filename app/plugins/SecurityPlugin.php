@@ -119,7 +119,7 @@ class SecurityPlugin extends Plugin
 		$teachResources = [
 			'test'    		=> ['index'],
 		    'session'    	=> ['logout'],
-		    'course'  		=> ['edit','new', 'create','list'],
+		    'course'  		=> ['index','edit','new', 'create','list'],
 		    'user'    		=> ['edit','save'],
 		    'subsection' 	=> ['index','create','save'],
 		];

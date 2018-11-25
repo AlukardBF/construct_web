@@ -42,7 +42,47 @@ class SubsectionController extends ControllerBase
             'action' => 'edit',
             'params' => ['course_id'=>$course_id]
         ]);
-    } 
+    }
+
+    public function deleteAction($subsection_id = null)
+    {
+        $subsection = Subsection::findFirstBysubsection_id($subsection_id);
+        $course_id = $subsection->course_course_id;
+        if (!$subsection) {
+            $this->flash->error("subsection was not found");
+
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'edit',
+                'params' => ['course_id'=>$course_id]
+            ]);
+
+            return;
+        }
+
+        if (!$subsection->delete()) {
+
+            foreach ($subsection->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'edit',
+                'params' => ['course_id'=>$course_id]
+            ]);
+
+            return;
+        }
+
+        $this->flash->success("subsection was deleted successfully");
+
+        $this->dispatcher->forward([
+            'controller' => "course",
+            'action' => "edit",
+            'params' => ['course_id'=>$course_id]
+        ]);
+    }
 
     public function saveAction()
     {
