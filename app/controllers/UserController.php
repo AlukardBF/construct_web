@@ -12,6 +12,7 @@ class UserController extends ControllerBase
     public function indexAction()
     {
         $this->persistent->parameters = null;
+        $this->view->groups = Group::find();
     }
 
     /**
@@ -129,7 +130,10 @@ class UserController extends ControllerBase
         $user->name = $this->request->getPost("name");
         $user->second_name = $this->request->getPost("second_name");
         $user->father_name = $this->request->getPost("father_name");
-        $user->group_group_id = $this->request->getPost("group_group_id");
+        $group =  $this->request->getPost("group_group_id");
+        if($group!=null){
+            $user->group_group_id = $group;
+        }
         $user->title = $this->request->getPost("title");
         
 
