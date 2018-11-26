@@ -76,18 +76,18 @@
 							<?}}?>
 
 							<div class="list-group">
-								<? foreach ($subsection->getFile() as $file) { ?>
-								<a href="<? echo '/file/download/'.$file->getUser()->user_id.'/'.$course->course_id.'/'.$subsection->subsection_id.'/'.$file->file_id ?>"
-								 class="my-2 list-group-item list-group-item-action flex-column align-items-start">
-									<div class="d-flex w-100 justify-content-between">
-										<h6 class="mb-1">
-											<? echo $file->filename ?>
+								<? foreach ($subsection->getFile() as $file) { 
+									echo $this->tag->linkTo([
+									"file/download/".$file->getUser()->user_id.'/'.$course->course_id.'/'.$subsection->subsection_id.'/'.$file->file_id,
+									"<div class='d-flex w-100 justify-content-between'>
+										<h6 class='mb-1'>".$file->filename."
 										</h6>
-										<small>
-											<? echo date('d/m/Y, H:i', strtotime($file->datetime)) ?></small>
-									</div>
-								</a>
-								<?}?>
+										<small>".date('d/m/Y, H:i', strtotime($file->datetime))."</small>
+									</div>",
+									"class" => "my-2 list-group-item list-group-item-action flex-column align-items-start",
+								]);
+								}
+								?>
 							</div>
 						</div>
 
