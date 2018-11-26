@@ -1,4 +1,5 @@
 <?php
+use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 
 
@@ -20,11 +21,6 @@ class StudentController extends ControllerBase
         } else {
             $numberPage = $this->request->getQuery("page", "int");
         }
-
-        $parameters = $this->persistent->parameters;
-        if (!is_array($parameters)) {
-            $parameters = [];
-        }
         $this->view->course_id = $course_id;
         $course=Course::findFirst($course_id);
         //id подписанных ребят
@@ -33,12 +29,21 @@ class StudentController extends ControllerBase
            $subIds[] = $user->user_id;
         }
         $this->view->course_id = $course_id;
-        $parameters[] = 'type = "student"';
-        if(count($subIds)>0){
-            $parameters[]='user_id NOT IN ({ids:array})';
-            $parameters["bind"]=["ids"=>$subIds];
+        $parameters = $this->persistent->parameters;
+        if (!is_array($parameters)) {
+            $parameters = [];
+            $parameters['bind']=[];
         }
-        
+        if(isset($parameters['conditions']))
+            $parameters['conditions'] .= " AND type = 'student'";
+        else
+            $parameters['conditions'] = "type = 'student'";
+        if(count($subIds)>0){
+            $parameters['conditions'].=' AND user_id NOT IN ({ids:array})';
+            $parameters["bind"]=array_merge($parameters["bind"],["ids"=>$subIds]);
+        }
+        print_r($parameters);
+
         
         
         //$parameters["order"] = "user_id";
