@@ -26,9 +26,9 @@
 									<? echo $subsection->theme ?></b></h4>
 							<small>
 								<? if (count($subsection->getFile()) != 0) {
-									$date = time(); 
+									$date = date('Y-m-d, H:i:s'); 
 									foreach ($subsection->getFile() as $file) { 
-										if ($date > strtotime($file->datetime)) {
+										if ($date < strtotime($file->datetime)) {
 											$date = strtotime($file->datetime);
 										}
 									}
@@ -75,8 +75,9 @@
 							</form>
 							<?}}?>
 
-							<div class="list-group">
-								<? foreach ($subsection->getFile() as $file) { 
+							<div class="list-group m-1" style="max-height: 30vh; overflow: auto;">
+								<? 
+									foreach ($subsection->getFile() as $file) { 
 									echo $this->tag->linkTo([
 									"file/download/".$file->getUser()->user_id.'/'.$course->course_id.'/'.$subsection->subsection_id.'/'.$file->file_id,
 									"<div class='d-flex w-100 justify-content-between'>
@@ -85,6 +86,8 @@
 										<small>".date('d/m/Y, H:i', strtotime($file->datetime))."</small>
 									</div>",
 									"class" => "my-2 list-group-item list-group-item-action flex-column align-items-start",
+
+
 								]);
 								}
 								?>
@@ -93,7 +96,7 @@
 
 						<a class="btn btn-danger" href="#<? echo $subsection->subsection_id ?>" style="width: 100%" data-toggle="collapse"
 						 role="button" aria-expanded="false" aria-controls="comment">Комментарии</a>
-						<div class="collapse multi-collapse" id="<? echo $subsection->subsection_id ?>" style="max-height: 50vh; overflow: scroll;">
+						<div class="collapse multi-collapse" id="<? echo $subsection->subsection_id ?>" style="max-height: 50vh; overflow: auto;">
 							<? foreach ($subsection->getComment() as $comment) {
 								$user = $comment->getUser();
 								$username = $user->second_name.' '.mb_substr($user->name,0,1,"UTF-8").'.';
@@ -134,7 +137,7 @@
 									<? echo $subsection->theme ?></b></h4>
 							<small>
 								<? if (count($subsection->getFile()) != 0) {
-									$date = time(); 
+									$date = date('Y-m-d, H:i:s'); 
 									foreach ($subsection->getFile() as $file) { 
 										if ($date > strtotime($file->datetime)) {
 											$date = strtotime($file->datetime);
@@ -182,20 +185,23 @@
 							</div>
 							</form>
 							<?}}?>
-
-							<div class="list-group">
-								<?	foreach ($subsection->getFile() as $file) { ?>
-								<a href="<? echo '/file/download/'.$file->getUser()->user_id.'/'.$course->course_id.'/'.$subsection->subsection_id.'/'.$file->file_id ?>"
-								 class="my-2 list-group-item list-group-item-action flex-column align-items-start">
-									<div class="d-flex w-100 justify-content-between">
-										<h6 class="mb-1">
-											<? echo $file->filename ?>
+							<div class="list-group m-1" style="max-height: 30vh; overflow: auto;">
+								<? 
+									foreach ($subsection->getFile() as $file) { 
+									echo $this->tag->linkTo([
+									"file/download/".$file->getUser()->user_id.'/'.$course->course_id.'/'.$subsection->subsection_id.'/'.$file->file_id,
+									"<div class='d-flex w-100 justify-content-between'>
+										<h6 class='mb-1'>".$file->filename."
 										</h6>
-										<small>
-											<? echo date('d/m/Y, H:i', strtotime($file->datetime)) ?></small>
-									</div>
-								</a>
-								<?}?>
+										<small>".date('d/m/Y, H:i', strtotime($file->datetime))."</small>
+									</div>",
+									"class" => "my-2 list-group-item list-group-item-action flex-column align-items-start",
+
+
+								]);
+								}
+								?>
+							</div>
 							</div>
 						</div>
 
@@ -242,7 +248,7 @@
 									<? echo $subsection->theme ?></b></h4>
 							<small>
 								<? if (count($subsection->getFile()) != 0) {
-									$date = time(); 
+									$date = date('Y-m-d, H:i:s');  
 									foreach ($subsection->getFile() as $file) { 
 										if ($date > strtotime($file->datetime)) {
 											$date = strtotime($file->datetime);
@@ -291,19 +297,23 @@
 							</form>
 							<?}}?>
 
-							<div class="list-group">
-								<?	foreach ($subsection->getFile() as $file) { ?>
-								<a href="<? echo '/file/download/'.$file->getUser()->user_id.'/'.$course->course_id.'/'.$subsection->subsection_id.'/'.$file->file_id ?>"
-								 class="my-2 list-group-item list-group-item-action flex-column align-items-start">
-									<div class="d-flex w-100 justify-content-between">
-										<h6 class="mb-1">
-											<? echo $file->filename ?>
+							<div class="list-group m-1" style="max-height: 30vh; overflow: auto;">
+								<? 
+									foreach ($subsection->getFile() as $file) { 
+									echo $this->tag->linkTo([
+									"file/download/".$file->getUser()->user_id.'/'.$course->course_id.'/'.$subsection->subsection_id.'/'.$file->file_id,
+									"<div class='d-flex w-100 justify-content-between'>
+										<h6 class='mb-1'>".$file->filename."
 										</h6>
-										<small>
-											<? echo date('d/m/Y, H:i', strtotime($file->datetime)) ?></small>
-									</div>
-								</a>
-								<?}?>
+										<small>".date('d/m/Y, H:i', strtotime($file->datetime))."</small>
+									</div>",
+									"class" => "my-2 list-group-item list-group-item-action flex-column align-items-start",
+
+
+								]);
+								}
+								?>
+							</div>
 							</div>
 						</div>
 
