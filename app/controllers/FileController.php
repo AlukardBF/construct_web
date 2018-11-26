@@ -44,7 +44,7 @@ class FileController extends \Phalcon\Mvc\Controller
         $subsection_id = $this->request->getPost('subsection_id');
 		$subsection = Subsection::findFirst($subsection_id);
 		$course_id = $subsection->getCourse()->course_id;
-		
+		$id = date('d_m_Y, H_i_s');
 		if (true == $this->request->hasFiles() && $this->request->isPost()) {
 			$upload_dir = $this->get_absolute_path(BASE_PATH.'/public/uploads/'.$user_id.'/'.$course_id.'/'.$subsection_id);
 
@@ -56,9 +56,9 @@ class FileController extends \Phalcon\Mvc\Controller
                     $this->flashSession->error($file->getName().' слишком большой (> 20MiB)');
                     continue;
                 }
-                $file->moveTo($this->get_absolute_path($upload_dir . '/' . $file->getName()));
+                $file->moveTo($this->get_absolute_path($upload_dir . '/' . $id.$file->getName()));
                 $this->flashSession->success($file->getName().' успешно загружен.');
-                $this->saveFile($file->getName());
+                $this->saveFile($id.$file->getName());
 			}
         } else {
             $this->flash->error('Не было передано файлов для загрузки');
@@ -78,7 +78,7 @@ class FileController extends \Phalcon\Mvc\Controller
         $file = File::findFirst($file_id);
         $file_path = $this->get_absolute_path(BASE_PATH.'/public/uploads/'.$user_id.'/'.$course_id.'/'.$subsection_id.'/'.$file->filename);
         header('Content-Length: '.filesize($file_path));
-        header('Content-Disposition: attachment; filename="'.$file->filename.'"');
+        header('Content-Disposition: attachment; filename="'.$file_id.$file->filename.'"');
         readfile($file_path);
         exit();
     }
