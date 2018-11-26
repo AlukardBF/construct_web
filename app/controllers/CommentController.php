@@ -30,8 +30,9 @@ class CommentController extends \Phalcon\Mvc\Controller
                     'controller' => 'course',
                     'action' => 'show',
                     'params' => [
-                        'course_id'=>$subsection->getCourse()->course_id,
-                        'user_id'=>$user_id,
+                        'course_id'=> $this->request->getPost('course_id'),
+                        'user_id'=> $user_id,
+                        'tab_id'=> $this->request->getPost('tab_id'),
                     ],
                 ]
             );

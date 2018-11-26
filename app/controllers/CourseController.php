@@ -61,11 +61,6 @@ class CourseController extends ControllerBase
 
     }
 
-    public function newAction()
-    {
-
-    }
-
     public function deleteAction($course_id = null)
     {
         $course = Course::findFirst($course_id);
@@ -148,7 +143,7 @@ class CourseController extends ControllerBase
         }
     }
 
-    public function showAction($course_id = null, $user_id = null)
+    public function showAction($course_id = null, $user_id = null, $tab_id = null)
     {
         // Получаем запрошенный курс
         $course = Course::findFirst($course_id);
@@ -167,6 +162,7 @@ class CourseController extends ControllerBase
 
         $this->view->course = $course;
         $this->view->user = $user;
+        $this->view->tab_id = $tab_id ?? "chapters";
     }
 
     public function saveAction()

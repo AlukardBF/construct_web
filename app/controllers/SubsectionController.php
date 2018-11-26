@@ -138,7 +138,7 @@ class SubsectionController extends ControllerBase
             'params' => ['course_id'=>$course_id]
         ]);
     }
-    public function gradeAction($user_id, $subsection_id, $grade) {
+    public function gradeAction($course_id, $user_id, $tab_id, $subsection_id, $grade) {
         $subsection = Subsection::findFirst($subsection_id);
         switch ($grade) {
             case '2':
@@ -155,15 +155,14 @@ class SubsectionController extends ControllerBase
                 break;
         }
         $success = $subsection->save();
-
-        $course = $subsection->getCourse();
         $this->dispatcher->forward(
             [
                 'controller' => 'course',
                 'action' => 'show',
                 'params' => [
-                    'course_id'=>$course->course_id,
+                    'course_id'=>$course_id,
                     'user_id'=>$user_id,
+                    'tab_id' => $tab_id,
                 ],
             ]
         );
