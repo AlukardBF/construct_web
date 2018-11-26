@@ -42,7 +42,7 @@ class StudentController extends ControllerBase
             $parameters['conditions'].=' AND user_id NOT IN ({ids:array})';
             $parameters["bind"]=array_merge($parameters["bind"],["ids"=>$subIds]);
         }
-        print_r($parameters);
+        //print_r($parameters);
 
         
         

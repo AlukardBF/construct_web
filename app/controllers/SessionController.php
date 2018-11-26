@@ -21,7 +21,7 @@ class SessionController extends \Phalcon\Mvc\Controller
     	if (!$this->request->isPost()) {
     		return $this->dispatcher->forward(
                 [
-                    'controller' => 'test',
+                    'controller' => 'index',
                     'action'     => 'index',
                     'params' => [error=>'Пожалйста, не хакайте нас. Оч просим.'],
                 ]

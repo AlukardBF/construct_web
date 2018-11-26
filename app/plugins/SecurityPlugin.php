@@ -63,8 +63,8 @@ class SecurityPlugin extends Plugin
             	case self::TEACH:
         			$dispatcher->forward(
 		                [
-		                    'controller' => 'test',
-		                    'action'     => 'index',
+		                    'controller' => 'course',
+		                    'action'     => 'list',
 		                ]
 		            );
             		break;
