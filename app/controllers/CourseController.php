@@ -23,7 +23,7 @@ class CourseController extends ControllerBase
         $this->view->page = $paginator->getPaginate();
 
     }
-    public function editAction($course_id = null)
+    public function editAction($course_id = null, $tab_id = null)
     {
         // Получаем запрошенный курс
         $course = Course::findFirst($course_id);
@@ -39,6 +39,7 @@ class CourseController extends ControllerBase
             ]);
         }
         $this->view->course = $course;
+        $this->view->tab_id = $tab_id ?? "chapters";
     }
 
     public function listAction()
@@ -65,7 +66,7 @@ class CourseController extends ControllerBase
     {
         $course = Course::findFirst($course_id);
         if (!$course) {
-            $this->flash->error("Course was not found");
+            $this->flash->error("Курс не найден " . $course_id);
 
             $this->dispatcher->forward([
                 'controller' => "course",
@@ -90,7 +91,7 @@ class CourseController extends ControllerBase
             return;
         }
 
-        $this->flash->success("Course was deleted successfully");
+        $this->flash->success("Курс успешно удален");
 
         $this->dispatcher->forward([
             'controller' => "course",
@@ -182,7 +183,7 @@ class CourseController extends ControllerBase
         $course = Course::findFirst($course_id);
 
         if (!$course) {
-            $this->flash->error("Подраздел не существует " . $course_id);
+            $this->flash->error("Курс не существует " . $course_id);
 
             $this->dispatcher->forward([
                 'controller' => "course",
@@ -210,7 +211,7 @@ class CourseController extends ControllerBase
             return;
         }
 
-        $this->flash->success("Курс успешно обновлен.");
+        $this->flash->success("Курс успешно обновлен");
 
         $this->dispatcher->forward([
             'controller' => "course",

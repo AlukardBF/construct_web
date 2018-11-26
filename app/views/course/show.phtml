@@ -22,7 +22,7 @@
 		<div class="row mx-0">
 			<div class="accordion col-12 p-0" id="accordionChapters">
 				<?foreach ($chapters as $number => $subsection) {?>
-					<?php $this->partial("course/subsection_partial", [ 'user' => $user, 'course' => $course, 'subsection' => $subsection, 'accordion_id' => 'accordionChapters', 'new_tab_id' => 'chapters' ]) ?>
+					<?php $this->partial("course/show_partial", [ 'user' => $user, 'course' => $course, 'subsection' => $subsection, 'accordion_id' => 'accordionChapters', 'new_tab_id' => 'chapters' ]) ?>
 				<?}?>
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 		<div class="row mx-0">
 			<div class="accordion col-12 p-0" id="accordionApplications">
 				<?foreach ($applications as $number => $subsection) {?>
-					<?php $this->partial("course/subsection_partial", [ 'user' => $user, 'course' => $course, 'subsection' => $subsection, 'accordion_id' => 'accordionApplications', 'new_tab_id' => 'applications' ]) ?>
+					<?php $this->partial("course/show_partial", [ 'user' => $user, 'course' => $course, 'subsection' => $subsection, 'accordion_id' => 'accordionApplications', 'new_tab_id' => 'applications' ]) ?>
 				<?}?>
 			</div>
 		</div>
@@ -42,7 +42,7 @@
 		<div class="row mx-0">
 			<div class="accordion col-12 p-0" id="accordionCharts">
 				<?foreach ($charts as $number => $subsection) {?>
-					<?php $this->partial("course/subsection_partial", [ 'user' => $user, 'course' => $course, 'subsection' => $subsection, 'accordion_id' => 'accordionCharts', 'new_tab_id' => 'charts' ]) ?>
+					<?php $this->partial("course/show_partial", [ 'user' => $user, 'course' => $course, 'subsection' => $subsection, 'accordion_id' => 'accordionCharts', 'new_tab_id' => 'charts' ]) ?>
 				<?}?>
 			</div>
 		</div>

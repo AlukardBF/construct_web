@@ -1,0 +1,35 @@
+<?php echo $this->tag->form(["subsection/create","method" => 'POST']); ?>
+    <p>
+    <label for="theme"> Название главы </label><br/>
+    <?php echo $this->tag->textField(["theme",'value'=>'']); ?> </p>
+    <p>
+    <label for="description">Описание</label><br/>
+    <?php echo $this->tag->textArea(["description",'value'=>'']); ?> </p>
+
+    <?php echo $this->tag->hiddenField(['section',"value" => $section]); ?>
+    <?php echo $this->tag->hiddenField(['course_id',"value" => $course->course_id]); ?> 
+    <?php echo $this->tag->hiddenField(['tab_id',"value" => $new_tab_id]); ?>
+
+    <?php echo $this->tag->submitButton(['Добавить раздел', "class" => "btn btn-secondary"]); ?> </p>
+</form>
+<div class="list-group">
+<?  foreach ($list as $number => $subsection) { ?>
+        <div class="list-group-item">
+            <?php echo $this->tag->form(["subsection/save","method" => 'POST']); ?>
+                <div class="w-100">
+                    <label for="theme"> Название главы </label><br/>
+                    <?php echo $this->tag->textField(["theme", 'value'=>$subsection->theme]); ?>
+                </div>
+                <div class="w-100">
+                    <label for="description">Описание</label><br/>
+                    <?php echo $this->tag->textArea(["description", 'value'=>$subsection->description, 'class'=>'w-100']); ?> 
+                    <?php echo $this->tag->hiddenField(['course_id',"value" => $course->course_id]); ?>
+                    <?php echo $this->tag->hiddenField(['subsection_id',"value" => $subsection->subsection_id]); ?>
+                    <?php echo $this->tag->hiddenField(['tab_id',"value" => $new_tab_id]); ?>
+                </div><br>
+                <?php echo $this->tag->submitButton(['Сохранить изменения', "class" => "btn btn-secondary"]); ?>
+                <?php echo $this->tag->linkTo(['subsection/delete/'.$subsection->subsection_id.'/'.$new_tab_id, 'Удалить раздел', 'class' => 'btn btn-danger']) ?>
+            </form>				
+        </div>
+<?  }?>
+</div>

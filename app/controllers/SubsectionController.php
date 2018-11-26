@@ -18,7 +18,7 @@ class SubsectionController extends ControllerBase
         $subsection->theme = $this->request->getPost("theme");
         $subsection->description = $this->request->getPost("description");
         $subsection->section = $this->request->getPost("section");
-        $course_id = $this->request->getPost("course_course_id");
+        $course_id = $this->request->getPost("course_id");
         $subsection->course_course_id = $course_id;
 
         if (!$subsection->save()) {
@@ -29,32 +29,32 @@ class SubsectionController extends ControllerBase
             $this->dispatcher->forward([
                 'controller' => "course",
                 'action' => 'edit',
-                'params' => ['course_id'=>$course_id]
+                'params' => ['course_id'=>$course_id,'tab_id'=>$this->request->getPost("tab_id")]
             ]);
 
             return;
         }
 
-        $this->flash->success("Секция была успешно создана!!!");
+        $this->flash->success("Глава успешно создана");
 
         $this->dispatcher->forward([
             'controller' => "course",
             'action' => 'edit',
-            'params' => ['course_id'=>$course_id]
+            'params' => ['course_id'=>$course_id,'tab_id'=>$this->request->getPost("tab_id")]
         ]);
     }
 
-    public function deleteAction($subsection_id = null)
+    public function deleteAction($subsection_id, $tab_id = null)
     {
-        $subsection = Subsection::findFirstBysubsection_id($subsection_id);
+        $subsection = Subsection::findFirst($subsection_id);
         $course_id = $subsection->course_course_id;
         if (!$subsection) {
-            $this->flash->error("subsection was not found");
+            $this->flash->error("Глава не найдена " . $subsection_id);
 
             $this->dispatcher->forward([
                 'controller' => "course",
                 'action' => 'edit',
-                'params' => ['course_id'=>$course_id]
+                'params' => ['course_id'=>$course_id,'tab_id'=>$tab_id]
             ]);
 
             return;
@@ -69,18 +69,18 @@ class SubsectionController extends ControllerBase
             $this->dispatcher->forward([
                 'controller' => "course",
                 'action' => 'edit',
-                'params' => ['course_id'=>$course_id]
+                'params' => ['course_id'=>$course_id,'tab_id'=>$tab_id]
             ]);
 
             return;
         }
 
-        $this->flash->success("subsection was deleted successfully");
+        $this->flash->success("Глава успешно удалена");
 
         $this->dispatcher->forward([
             'controller' => "course",
             'action' => "edit",
-            'params' => ['course_id'=>$course_id]
+            'params' => ['course_id'=>$course_id,'tab_id'=>$tab_id]
         ]);
     }
 
@@ -101,7 +101,7 @@ class SubsectionController extends ControllerBase
         $subsection = Subsection::findFirst($subsection_id);
 
         if (!$subsection) {
-            $this->flash->error("Подраздел не существует " . $group_id);
+            $this->flash->error("Глава не существует " . $group_id);
 
             $this->dispatcher->forward([
                 'controller' => "course",
@@ -124,18 +124,18 @@ class SubsectionController extends ControllerBase
             $this->dispatcher->forward([
                 'controller' => "course",
                 'action' => 'edit',
-                'params' => ['course_id'=>$course_id]
+                'params' => ['course_id'=>$course_id,'tab_id'=>$this->request->getPost("tab_id")]
             ]);
 
             return;
         }
 
-        $this->flash->success("group was updated successfully");
+        $this->flash->success("Глава успешно обновлена");
 
         $this->dispatcher->forward([
             'controller' => "course",
             'action' => 'edit',
-            'params' => ['course_id'=>$course_id]
+            'params' => ['course_id'=>$course_id,'tab_id'=>$this->request->getPost("tab_id")]
         ]);
     }
     public function gradeAction($course_id, $user_id, $tab_id, $subsection_id, $grade) {
