@@ -9,6 +9,7 @@ class StudentController extends ControllerBase
     {  
         $this->persistent->parameters = null;
         $this->view->course_id = $course_id;
+        $this->view->groups = Group::find();
 
     }
 
@@ -42,10 +43,7 @@ class StudentController extends ControllerBase
             $parameters['conditions'].=' AND user_id NOT IN ({ids:array})';
             $parameters["bind"]=array_merge($parameters["bind"],["ids"=>$subIds]);
         }
-        //print_r($parameters);
-
-        
-        
+        //print_r($parameters);        
         //$parameters["order"] = "user_id";
         $user = User::find($parameters);
         if (count($user) == 0) {
@@ -65,6 +63,76 @@ class StudentController extends ControllerBase
         ]);
 
         $this->view->page = $paginator->getPaginate();
+    }
+    //ууу, какой большой контроллер, с повторяющимся кодом.
+    //он подписывае всех, кто был найден по поиску.
+    public function subscribeallAction($course_id = null){
+        $parameters = $this->persistent->parameters;
+        if($parameters==null){
+            $this->dispatcher->forward([
+                "controller" => "course",
+                "action" => "list",
+                "error" => "Пожалуйста, не хакайте нас ;)"
+            ]);
+        }
+        //ищем по тем же параметрам, что и при поиске
+        $this->view->course_id = $course_id;
+        $course=Course::findFirst($course_id);
+        //id подписанных ребят
+        $subIds=[];
+        foreach ($course->user as $user) {
+           $subIds[] = $user->user_id;
+        }
+        $this->view->course_id = $course_id;
+        $parameters = $this->persistent->parameters;
+        if (!is_array($parameters)) {
+            $parameters = [];
+            $parameters['bind']=[];
+        }
+        if(isset($parameters['conditions']))
+            $parameters['conditions'] .= " AND type = 'student'";
+        else
+            $parameters['conditions'] = "type = 'student'";
+        if(count($subIds)>0){
+            $parameters['conditions'].=' AND user_id NOT IN ({ids:array})';
+            $parameters["bind"]=array_merge($parameters["bind"],["ids"=>$subIds]);
+        }
+        $user = User::find($parameters);
+        if (count($user) > 40) {
+            $this->flash->error("Нельзя подписывать более 40 человек за раз.");
+
+            $this->dispatcher->forward([
+                "controller" => "course",
+                "action" => "list"
+            ]);
+            return;
+        }
+        //подписываем найденых
+        foreach ($user as $currentUser) {
+            $userHasCourse = new UserHasCourse();
+            $userHasCourse->user = $currentUser;
+            $userHasCourse->course = $course;
+            $success = $userHasCourse->create();
+            if(!$success){
+                echo "К сожалению, возникли следующие проблемы: ";
+                $messages = $userHasCourse->getMessages();
+                if($messages!=null){
+                    foreach ($messages as $message) {
+                        echo $message->getMessage(), "<br/>";
+                    }
+                }
+                $this->dispatcher->forward([
+                    "controller" => "course",
+                    "action" => "list"
+                ]);
+                return;
+            }
+            $this->dispatcher->forward([
+                "controller" => "course",
+                "action" => "list"
+            ]);
+            return;
+        }
     }
     public function subscribeAction($course_id, $user_id)
     {

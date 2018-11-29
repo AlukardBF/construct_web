@@ -18,6 +18,7 @@
 <div class="page-header">
     <h1>Результаты поиска</h1>
 </div>
+<?php  echo $this->tag->linkTo(["student/subscribeall/".$course_id, " <i class='fas fa-reply-all'></i> Подписать всех найденых"]); ?>
 
 <?php echo $this->getContent(); ?>
 

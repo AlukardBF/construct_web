@@ -1,4 +1,5 @@
 <?php
+use Phalcon\Validation;
 use Phalcon\Validation\Validator\PresenceOf;
 
 class Course extends \Phalcon\Mvc\Model
