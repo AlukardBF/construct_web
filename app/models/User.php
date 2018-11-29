@@ -1,6 +1,9 @@
 <?php
 use Phalcon\Validation;
+use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Email as EmailValidator;
+use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
+use Phalcon\Validation\Validator\Regex as RegexValidator;
 
 class User extends \Phalcon\Mvc\Model
 {
@@ -79,12 +82,61 @@ class User extends \Phalcon\Mvc\Model
     {
         $validator = new Validation();
 
+
+        $validator->add(
+            "email",
+            new UniquenessValidator(
+                [
+                    "email"   => $this,
+                    "message" => "Пользователь с таким email уже существует.",
+                ]
+            )
+        );
+
         $validator->add(
             'email',
             new EmailValidator(
                 [
                     'model'   => $this,
-                    'message' => 'Please enter a correct email address',
+                    'message' => 'Пожалуйста введите правильный email адрес.',
+                ]
+            )
+        );
+        $validator->add(
+            ['email',
+             'pass',
+             'name',
+             'second_name'],
+            new PresenceOf(
+                [
+                    "message" => [
+                            "name" => "Отчество - обязательное поле.",
+                            "second_name"       => "Фамилия - обязательное поле",
+                            "email"       => "Email - обязательное поле",
+                            "pass"       => "Пароль - обязательное поле",
+                        ]
+                ]
+            )
+        );
+
+        $validator->add(
+            [
+                "name",
+                "second_name",
+                "father_name"
+            ],
+            new RegexValidator(
+                [
+                    "pattern" => [
+                        "name" => "/^[A-ЯЁ][a-яё]*([a-яё]|-[А-ЯЁ])[a-яё]*$/",
+                        "second_name"       => "/^[A-ЯЁ][a-яё]*([a-яё]|-[А-ЯЁ])[a-яё]*$/",
+                        "father_name"       => "/^[A-ЯЁ][a-яё]*([a-яё]|-[А-ЯЁ])[a-яё]*$/",
+                    ],
+                    "message" => [
+                        "name" => "Неверно введено имя.",
+                        "second_name"    => "Неверно введена фамилия.",
+                        "father_name"    => "Неверно введено отчество",
+                    ]
                 ]
             )
         );

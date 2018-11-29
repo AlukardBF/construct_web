@@ -34,12 +34,17 @@ try {
      */
     include APP_PATH . '/config/loader.php';
 
+
+
     /**
      * Handle the request
      */
     $application = new \Phalcon\Mvc\Application($di);
+    //Подгружаем phalcon mailer
 
     echo str_replace(["\n","\r","\t"], '', $application->handle()->getContent());
+
+
 
 } catch (\Exception $e) {
     echo $e->getMessage() . '<br>';
