@@ -127,12 +127,13 @@ class StudentController extends ControllerBase
                 ]);
                 return;
             }
-            $this->dispatcher->forward([
-                "controller" => "course",
-                "action" => "list"
-            ]);
-            return;
         }
+        $this->dispatcher->forward([
+            "controller" => "course",
+            "action" => "index",
+            "params"=>['course_id'=>$course_id]
+        ]);
+        return;
     }
     public function subscribeAction($course_id, $user_id)
     {
