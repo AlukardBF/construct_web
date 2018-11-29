@@ -12,9 +12,8 @@ class CommentController extends \Phalcon\Mvc\Controller
     {
         $comment = new Comment();
         $user_id = $this->session->auth['id'];
-        $user = User::findFirst($user_id);
+        $user_target_id = $this->request->getPost('user_target_id');
         $subsection_id = $this->request->getPost('subsection_id');
-        $subsection = Subsection::findFirst($subsection_id);
         // Сохраняем и проверяем на наличие ошибок
         $success = $comment->save(
             [
@@ -22,6 +21,7 @@ class CommentController extends \Phalcon\Mvc\Controller
                 'text' => $this->request->getPost('text'),
                 'subsection_subsection_id' => $subsection_id,
                 'user_user_id' => $user_id,
+                'user_target_id' => $user_target_id,
             ]
         );
         if ($success) {
@@ -31,7 +31,7 @@ class CommentController extends \Phalcon\Mvc\Controller
                     'action' => 'show',
                     'params' => [
                         'course_id'=> $this->request->getPost('course_id'),
-                        'user_id'=> $user_id,
+                        'user_id'=> $user_target_id,
                         'tab_id'=> $this->request->getPost('tab_id'),
                     ],
                 ]

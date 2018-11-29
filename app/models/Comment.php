@@ -36,6 +36,12 @@ class Comment extends \Phalcon\Mvc\Model
     public $user_user_id;
 
     /**
+     *
+     * @var integer
+     */
+    public $user_target_id;
+
+    /**
      * Initialize method for model.
      */
     public function initialize()
@@ -44,6 +50,7 @@ class Comment extends \Phalcon\Mvc\Model
         $this->setSource("comment");
         $this->belongsTo('subsection_subsection_id', 'Subsection', 'subsection_id', ['alias' => 'Subsection']);
         $this->belongsTo('user_user_id', 'User', 'user_id', ['alias' => 'User']);
+        $this->belongsTo('user_target_id', 'User', 'user_id', ['alias' => 'TargetUser']);
     }
 
     /**

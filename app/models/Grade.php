@@ -2,38 +2,32 @@
 
 
 
-class Subsection extends \Phalcon\Mvc\Model
+class Grade extends \Phalcon\Mvc\Model
 {
 
     /**
      *
      * @var integer
      */
-    public $subsection_id;
+    public $grade_id;
 
     /**
      *
      * @var string
      */
-    public $theme;
-
-    /**
-     *
-     * @var string
-     */
-    public $description;
-
-    /**
-     *
-     * @var string
-     */
-    public $section;
+    public $grade;
 
     /**
      *
      * @var integer
      */
-    public $course_course_id;
+    public $user_user_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $subsection_subsection_id;
 
     /**
      * Initialize method for model.
@@ -41,10 +35,9 @@ class Subsection extends \Phalcon\Mvc\Model
     public function initialize()
     {
         $this->setSchema("konlabu");
-        $this->setSource("subsection");
-        $this->hasMany('subsection_id', 'Comment', 'subsection_subsection_id', ['alias' => 'Comment']);
-        $this->hasMany('subsection_id', 'File', 'subsection_subsection_id', ['alias' => 'File']);
-        $this->belongsTo('course_course_id', 'Course', 'course_id', ['alias' => 'Course']);
+        $this->setSource("grade");
+        $this->belongsTo('subsection_subsection_id', 'Subsection', 'subsection_id', ['alias' => 'Subsection']);
+        $this->belongsTo('user_user_id', 'User', 'user_id', ['alias' => 'User']);
     }
 
     /**
@@ -54,14 +47,14 @@ class Subsection extends \Phalcon\Mvc\Model
      */
     public function getSource()
     {
-        return 'subsection';
+        return 'grade';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Subsection[]|Subsection|\Phalcon\Mvc\Model\ResultSetInterface
+     * @return Grade[]|Grade|\Phalcon\Mvc\Model\ResultSetInterface
      */
     public static function find($parameters = null)
     {
@@ -72,7 +65,7 @@ class Subsection extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Subsection|\Phalcon\Mvc\Model\ResultInterface
+     * @return Grade|\Phalcon\Mvc\Model\ResultInterface
      */
     public static function findFirst($parameters = null)
     {

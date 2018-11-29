@@ -139,22 +139,28 @@ class SubsectionController extends ControllerBase
         ]);
     }
     public function gradeAction($course_id, $user_id, $tab_id, $subsection_id, $grade) {
-        $subsection = Subsection::findFirst($subsection_id);
+        $grade_record = Grade::findFirst("user_user_id = ".$user_id." AND subsection_subsection_id = ".$subsection_id);
+        //Если запись не найдена
+        if (!$grade_record) {
+            $grade_record = new Grade();
+            $grade_record->user_user_id = $user_id;
+            $grade_record->subsection_subsection_id = $subsection_id;
+        }
         switch ($grade) {
             case '2':
-                $subsection->grade = 'ужасно';
+                $grade_record->grade = 'ужасно';
                 break;
             case '3':
-                $subsection->grade = 'все плохо';
+                $grade_record->grade = 'все плохо';
                 break;
             case '4':
-                $subsection->grade = 'уже лучше';
+                $grade_record->grade = 'уже лучше';
                 break;
             case '5':
-                $subsection->grade = 'как надо';
+                $grade_record->grade = 'как надо';
                 break;
         }
-        $success = $subsection->save();
+        $success = $grade_record->save();
         $this->dispatcher->forward(
             [
                 'controller' => 'course',

@@ -159,6 +159,7 @@ class User extends \Phalcon\Mvc\Model
             'course_id'
         );
         $this->hasMany('user_id', 'Comment', 'user_user_id', ['alias' => 'Comment']);
+        $this->hasMany('user_id', 'Comment', 'user_target_id', ['alias' => 'CommentTarget']);
         $this->hasMany('user_id', 'UserHasCourse', 'user_user_id', ['alias' => 'UserHasCourse']);
         $this->belongsTo('group_group_id', 'Group', 'group_id', ['alias' => 'Group']);
     }
