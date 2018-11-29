@@ -1,33 +1,44 @@
 <?php
 
-
-
 class File extends \Phalcon\Mvc\Model
 {
 
     /**
      *
      * @var integer
+     * @Primary
+     * @Identity
+     * @Column(column="file_id", type="integer", length=11, nullable=false)
      */
     public $file_id;
 
     /**
      *
      * @var string
+     * @Column(column="filename", type="string", length=255, nullable=true)
      */
     public $filename;
 
     /**
      *
      * @var string
+     * @Column(column="datetime", type="string", nullable=true)
      */
-    public $datetaime;
+    public $datetime;
 
     /**
      *
      * @var integer
+     * @Column(column="subsection_subsection_id", type="integer", length=11, nullable=false)
      */
     public $subsection_subsection_id;
+
+    /**
+     *
+     * @var integer
+     * @Column(column="user_user_id", type="integer", length=11, nullable=false)
+     */
+    public $user_user_id;
 
     /**
      * Initialize method for model.
@@ -38,16 +49,6 @@ class File extends \Phalcon\Mvc\Model
         $this->setSource("file");
         $this->belongsTo('subsection_subsection_id', 'Subsection', 'subsection_id', ['alias' => 'Subsection']);
         $this->belongsTo('user_user_id', 'User', 'user_id', ['alias' => 'User']);
-    }
-
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'file';
     }
 
     /**
@@ -70,6 +71,16 @@ class File extends \Phalcon\Mvc\Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    /**
+     * Returns table name mapped in the model.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return 'file';
     }
 
 }

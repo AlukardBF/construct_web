@@ -2,6 +2,7 @@
  
 
 use Phalcon\Paginator\Adapter\Model as Paginator;
+use Phalcon\Mvc\Model\Criteria;
 
 
 class UserController extends ControllerBase

@@ -46,12 +46,12 @@
 <div class="form-group">
     <label for="fieldType" class="col-sm-2 control-label">Форма обучения</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->selectStatic(["type", [], "class" => "form-control", "id" => "fieldType"]) ?>
+        <?php echo $this->tag->selectStatic(["type", ['очная'=>'очная', 'заочная'=>'заочная', 'вечернее'=>'вечернее'], "class" => "form-control", "id" => "fieldType"]) ?>
     </div>
 </div>
 
 
-<?php echo $this->tag->hiddenField("id") ?>
+<?php echo $this->tag->hiddenField("group_id") ?>
 
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
