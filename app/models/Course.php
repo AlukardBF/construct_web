@@ -1,5 +1,5 @@
 <?php
-
+use Phalcon\Validation\Validator\PresenceOf;
 
 class Course extends \Phalcon\Mvc\Model
 {
@@ -70,6 +70,23 @@ class Course extends \Phalcon\Mvc\Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    public function validation()
+    {
+        $validator = new Validation();
+
+
+        $validator->add(
+            'name',
+            new PresenceOf(
+                [
+                    "message" => "У курса должно быть название."
+                ]
+            )
+        );
+
+        return $this->validate($validator);
     }
 
 }

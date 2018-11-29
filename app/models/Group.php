@@ -1,5 +1,9 @@
 <?php
 
+use Phalcon\Validation;
+use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
+
 class Group extends \Phalcon\Mvc\Model
 {
 
@@ -54,6 +58,7 @@ class Group extends \Phalcon\Mvc\Model
         return parent::find($parameters);
     }
 
+
     /**
      * Allows to query the first record that match the specified conditions
      *
@@ -73,6 +78,30 @@ class Group extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'group';
+    }
+
+        public function validation()
+    {
+        $validator = new Validation();
+
+
+        $validator->add(
+            ['name',
+             'year',
+             'type',],
+            new PresenceOf(
+                [
+                    "message" => [
+                            "name" => "Отчество - обязательное поле.",
+                            "second_name"       => "Название - обязательное поле",
+                            "email"       => "Год начала обучения - обязательное поле",
+                            "pass"       => "Не указана форма обучения.",
+                        ]
+                ]
+            )
+        );
+
+        return $this->validate($validator);
     }
 
 }
