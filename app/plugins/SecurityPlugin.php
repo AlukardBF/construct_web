@@ -102,7 +102,6 @@ class SecurityPlugin extends Plugin
 		}
 		// Private area resources (backend)
 		$allPrivateResources = [
-		    'test'			=> ['index'],
 		    'session'		=> ['index', 'logout'],
 		    'user'			=> ['index','edit','create','search','new','save','delete'],
 		    'course'		=> ['index','edit','new', 'create','list','save','show','delete'],
@@ -114,13 +113,11 @@ class SecurityPlugin extends Plugin
 			'file'    		=> ['upload','download'],
 		];
 		$adminResources = [
-		    'test'		=> ['index'],
 		    'session'	=> ['logout'],
 		    'user'		=> ['index','edit','create','search','new','save','delete'],
 		    'group'		=> ['index','edit','create','search','new','save','delete'],
 		];
 		$teachResources = [
-			'test'    		=> ['index'],
 		    'session'    	=> ['logout'],
 		    'course'  		=> ['index','edit','new', 'create','list','save','show','delete'],
 		    'user'    		=> ['edit','save'],
@@ -130,7 +127,6 @@ class SecurityPlugin extends Plugin
 			'file'    		=> ['download'],
 		];
 		$studentResources = [
-			'test'    		=> ['index'],
 		    'session'    	=> ['logout'],
 		    'user'    		=> ['edit','save'],
 			'course'  		=> ['list','show'],
