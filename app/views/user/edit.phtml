@@ -91,18 +91,17 @@
         </div>
     </div>
 
-    <nav aria-label="breadcrumb" class='pt-3'>
-      <ol class="breadcrumb">
+    
+<?}  /*конец условия*/?>
+<nav aria-label="breadcrumb" class='pt-3'>
+    <ol class="breadcrumb">
         <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["user/index", "Пользователи"]); ?></li>
         <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["user/search", "Результаты поиска"]); ?></li>
         <li class="breadcrumb-item active">Редактировать пользователя</li>
-      </ol>
-    </nav>
-<?}  /*конец условия*/?>
+    </ol>
+</nav>
 <div class="page-header">
-    <h1>
-        Редактировать пользователя
-    </h1>
+    <h1>Редактировать пользователя</h1>
 </div>
 
 <!--//форма изменения пароля-->
@@ -200,7 +199,7 @@
 <div class="form-group">
     <label for="fieldType" class="col-sm-2 control-label">Тип пользователя</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->selectStatic(["type",  ['admin'=>'admin','teach'=>'teach','student'=>'student'], "class" => "form-control", "id" => "fieldType"]) ?>
+        <?php echo $this->tag->selectStatic(["type",  ['admin'=>'Администратор','teach'=>'Преподаватель','student'=>'Студент'], "class" => "form-control", "id" => "fieldType"]) ?>
     </div>
 </div>
 

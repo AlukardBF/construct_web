@@ -1,4 +1,10 @@
 <? echo Phalcon\Tag::stylesheetLink("css/course_show.css"); ?>
+<nav aria-label="breadcrumb" class='pt-3'>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["course/list", "Курсы"]); ?></li>
+        <li class="breadcrumb-item active"><?php echo $course->name; ?></li>
+    </ol>
+</nav>
 <div class="py-1">
 	<div class="container">
 		<div class="row">

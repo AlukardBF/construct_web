@@ -18,10 +18,15 @@
         
             <nav class="navbar navbar-expand-md bg-primary navbar-dark bg-gradient">
                 <div class="container">
-                  <a class="navbar-brand" href="#">
-                    <i class="fa d-inline fa-lg fa-cloud"></i>
-                    <b> ВПИ/ВИТ</b>
-                  </a>
+                    <?
+                      echo Phalcon\Tag::linkTo(
+                          [
+                              "/",
+                              '<i class="fa d-inline fa-lg fa-cloud"></i><b> ВПИ/ВИТ</b>',
+                              "class" => "navbar-brand",
+                          ]
+                      );
+                    ?>
                   <?php 
                   $role=$this->session->auth['role'];
                   if($role != 'guest' && $role != null){

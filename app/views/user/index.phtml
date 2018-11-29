@@ -44,11 +44,14 @@
             </div>
         </div>
     </div>
+<nav aria-label="breadcrumb" class='pt-3'>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["user", "Пользователи"]); ?></li>
+        <li class="breadcrumb-item active">Поиск пользователя</li>
+    </ol>
+</nav>
 <div class="page-header">
-    <h1>
-        Поиск пользователя
-    </h1>
-
+    <h1>Поиск пользователя</h1>
 </div>
 <div class="col-sm-10">
     <p>

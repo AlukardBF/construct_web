@@ -4,6 +4,13 @@
  */
        echo \Phalcon\Tag::javascriptInclude("public/js/userform.js"); 
 ?>
+<nav aria-label="breadcrumb" class='pt-3'>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["course/list", "Курсы"]); ?></li>
+        <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["course/index/".$course_id, Course::findFirst($course_id)->name]); ?></li>
+		<li class="breadcrumb-item active">Поиск студентов</li>
+    </ol>
+</nav>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
@@ -51,10 +58,7 @@
     </div>
 
 <div class="page-header">
-    <h1>
-        Поиск студентов
-    </h1>
-
+    <h1>Поиск студентов</h1>
 </div>
 <?php echo $this->getContent() ?>
 

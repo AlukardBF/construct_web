@@ -8,12 +8,13 @@
 
 
 
-<!-- <nav aria-label="breadcrumb " class='pt-3'>
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["user/index", "Пользователи"]); ?></li>
-    <li class="breadcrumb-item active">Результаты поиска</li>
-  </ol>
-</nav> -->
+<nav aria-label="breadcrumb" class='pt-3'>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["course/list", "Курсы"]); ?></li>
+        <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["course/index/".$course_id, Course::findFirst($course_id)->name]); ?></li>
+		<li class="breadcrumb-item active">Результаты поиска</li>
+    </ol>
+</nav>
 
 <div class="page-header">
     <h1>Результаты поиска</h1>

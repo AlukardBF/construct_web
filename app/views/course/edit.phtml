@@ -1,3 +1,10 @@
+<nav aria-label="breadcrumb" class='pt-3'>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["course/list", "Курсы"]); ?></li>
+        <li class="breadcrumb-item"><?php echo $this->tag->linkTo(["course/index/".$course->course_id, $course->name]); ?></li>
+		<li class="breadcrumb-item active">Редактирование курса</li>
+    </ol>
+</nav>
 <div class="py-1">
 	<div class="container">
 		<div class="row pb-4">
