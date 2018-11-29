@@ -166,7 +166,50 @@ class StudentController extends ControllerBase
                 }
             }
         }
+    }
+    public function unsubscribeAction($course_id, $user_id)
+    {
+        $user = User::findFirst($user_id);
+        $course = Course::findFirst($course_id);
+        if($user ==null || $course==null){
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'index',
+                'params' => ['course_id'=>$course_id]
+            ]);
+        }
+        $userHasCourse = UserHasCourse::findFirst("user_user_id = ".$user_id." AND course_course_id = ".$course_id);
+        if (!$userHasCourse) {
+            $this->flash->error("Связь курса и студента не найдена!");
 
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'index',
+                'params' => ['course_id'=>$course_id]
+            ]);
+            return;
+        }
+        if (!$userHasCourse->delete()) {
+            foreach ($userHasCourse->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => "course",
+                'action' => 'index',
+                'params' => ['course_id'=>$course_id]
+            ]);
+
+            return;
+        }
+
+        $this->flash->success("Студент успешно отписан");
+
+        $this->dispatcher->forward([
+            'controller' => "course",
+            'action' => 'index',
+            'params' => ['course_id'=>$course_id]
+        ]);
     }
 }
 

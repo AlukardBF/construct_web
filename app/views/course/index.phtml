@@ -1,62 +1,63 @@
+<? echo Phalcon\Tag::stylesheetLink("css/course_show.css"); ?>
 <div class="py-1">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h1 class="text-center"><?echo $course->name; ?></h1>
-				<h3><?echo $course->description; ?></h3>
-				<a>
-              <?
-              
-           echo $this->tag->linkTo( 
-              [
-                "course/edit/".$course->course_id,
-                "Редактировать курс",
-              	"class" => "btn btn-outline-primary",
-            ]
-            );
-            echo " ".$this->tag->linkTo( 
-              [
-                "student/index/".$course->course_id,
-                "Подписать на курс",
-              	"class" => "btn btn-outline-primary",
-            ]
-            );
-?>
-            </a>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center"><?echo $course->name; ?></h1>
+                <h3><?echo $course->description; ?></h3>
+                    <? echo $this->tag->linkTo( 
+                    [
+                        "course/edit/".$course->course_id,
+                        "Редактировать курс",
+                        "class" => "btn btn-outline-primary",
+                    ]
+                    );
+                    echo " ".$this->tag->linkTo( 
+                    [
+                        "student/index/".$course->course_id,
+                        "Подписать на курс",
+                        "class" => "btn btn-outline-primary",
+                    ]
+                    );
+                    ?>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="py-1">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h1 class="">Список студентов</h1>
-				 <?
-              foreach ($page->items as $item) 
-                { 
-									$fullname = $item->name.' '.$item->second_name;
-									if ($item->father_name != null) {
-										$fullname .= ' '.$item->father_name;
-									}
-                  ?>
-                  <a>
-              <?
-		           echo $this->tag->linkTo( 
-		              [
-		                "course/show/".$course->course_id."/".$item->user_id,
-		                " <div class='d-flex w-100 justify-content-between'>
-		                <h5 class='mb-1'>".$fullname."</h5>
-		              </div>",
-		              "class" => "list-group-item list-group-item-action flex-column align-items-start btn-outline-primary",
-
-		            ]
-		            );
-				?> 
-				</a>
-				<? } ?>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="">Список студентов</h1>
+                <?
+                    foreach ($page->items as $item) 
+                    { 
+                        $fullname = $item->name.' '.$item->second_name;
+                        if ($item->father_name != null) {
+                            $fullname .= ' '.$item->father_name;
+                        }
+                        ?>
+                        <div class="btn-group col-12">
+                        <?
+                        echo $this->tag->linkTo( 
+                            [
+                            "course/show/".$course->course_id."/".$item->user_id,
+                            "<div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>".$fullname."</h5></div>",
+                            "class" => "list-group-item list-group-item-action flex-column align-items-start btn-outline-primary rounded-left-0",
+                            ]
+                        );
+                        echo $this->tag->linkTo( 
+                            [
+                            "student/unsubscribe/".$course->course_id."/".$item->user_id,
+                            "<div class='d-flex w-100 justify-content-between'><h6 class='mb-1'>Отписать студента</h6></div>",
+                            "class" => "btn btn-outline-primary",
+                            ]
+                        );
+                        ?>
+                        </div>
+                    <?} ?>
+            </div>
+        </div>
+    </div>
 </div>	
