@@ -96,7 +96,7 @@
 <div class="form-group">
     <label for="fieldType" class="col-sm-2 control-label">Тип пользователя</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->selectStatic(["type",  ['admin'=>'admin','teach'=>'teach','student'=>'student'], "class" => "form-control", "id" => "fieldType"]) ?>
+    <?php echo $this->tag->selectStatic(["type", [''=>'','admin'=>'Администратор','teach'=>'Преподаватель','student'=>'Студент'], "class" => "form-control", "id" => "fieldType"]) ?>
     </div>
 </div>
 
@@ -146,7 +146,7 @@
 
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-        <?php echo $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+        <?php echo $this->tag->submitButton(["Сохранить", "class" => "btn btn-default"]) ?>
     </div>
 </div>
 

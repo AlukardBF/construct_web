@@ -46,7 +46,7 @@
 <div class="form-group">
     <label for="fieldType" class="col-sm-2 control-label">Форма обучения</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->selectStatic(["type", ['очная'=>'очная', 'заочная'=>'заочная', 'вечернее'=>'вечернее'], "class" => "form-control", "id" => "fieldType"]) ?>
+        <?php echo $this->tag->selectStatic(["type", ['очная'=>'Очная', 'заочная'=>'Заочная', 'вечернее'=>'Вечернее'], "class" => "form-control", "id" => "fieldType"]) ?>
     </div>
 </div>
 
@@ -55,7 +55,7 @@
 
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-        <?php echo $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+        <?php echo $this->tag->submitButton(["Сохранить", "class" => "btn btn-default"]) ?>
     </div>
 </div>
 

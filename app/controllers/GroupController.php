@@ -35,7 +35,7 @@ class GroupController extends ControllerBase
 
         $group = Group::find($parameters);
         if (count($group) == 0) {
-            $this->flash->notice("The search did not find any group");
+            $this->flash->notice("По результату поиска, группы не были найдены");
 
             $this->dispatcher->forward([
                 "controller" => "group",
@@ -73,7 +73,7 @@ class GroupController extends ControllerBase
 
             $group = Group::findFirstBygroup_id($group_id);
             if (!$group) {
-                $this->flash->error("group was not found");
+                $this->flash->error("Группа не была найдена");
 
                 $this->dispatcher->forward([
                     'controller' => "group",
@@ -126,7 +126,7 @@ class GroupController extends ControllerBase
             return;
         }
 
-        $this->flash->success("group was created successfully");
+        $this->flash->success("Группа была успешно создана");
 
         $this->dispatcher->forward([
             'controller' => "group",
@@ -154,7 +154,7 @@ class GroupController extends ControllerBase
         $group = Group::findFirstBygroup_id($group_id);
 
         if (!$group) {
-            $this->flash->error("group does not exist " . $group_id);
+            $this->flash->error("Группа не существует " . $group_id);
 
             $this->dispatcher->forward([
                 'controller' => "group",
@@ -184,7 +184,7 @@ class GroupController extends ControllerBase
             return;
         }
 
-        $this->flash->success("group was updated successfully");
+        $this->flash->success("Группа была успешна обновлена");
 
         $this->dispatcher->forward([
             'controller' => "group",
@@ -201,7 +201,7 @@ class GroupController extends ControllerBase
     {
         $group = Group::findFirstBygroup_id($group_id);
         if (!$group) {
-            $this->flash->error("group was not found");
+            $this->flash->error("Группа не найдена");
 
             $this->dispatcher->forward([
                 'controller' => "group",
@@ -225,7 +225,7 @@ class GroupController extends ControllerBase
             return;
         }
 
-        $this->flash->success("group was deleted successfully");
+        $this->flash->success("Группа была успешно удалена");
 
         $this->dispatcher->forward([
             'controller' => "group",

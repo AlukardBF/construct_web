@@ -16,7 +16,7 @@
 </nav>
 
 <div class="page-header">
-    <h1>Search result</h1>
+    <h1>Результаты поиска</h1>
 </div>
 
 <?php echo $this->getContent(); ?>
@@ -25,14 +25,14 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>User</th>
+                <!-- <th>User</th> -->
             <th>Email</th>
             <th>Тип пользователя</th>
-            <th>Даниил</th>
-            <th>Отчество</th>
             <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
             <th>Группа</th>
-            <th>Title</th>
+            <th>Научная степень</th>
 
                 <th></th>
                 <th></th>
@@ -41,17 +41,17 @@
         <tbody>
         <?php foreach ($page->items as $user): ?>
             <tr>
-                <td><?php echo $user->user_id ?></td>
+                <!-- <td><?php echo $user->user_id ?></td> -->
             <td><?php echo $user->email ?></td>
-            <td><?php echo $user->type ?></td>
-            <td><?php echo $user->name ?></td>
+            <td><?php echo $user->getType(); ?></td>
             <td><?php echo $user->second_name ?></td>
+            <td><?php echo $user->name ?></td>
             <td><?php echo $user->father_name ?></td>
             <td><?php echo $user->group!=null ? $user->group->name:""; ?></td>
             <td><?php echo $user->title ?></td>
 
-                <td><?php echo $this->tag->linkTo(["user/edit/" . $user->user_id, "Edit"]); ?></td>
-                <td><?php echo $this->tag->linkTo(["user/delete/" . $user->user_id, "Delete"]); ?></td>
+                <td><?php echo $this->tag->linkTo(["user/edit/" . $user->user_id, "Изменить"]); ?></td>
+                <td><?php echo $this->tag->linkTo(["user/delete/" . $user->user_id, "Удалить"]); ?></td>
             </tr>
         <?php endforeach; ?>
         </tbody>

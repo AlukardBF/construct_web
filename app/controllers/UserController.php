@@ -37,7 +37,7 @@ class UserController extends ControllerBase
 
         $user = User::find($parameters);
         if (count($user) == 0) {
-            $this->flash->notice("The search did not find any user");
+            $this->flash->notice("По результатам поиска, пользователи не были найдены");
 
             $this->dispatcher->forward([
                 "controller" => "user",
@@ -81,7 +81,7 @@ class UserController extends ControllerBase
                 $user = User::findFirstByuser_id($auth['id']);
             }
             if (!$user) {
-                $this->flash->error("user was not found");
+                $this->flash->error("Пользователь не найден");
 
                 $this->dispatcher->forward([
                     'controller' => "user",
@@ -151,7 +151,7 @@ class UserController extends ControllerBase
             return;
         }
 
-        $this->flash->success("user was created successfully");
+        $this->flash->success("Пользователь успешно создан");
 
         $this->dispatcher->forward([
             'controller' => "user",
@@ -184,7 +184,7 @@ class UserController extends ControllerBase
         }
 
         if (!$user) {
-            $this->flash->error("user does not exist " . $user_id);
+            $this->flash->error("Пользователь не существует " . $user_id);
 
             $this->dispatcher->forward([
                 'controller' => "user",
@@ -212,7 +212,7 @@ class UserController extends ControllerBase
                     if($this->security->checkHash($old_pass,$user->pass)){
                         $user->pass = $this->security->hash($pass);
                     }else{
-                        $this->flash->error("Неверный старый пароль!!!");
+                        $this->flash->error("Неверный старый пароль");
                         return $this->dispatcher->forward([
                             'controller' => "user",
                             'action' => 'edit'
@@ -220,7 +220,7 @@ class UserController extends ControllerBase
                     }
                     
                 }else{
-                    $this->flash->error("Новый пароль и повторный пароль не совпадают!!!");
+                    $this->flash->error("Пароли не совпадают не совпадают");
                     return $this->dispatcher->forward([
                             'controller' => "user",
                             'action' => 'edit'
@@ -267,7 +267,7 @@ class UserController extends ControllerBase
             return;
         }
 
-        $this->flash->success("user was updated successfully");
+        $this->flash->success("Пользователь успешно обновлен");
 
         $this->dispatcher->forward([
             'controller' => "user",
@@ -284,7 +284,7 @@ class UserController extends ControllerBase
     {
         $user = User::findFirstByuser_id($user_id);
         if (!$user) {
-            $this->flash->error("user was not found");
+            $this->flash->error("Пользователь не найден");
 
             $this->dispatcher->forward([
                 'controller' => "user",
@@ -308,7 +308,7 @@ class UserController extends ControllerBase
             return;
         }
 
-        $this->flash->success("user was deleted successfully");
+        $this->flash->success("Пользователь успешно удален");
 
         $this->dispatcher->forward([
             'controller' => "user",

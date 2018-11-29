@@ -47,7 +47,7 @@ class StudentController extends ControllerBase
         //$parameters["order"] = "user_id";
         $user = User::find($parameters);
         if (count($user) == 0) {
-            $this->flash->notice("The search did not find any user");
+            $this->flash->notice("Поиск не нашел пользователей");
 
             $this->dispatcher->forward([
                 "controller" => "course",
@@ -181,7 +181,7 @@ class StudentController extends ControllerBase
         }
         $userHasCourse = UserHasCourse::findFirst("user_user_id = ".$user_id." AND course_course_id = ".$course_id);
         if (!$userHasCourse) {
-            $this->flash->error("Связь курса и студента не найдена!");
+            $this->flash->error("Связь курса и студента не найдена");
 
             $this->dispatcher->forward([
                 'controller' => "course",

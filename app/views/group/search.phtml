@@ -14,7 +14,7 @@
 </nav>
 
 <div class="page-header">
-    <h1>Search result</h1>
+    <h1>Результаты поиска</h1>
 </div>
 
 <?php echo $this->getContent(); ?>
@@ -23,10 +23,10 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Group</th>
-            <th>Name</th>
-            <th>Year</th>
-            <th>Type</th>
+                <!-- <th>Group</th> -->
+            <th>Название</th>
+            <th>Год</th>
+            <th>Форма обучения</th>
 
                 <th></th>
                 <th></th>
@@ -35,13 +35,13 @@
         <tbody>
         <?php foreach ($page->items as $group): ?>
             <tr>
-                <td><?php echo $group->group_id ?></td>
+                <!-- <td><?php echo $group->group_id ?></td> -->
             <td><?php echo $group->name ?></td>
             <td><?php echo $group->year ?></td>
-            <td><?php echo $group->type ?></td>
+            <td><?php echo $group->getType(); ?></td>
 
-                <td><?php echo $this->tag->linkTo(["group/edit/" . $group->group_id, "Edit"]); ?></td>
-                <td><?php echo $this->tag->linkTo(["group/delete/" . $group->group_id, "Delete"]); ?></td>
+                <td><?php echo $this->tag->linkTo(["group/edit/" . $group->group_id, "Изменить"]); ?></td>
+                <td><?php echo $this->tag->linkTo(["group/delete/" . $group->group_id, "Удалить"]); ?></td>
             </tr>
         <?php endforeach; ?>
         </tbody>

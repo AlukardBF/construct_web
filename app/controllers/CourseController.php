@@ -59,7 +59,6 @@ class CourseController extends ControllerBase
             // Получение результатов работы пагинатора
             $this->view->page = $paginator->getPaginate();
         }
-
     }
 
     public function deleteAction($course_id = null)

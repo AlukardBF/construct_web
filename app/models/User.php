@@ -196,4 +196,18 @@ class User extends \Phalcon\Mvc\Model
         return 'user';
     }
 
+    public function getType()
+    {
+        switch ($this->type) {
+            case 'admin':
+                return 'Администратор';
+            case 'teach':
+                return 'Преподаватель';
+            case 'student':
+                return 'Студент';          
+            default:
+                return null;
+        }
+    }
+
 }

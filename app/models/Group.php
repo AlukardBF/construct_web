@@ -80,7 +80,7 @@ class Group extends \Phalcon\Mvc\Model
         return 'group';
     }
 
-        public function validation()
+    public function validation()
     {
         $validator = new Validation();
 
@@ -102,6 +102,20 @@ class Group extends \Phalcon\Mvc\Model
         );
 
         return $this->validate($validator);
+    }
+
+    public function getType()
+    {
+        switch ($this->type) {
+            case 'очная':
+                return 'Очная';
+            case 'вечерняя':
+                return 'Вечерняя';
+            case 'заочная':
+                return 'Заочная';
+            default:
+                return null;
+        }
     }
 
 }
