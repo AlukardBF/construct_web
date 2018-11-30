@@ -20,6 +20,30 @@ $(document).ready(function() {
     $('#fieldGroupBlock').hide();
     $('#fieldTitle').val("");
     $('#fieldGroupGroupId').val("");
+    switch($('#fieldType').val()){
+        case 'admin':{
+            $('#fieldTitleBlock').hide();
+            $('#fieldGroupBlock').hide();
+            $('#fieldTitle').val("");
+            $('#fieldGroupGroupId').val("");
+        }break;
+        case 'teach':{
+            $('#fieldTitleBlock').show();
+            $('#fieldGroupBlock').hide();
+            $('#fieldGroupGroupId').val("");
+        }break;
+        case 'student':{
+            $('#fieldTitleBlock').hide();
+            $('#fieldGroupBlock').show();
+            $('#fieldTitle').val("");
+        }break;
+        default: {
+            $('#fieldTitleBlock').hide();
+            $('#fieldGroupBlock').hide();
+            $('#fieldTitle').val("");
+            $('#fieldGroupGroupId').val("");
+        }
+    }
     $('#fieldType').change(function(){
         switch($(this).val()){
             case 'admin':{

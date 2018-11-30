@@ -9,35 +9,7 @@
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <? $role=$this->session->auth['role']; ?>
 <? if($role=='admin'){ /*начало условия*/?>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#groups').DataTable();
-        $('#erase_group').click(function(){
-            $('#fieldGroupGroupId').val('');
-            $('#fieldGroupName').val('');
-            $('#groups tr').removeClass("bg-secondary");
-        });
-        
-        $('#groups tbody tr').click(function(){
-            var group_id = $(this).find(".group_id").text();
-            var name = $(this).find(".group_name").text();
-            $('#groups tr').removeClass("bg-secondary");
-            $(this).addClass("bg-secondary");
-            $('#fieldGroupGroupId').val(group_id);
-            $('#fieldGroupName').val(name);
-            $('#set_group').modal('toggle');
-        });
-        $('#random_pass').click(function(){
-            var text = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$_";
-            var passLen = Math.floor(Math.random()* 5+8);
-            for (var i = 0; i < passLen; i++)
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-            $('#fieldPass').val(text);
-        });
-    } );
-    </script>
-        
+    
     <style>
         tbody tr{
             cursor: pointer;
@@ -222,7 +194,7 @@
 <?}?>
 <? if($role=='admin'||$role=='teach'){?>
 <div class="form-group" id = "fieldTitleBlock" >
-    <label for="fieldTitle" class="col-sm-2 control-label">Звание (для преподователей)</label>
+    <label for="fieldTitle" class="col-sm-2 control-label">Научная степень (для преподавателей)</label>
     <div class="col-sm-10">
         <?php echo $this->tag->textField(["title", "size" => 30, "class" => "form-control", "id" => "fieldTitle"]) ?>
     </div>
