@@ -8,13 +8,13 @@ class SubsectionController extends ControllerBase
     	if (!$this->request->isPost()) {
             $this->dispatcher->forward([
                 'controller' => "course",
-                'action' => 'new'
+                'action' => 'list'
             ]);
 
             return;
         }
 
-        $subsection = new subsection();
+        $subsection = new Subsection();
         $subsection->theme = $this->request->getPost("theme");
         $subsection->description = $this->request->getPost("description");
         $subsection->section = $this->request->getPost("section");

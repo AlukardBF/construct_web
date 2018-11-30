@@ -104,7 +104,7 @@ class SecurityPlugin extends Plugin
 		$allPrivateResources = [
 		    'session'		=> ['index', 'logout'],
 		    'user'			=> ['index','edit','create','search','new','save','delete'],
-		    'course'		=> ['index','edit','new', 'create','list','save','show','delete'],
+		    'course'		=> ['index','edit','create','list','save','show','delete'],
 		    'student'		=> ['index','search','subscribe','subscribeall','unsubscribe'],
 		    'subsection'	=> ['index','create','save','delete','grade'],
 			'group'			=> ['index','edit','create','search','new','save','delete'],
@@ -119,7 +119,7 @@ class SecurityPlugin extends Plugin
 		];
 		$teachResources = [
 		    'session'    	=> ['logout'],
-		    'course'  		=> ['index','edit','new', 'create','list','save','show','delete'],
+		    'course'  		=> ['index','edit','create','list','save','show','delete'],
 		    'user'    		=> ['edit','save'],
 		    'student' 		=> ['index','search','subscribe','subscribeall','unsubscribe'],
 			'subsection' 	=> ['index','create','save','delete','grade'],
