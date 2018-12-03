@@ -15,7 +15,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         
     </head>
-    <body style="background-image:url(<?php echo $this->url->get('img/background.png')?>); height: 100%; overflow: hidden; background-attachment: fixed;">
+    <body style="background-image:url(<?php echo $this->url->get('img/background.png')?>); background-attachment: fixed;">
         <nav class="navbar navbar-expand-md bg-primary navbar-dark bg-gradient">
           <div class="container">
               <?
@@ -116,7 +116,7 @@
           </div>
         </nav>
 
-        <div class="container h-100 border-right border-left" style="background-color: #fff;">
+        <div class="container pb-3 border-right border-left" style="background-color: #fff;">
             <?php echo $this->getContent(); ?>
         </div>
     </body>
