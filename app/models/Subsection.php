@@ -1,6 +1,6 @@
 <?php
-
-
+use Phalcon\Validation;
+use Phalcon\Validation\Validator\PresenceOf;
 
 class Subsection extends \Phalcon\Mvc\Model
 {
@@ -77,6 +77,22 @@ class Subsection extends \Phalcon\Mvc\Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    public function validation()
+    {
+        $validator = new Validation();
+
+        $validator->add(
+            'theme',
+            new PresenceOf(
+                [
+                    "message" => "У главы должно быть название."
+                ]
+            )
+        );
+
+        return $this->validate($validator);
     }
 
 }

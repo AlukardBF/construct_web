@@ -124,20 +124,19 @@ class User extends \Phalcon\Mvc\Model
         $validator->add(
             [
                 "name",
-                "second_name",
-                "father_name"
+                "second_name"
             ],
             new RegexValidator(
                 [
                     "pattern" => [
                         "name" => "/^[A-ЯЁ][a-яё]*([a-яё]|-[А-ЯЁ])[a-яё]*$/",
-                        "second_name"       => "/^[A-ЯЁ][a-яё]*([a-яё]|-[А-ЯЁ])[a-яё]*$/",
-                        "father_name"       => "/^[A-ЯЁ][a-яё]*([a-яё]|-[А-ЯЁ])[a-яё]*$/",
+                        "second_name"       => "/^[A-ЯЁ][a-яё]*([a-яё]|-[А-ЯЁ])*[a-яё]*$/",
+                        "father_name"       => "/^[A-ЯЁ][a-яё]*([a-яё]|-[А-ЯЁ])*[a-яё]*$|^$/",
                     ],
                     "message" => [
                         "name" => "Неверно введено имя.",
                         "second_name"    => "Неверно введена фамилия.",
-                        "father_name"    => "Неверно введено отчество",
+                        "father_name"    => "Неверно введено отчество.",
                     ]
                 ]
             )

@@ -197,7 +197,7 @@ class CourseController extends ControllerBase
 
         if (!$course->save()) {
             $this->flash->error('Произошла ошибка: ');
-            foreach ($group->getMessages() as $message) {
+            foreach ($course->getMessages() as $message) {
                 $this->flash->error($message);
             }
 

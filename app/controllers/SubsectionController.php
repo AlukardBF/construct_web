@@ -22,7 +22,7 @@ class SubsectionController extends ControllerBase
         $subsection->course_course_id = $course_id;
 
         if (!$subsection->save()) {
-            foreach ($group->getMessages() as $message) {
+            foreach ($subsection->getMessages() as $message) {
                 $this->flash->error($message);
             }
 
@@ -117,7 +117,7 @@ class SubsectionController extends ControllerBase
 
         if (!$subsection->save()) {
             $this->flash->error('Произошла ошибка');
-            foreach ($group->getMessages() as $message) {
+            foreach ($subsection->getMessages() as $message) {
                 $this->flash->error($message);
             }
 
