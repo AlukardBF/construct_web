@@ -68,7 +68,7 @@ class SessionController extends \Phalcon\Mvc\Controller
             [
                 'controller' => 'index',
                 'action'     => 'index',
-                'params' => [error=>'error '.$user->email.' | '.$this->security->checkHash($user->pass, $password).' | '.$password],
+                'params' => [error=>'Введен неправильный логин или пароль.'],
             ]
         );
     }

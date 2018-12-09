@@ -106,6 +106,7 @@ class User extends \Phalcon\Mvc\Model
             ['email',
              'pass',
              'name',
+             'type',
              'second_name'],
             new PresenceOf(
                 [
@@ -114,6 +115,7 @@ class User extends \Phalcon\Mvc\Model
                             "second_name"       => "Фамилия - обязательное поле",
                             "email"       => "Email - обязательное поле",
                             "pass"       => "Пароль - обязательное поле",
+                            "type"       => "Тип пользователя - обязательное поле",
                         ]
                 ]
             )

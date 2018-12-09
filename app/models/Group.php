@@ -2,6 +2,7 @@
 
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation\Validator\Numericality;
 use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 
 class Group extends \Phalcon\Mvc\Model
@@ -97,6 +98,14 @@ class Group extends \Phalcon\Mvc\Model
                             "email"       => "Год начала обучения - обязательное поле",
                             "pass"       => "Не указана форма обучения.",
                         ]
+                ]
+            )
+        );
+        $validator->add(
+            "year",
+            new Numericality(
+                [
+                    "message" => "Поле дата - введите валидный год",
                 ]
             )
         );
